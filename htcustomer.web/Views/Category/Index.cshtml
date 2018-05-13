@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- New Category Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Category</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Category Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Category Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" placeholder="Description">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    
+                </form>
+            </div>            
+        </div>
+    </div>
+</div>
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Small Modal</button>
+<div class="row">
+    <table class="table table-responsive table-striped" cellspacing="10">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Laptop</td>
+                <td>null</td>
+                <td>
+                    <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>PC</td>
+                <td>null</td>
+                <td>
+                    <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>TV</td>
+                <td>null</td>
+                <td>
+                    <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Air Conditioner</td>
+                <td>null</td>
+                <td>
+                    <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+

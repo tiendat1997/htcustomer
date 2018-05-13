@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/MyCss/FlatButton.css" rel="stylesheet" />
+    <link href="~/Content/MyCss/CustomSearchBox.css" rel="stylesheet" />    
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <p class="title">HT</p>
+            </a>
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Fixing", "Index", "Home")</li>
+                <li>@Html.ActionLink("Contacts", "Index", "Contact")</li>
+                <li>@Html.ActionLink("Category", "Index", "Category")</li>
+                <li>@Html.ActionLink("Repository", "Index", "Repository")</li>
+                <li><a>To Do List <span class="badge">5</span></a></li>
+                <li class="sep"></li>
+                <li><a href="/accounts/signup/" class="signup-link">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
+        <div id="footer">
+        </div>
+    </div>
+</body>
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery-ui")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+
+</html>

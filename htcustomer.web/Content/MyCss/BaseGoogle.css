@@ -1,0 +1,158 @@
+﻿body {
+    background-color: #ffffff;
+    padding-top: 20px !important;
+}
+
+.navbar {
+    background-color: #4897d9;
+}
+.nav > li > a:hover {
+    background-color: #286090;
+}
+.navbar-brand {
+    background-color: black;
+}
+.navbar-brand .title {
+    color: #fff;
+    font-weight: bold;
+    font-size: 25px;
+    font-family: cursive;
+    padding-bottom: 5px;
+    border-bottom: 2px #f5cc03 solid;
+}
+.navbar .signup-link {
+    margin-left: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 2px;
+    background: none;
+    color: #fff;
+    line-height: 1;
+    border: 2px solid #fff;
+}
+
+.navbar a {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.navbar .nav > li.sep {
+    border-left: 1px solid rgba(255,255,255,0.2);
+    width: 1px;
+    margin: 14px 20px;
+    height: 16px;
+}
+
+.navbar-default {
+    max-height: 40px;
+    background-color: #3498db !important;
+    border-color: #2980b9;
+    color: #ecf0f1;
+}
+
+.navbar-right {
+    float: right;
+}
+
+.navbar-default .navbar-brand {
+    color: #3498db !important;
+    font-size: 32px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #ecf0f1 !important;
+}
+
+.col-xs-6 {
+    float: none !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .col-xs-6 .search-input {
+        width: 100%;
+    }
+
+        .col-xs-6 .search-input input {
+            max-width: 100%;
+        }
+
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.btn-group-wrap {
+    text-align: center;
+    margin-top: 30px;
+}
+
+div.btn-group {
+    margin: 0 auto;
+    text-align: center;
+    width: inherit;
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.btn-primary {
+    color: #ecf0f1 !important;
+    background-color: #2980b9 !important;
+    border-color: #2980b9 !important;
+}
+
+#btn-new-contact {
+}
+/* Device List */
+.list-container {
+    max-height: 50vh;
+    display: block;
+    overflow-y: scroll;
+}
+
+label.device-title {
+    color: #666694;
+    font-size: 25px;
+    padding: 0;
+}
+
+.list-group-item-heading {
+}
+
+.list-group-item > .btn-action {
+    right: 0;
+    position: absolute;
+    top: 0;
+}
+
+label.device-error, label.device-description, label.device-price, label.device-note {
+    font-size: 15px;
+}
+
+.seperator-device {
+    margin: 10px auto;
+}
+
+label.device-error {
+    color: red;
+}
+
+label.device-price {
+    color: #666694;
+}
+
+label.device-description {
+    color: #666694;
+}
+
+label.device-note {
+    color: #666694;
+}

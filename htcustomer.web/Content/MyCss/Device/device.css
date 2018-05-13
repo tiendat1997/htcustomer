@@ -1,0 +1,11 @@
+﻿.ui-datepicker-calendar {
+    display: none;
+}
+
+#device-filter-form {
+    float: right;
+}
+
+    #device-filter-form .form-group {
+        display: inline-block;
+    }

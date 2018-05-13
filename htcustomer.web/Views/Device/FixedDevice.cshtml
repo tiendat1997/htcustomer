@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "FixedDevice";
+}
+@section styles {
+    @Styles.Render("~/Content/css/device")
+}
+
+<div class="row">
+    @Html.Action("PartialTabs", "Device")
+    @Html.Action("PartialFilter", "Device")
+</div>
+<div class="row">
+    <table class="table table-responsive table-striped">
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>Device</th>
+                <th>Error</th>
+                <th>Customer</th>
+                <th>Contact</th>
+                <th>Received Date</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <button class="btn btn-success"><i class="fa fa-send"></i></button>
+                </td>
+                <td>
+                    <p>Laptop </p>
+                    <p>Asus, mau den</p>
+                </td>
+                <td>
+                    Hu o dia
+                    Man hinh bi hu.
+                </td>
+                <td>
+                    <p>Anh Nam</p>
+                </td>
+                <td>
+                    <p>0123456780</p>
+                </td>
+                <td>
+                    12/2/2018
+                </td>
+                <td>
+                    <p>150.000vnd</p>
+                    <ul>
+                        <li>Thay man hinh</li>
+                        <li>Cai lai win</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/js/device")
+}
+
