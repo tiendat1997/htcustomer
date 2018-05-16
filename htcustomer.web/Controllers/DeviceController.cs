@@ -35,5 +35,10 @@ namespace htcustomer.web.Controllers
         {
             return PartialView("_DeviceFilter");
         }
+
+        public ActionResult AddToBillForm()
+        {
+            return PartialView("_AddBillForm");
+        }
     }
 }

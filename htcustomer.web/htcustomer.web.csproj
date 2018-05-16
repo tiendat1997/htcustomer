@@ -368,6 +368,7 @@
     <Content Include="Views\Repository\Index.cshtml" />
     <Content Include="Views\Device\_DeviceTab.cshtml" />
     <Content Include="Views\Device\_DeviceFilter.cshtml" />
+    <Content Include="Views\Device\_AddBillForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
