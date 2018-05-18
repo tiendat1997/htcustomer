@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace htcustomer.repository
 {
-    interface IRepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
         IEnumerable<T> Gets();
         T GetByID(int id);

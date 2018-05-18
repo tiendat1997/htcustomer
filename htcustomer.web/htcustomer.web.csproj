@@ -401,6 +401,10 @@
       <Project>{65e111d9-b899-4c9e-8eef-18feb80663d8}</Project>
       <Name>htcustomer.entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\htcustomer.repository\htcustomer.repository.csproj">
+      <Project>{dceb1884-9ff5-4cbc-9877-39274e05f188}</Project>
+      <Name>htcustomer.repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\htcustomer.service\htcustomer.service.csproj">
       <Project>{2ff38740-2f14-4d54-9944-96257059e228}</Project>
       <Name>htcustomer.service</Name>

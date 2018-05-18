@@ -1,8 +1,10 @@
+using htcustomer.repository;
 using htcustomer.service.Implements;
 using htcustomer.service.Interfaces;
 using System;
 using System.Web.Mvc;
 using Unity;
+
 
 namespace htcustomer.web
 {
@@ -44,7 +46,8 @@ namespace htcustomer.web
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IContactService, ContactService>();           
+            container.RegisterType<IContactService, ContactService>();
+            container.RegisterType(typeof(IRepository<>),typeof(Repository<>));
         }
     }
 }

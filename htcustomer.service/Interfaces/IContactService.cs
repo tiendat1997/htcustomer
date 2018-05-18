@@ -1,4 +1,5 @@
-﻿using System;
+﻿using htcustomer.service.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,11 @@ namespace htcustomer.service.Interfaces
 {
     public interface IContactService
     {
-        string TestSasuke();                
+        string TestSasuke();
+        IEnumerable<CustomerViewModel> GetAllCustomer();
     }
+    
+
+
+
 }

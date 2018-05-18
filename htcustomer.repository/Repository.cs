@@ -10,7 +10,7 @@ using System.Web;
 
 namespace htcustomer.repository
 {
-    class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly HuyThongDiaryDBEntities _context;
         private readonly IDbSet<T> dbEntity;

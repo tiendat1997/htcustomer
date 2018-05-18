@@ -24,5 +24,11 @@ namespace htcustomer.web.Controllers
         {
             return View();
         }
+
+        public ActionResult AllCustomer()
+        {
+            var allCustomer = contactService.GetAllCustomer();            
+            return Json(allCustomer, JsonRequestBehavior.AllowGet);
+        }
     }
 }
