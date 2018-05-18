@@ -40,14 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implements\ContactService.cs" />
+    <Compile Include="Interfaces\IContactService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Constant\" />
     <Folder Include="Enum\" />
     <Folder Include="Helper\" />
-    <Folder Include="Implements\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Model\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
