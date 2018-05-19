@@ -32,6 +32,17 @@ namespace htcustomer.service.Implements
                 Description = c.Description
             });
             return customer; 
-        }        
+        }
+
+        public bool AddCustomer(TblCustomer customer)
+        {
+            if (customer != null)
+            {
+                customerRepository.Insert(customer);
+                customerRepository.Save();
+                return true;
+            }
+            return false;
+        }
     }
 }
