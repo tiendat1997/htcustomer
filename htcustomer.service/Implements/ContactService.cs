@@ -52,7 +52,10 @@ namespace htcustomer.service.Implements
             var addressBook = new AddressBookViewModel { customerList = customerList };
             return addressBook;
         }
-        
-        
+
+        public bool AddCustomer(TblCustomer customer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
