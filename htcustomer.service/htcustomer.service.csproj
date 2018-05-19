@@ -40,11 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\TransactionStatus.cs" />
     <Compile Include="Implements\ContactService.cs" />
+    <Compile Include="Implements\TransactionService.cs" />
     <Compile Include="Interfaces\IContactService.cs" />
+    <Compile Include="Interfaces\ITransactionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\Contact\AddressBookViewModel.cs" />
     <Compile Include="ViewModel\Contact\ContactDetailsViewModel.cs" />
+    <Compile Include="ViewModel\CustomerTransactionViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

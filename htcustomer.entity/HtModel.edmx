@@ -190,8 +190,7 @@
             <End Role="TblTransaction" EntitySet="TblTransaction" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HuyThongDiaryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -211,6 +210,7 @@
           <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Disable" Type="Boolean" />
           <NavigationProperty Name="TblTransactions" Relationship="Self.FK_TblTransaction_TblDevice" FromRole="TblCategory" ToRole="TblTransaction" />
+          <Property Name="Disable" Type="Boolean" />
         </EntityType>
         <EntityType Name="TblCustomer">
           <Key>
@@ -223,6 +223,7 @@
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Disable" Type="Boolean" />
           <NavigationProperty Name="TblTransactions" Relationship="Self.FK_TblTransaction_TblCustomer" FromRole="TblCustomer" ToRole="TblTransaction" />
+          <Property Name="Disable" Type="Boolean" />
         </EntityType>
         <EntityType Name="TblDetailPrice">
           <Key>
@@ -251,6 +252,7 @@
           <Property Name="Type" Type="Int32" />
           <Property Name="Disable" Type="Boolean" />
           <NavigationProperty Name="TblProductType" Relationship="Self.FK_TblProduct_TblProductType" FromRole="TblProduct" ToRole="TblProductType" />
+          <Property Name="Disable" Type="Boolean" />
         </EntityType>
         <EntityType Name="TblProductType">
           <Key>
@@ -260,6 +262,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Disable" Type="Boolean" />
           <NavigationProperty Name="TblProducts" Relationship="Self.FK_TblProduct_TblProductType" FromRole="TblProductType" ToRole="TblProduct" />
+          <Property Name="Disable" Type="Boolean" />
         </EntityType>
         <EntityType Name="TblToDo">
           <Key>
@@ -290,6 +293,9 @@
           <NavigationProperty Name="TblCustomer" Relationship="Self.FK_TblTransaction_TblCustomer" FromRole="TblTransaction" ToRole="TblCustomer" />
           <NavigationProperty Name="TblDetailPrices" Relationship="Self.FK_TblDetailPrice_TblTransaction" FromRole="TblTransaction" ToRole="TblDetailPrice" />
           <NavigationProperty Name="TblTransactionStatu" Relationship="Self.FK_TblTransaction_TblTransactionStatus" FromRole="TblTransaction" ToRole="TblTransactionStatus" />
+          <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Delivered" Type="Boolean" />
+          <Property Name="Device" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TblTransactionStatu">
           <Key>
@@ -408,6 +414,7 @@
           <EntitySetMapping Name="TblCategories">
             <EntityTypeMapping TypeName="HuyThongDiaryDBModel.TblCategory">
               <MappingFragment StoreEntitySet="TblCategory">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Disable" ColumnName="Disable" />
@@ -417,6 +424,7 @@
           <EntitySetMapping Name="TblCustomers">
             <EntityTypeMapping TypeName="HuyThongDiaryDBModel.TblCustomer">
               <MappingFragment StoreEntitySet="TblCustomer">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
@@ -439,6 +447,7 @@
           <EntitySetMapping Name="TblProducts">
             <EntityTypeMapping TypeName="HuyThongDiaryDBModel.TblProduct">
               <MappingFragment StoreEntitySet="TblProduct">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -457,6 +466,7 @@
           <EntitySetMapping Name="TblProductTypes">
             <EntityTypeMapping TypeName="HuyThongDiaryDBModel.TblProductType">
               <MappingFragment StoreEntitySet="TblProductType">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Disable" ColumnName="Disable" />
@@ -478,6 +488,9 @@
           <EntitySetMapping Name="TblTransactions">
             <EntityTypeMapping TypeName="HuyThongDiaryDBModel.TblTransaction">
               <MappingFragment StoreEntitySet="TblTransaction">
+                <ScalarProperty Name="Device" ColumnName="Device" />
+                <ScalarProperty Name="Delivered" ColumnName="Delivered" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />

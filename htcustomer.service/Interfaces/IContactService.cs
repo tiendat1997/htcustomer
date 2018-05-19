@@ -1,4 +1,5 @@
-﻿using htcustomer.service.ViewModel;
+﻿using htcustomer.entity;
+using htcustomer.service.ViewModel;
 using htcustomer.service.ViewModel.Contact;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace htcustomer.service.Interfaces
         string TestSasuke();
         IEnumerable<CustomerViewModel> GetAllCustomer();
         AddressBookViewModel GetAddressBook(string searchValue);
+        bool AddCustomer(TblCustomer customer);
     }
     
 
