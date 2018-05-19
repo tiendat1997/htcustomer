@@ -25,6 +25,7 @@ namespace htcustomer.entity
         public Nullable<double> SellPrice { get; set; }
         public Nullable<System.DateTime> BuyDate { get; set; }
         public Nullable<int> Type { get; set; }
+        public Nullable<bool> Disable { get; set; }
     
         public virtual TblProductType TblProductType { get; set; }
     }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using htcustomer.entity;
 using htcustomer.service.ViewModel;
+using htcustomer.service.ViewModel.Contact;
 
 namespace htcustomer.service.Implements
 {
@@ -21,7 +22,6 @@ namespace htcustomer.service.Implements
         {
             return "Hello Naruto - I don't want to be master of boruto";
         }
-
         public IEnumerable<CustomerViewModel> GetAllCustomer()
         {
             var customer = customerRepository.Gets().Select(c => new CustomerViewModel {
@@ -32,6 +32,27 @@ namespace htcustomer.service.Implements
                 Description = c.Description
             });
             return customer; 
-        }        
+        }
+        public AddressBookViewModel GetAddressBook(string searchValue)
+        {
+            var customerList = customerRepository.Gets()
+                .Where(e => (searchValue == null) || ((searchValue != null) && ((e.Name + " " + e.Description).ToUpper().Contains(searchValue.ToUpper()))))
+                .Select(c => new CustomerViewModel
+                {
+                    CustomerID = c.CustomerID,
+                    Name = c.Name,
+                    Phone = c.Phone,
+                    Address = c.Address,
+                    Description = c.Description
+                })
+                .OrderBy(c => c.Name)
+                .ThenBy(c => c.Description)
+                .Take(20);
+
+            var addressBook = new AddressBookViewModel { customerList = customerList };
+            return addressBook;
+        }
+        
+        
     }
 }

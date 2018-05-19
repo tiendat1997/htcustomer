@@ -1,12 +1,16 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Contact";
 }
-
+<style>
+    .customer-contact {
+        width: 18rem;
+        padding-left: 15px;
+        border-bottom: 1px solid #ddd;
+    }
+</style>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -44,40 +48,19 @@
 <div class="col-md-4">
     <div class="row">
         <button class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> &nbsp New Contact</button>
-        <form class="navbar-form" role="search">
+        <form class="navbar-form" role="search" id="customer-search-form">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search" name="q">
+                <input type="text" class="form-control" placeholder="Search" name="searchCustomer">
                 <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    <button class="btn btn-default" type="submit" data-url="/htcustomer/Contact/GetAddressBook/">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
                 </div>
             </div>
         </form>
     </div>
-    <div class="row">
-        <div class="card" style="width: 18rem; padding-left: 15px; border-bottom: 1px solid #ddd;">
-            <div class="card-body">
-                <h5 class="card-title">Anh Nam</h5>
-                <h6 class="card-subtitle mb-2 text-muted">01218351464</h6>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem; padding-left: 15px; border-bottom: 1px solid #ddd;">
-            <div class="card-body">
-                <h5 class="card-title">Anh Nam</h5>
-                <h6 class="card-subtitle mb-2 text-muted">01218351464</h6>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem; padding-left: 15px; border-bottom: 1px solid #ddd;">
-            <div class="card-body">
-                <h5 class="card-title">Anh Nam</h5>
-                <h6 class="card-subtitle mb-2 text-muted">01218351464</h6>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem; padding-left: 15px; border-bottom: 1px solid #ddd;">
-            <div class="card-body">
-                <h5 class="card-title">Anh Nam</h5>
-                <h6 class="card-subtitle mb-2 text-muted">01218351464</h6>
-            </div>
-        </div>
+    <div id="customer-search-result">
+        @Html.Action("GetAddressBook", "Contact")
     </div>
 </div>
 <div class="col-md-8">
@@ -153,3 +136,6 @@
         </table>
     </div>
 </div>
+@section scripts {
+    <script src="~/Scripts/MyScript/contact/contact.js"></script>
+}

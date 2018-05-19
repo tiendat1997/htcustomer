@@ -1,0 +1,16 @@
+﻿@model htcustomer.service.ViewModel.Contact.AddressBookViewModel
+
+<div class="row address-book">
+    @if (Model.customerList.Count() > 0)
+    {
+        foreach (var customer in @Model.customerList)
+        {
+            @Html.Partial("_CustomerRow", customer)
+        }
+    }
+    else
+    {
+        <h2>No search result</h2>
+    }
+
+</div>

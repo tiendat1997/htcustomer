@@ -10,7 +10,6 @@ namespace htcustomer.web.Controllers
     public class ContactController : Controller
     {
         private readonly IContactService contactService;
-
         public ContactController(IContactService contactService)
         {
             this.contactService = contactService;
@@ -20,15 +19,21 @@ namespace htcustomer.web.Controllers
             return contactService.TestSasuke(); 
         }
         // GET: Contact
-        public ActionResult Index()
+        public ActionResult Index(int? customerID = null)
         {
+            if (customerID != null)
+            {
+                // Get Details of A customer 
+            }            
             return View();
+        }     
+        public ActionResult GetAddressBook(string searchCustomer)
+        {
+            var addressBook = contactService.GetAddressBook(searchCustomer);
+
+            return PartialView("_AddressBook", addressBook);
         }
 
-        public ActionResult AllCustomer()
-        {
-            var allCustomer = contactService.GetAllCustomer();            
-            return Json(allCustomer, JsonRequestBehavior.AllowGet);
-        }
+
     }
 }

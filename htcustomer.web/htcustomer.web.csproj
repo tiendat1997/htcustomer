@@ -316,6 +316,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\MyScript\contact\contact.js" />
     <Content Include="Scripts\MyScript\device\device.js" />
     <Content Include="Scripts\MyScript\homescript.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -383,6 +384,8 @@
     <Content Include="Views\Device\_DeviceTab.cshtml" />
     <Content Include="Views\Device\_DeviceFilter.cshtml" />
     <Content Include="Views\Device\_AddBillForm.cshtml" />
+    <Content Include="Views\Contact\_CustomerRow.cshtml" />
+    <Content Include="Views\Contact\_AddressBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
