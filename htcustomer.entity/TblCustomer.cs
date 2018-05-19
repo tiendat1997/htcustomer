@@ -25,6 +25,7 @@ namespace htcustomer.entity
         public Nullable<long> Phone { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }
+        public Nullable<bool> Disable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblTransaction> TblTransactions { get; set; }

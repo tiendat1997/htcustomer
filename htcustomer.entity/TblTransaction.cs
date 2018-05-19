@@ -27,6 +27,9 @@ namespace htcustomer.entity
         public Nullable<System.DateTime> RecievedDate { get; set; }
         public Nullable<System.DateTime> DeliverDate { get; set; }
         public Nullable<int> TypeID { get; set; }
+        public string Error { get; set; }
+        public Nullable<bool> Delivered { get; set; }
+        public string Device { get; set; }
     
         public virtual TblCategory TblCategory { get; set; }
         public virtual TblCustomer TblCustomer { get; set; }
