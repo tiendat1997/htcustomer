@@ -13,6 +13,8 @@ namespace htcustomer.service.ViewModel
         public long? Phone { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }
+        public bool? Disable { get; set; } 
+
 
     }
 }

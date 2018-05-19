@@ -1,8 +1,16 @@
 ﻿@model htcustomer.service.ViewModel.CustomerViewModel
 
-<div class="card customer-contact">
+<div class="card customer-contact" style="width: 80%; margin-bottom: 30px;">
     <div class="card-body">
         <h5 class="card-title">@Model.Name ( @Model.Description )</h5>
-        <h6 class="card-subtitle mb-2 text-muted">@Model.Phone</h6>
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="card-subtitle mb-2 text-muted"><i class="fa fa-phone"></i> &nbsp;&nbsp;@Model.Phone</h6>
+            </div>
+            <div class="col-md-6">
+                <a href="#">Details &nbsp;&nbsp;<i class="fa fa-angle-double-right"></i></a>
+            </div>
+        </div>                
     </div>
+    
 </div>
