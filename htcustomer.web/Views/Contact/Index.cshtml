@@ -59,6 +59,10 @@
         </form>
     </div>
     <div id="customer-search-result">
+        <div id="loading-customer" style="position: relative;width: 70%;display:none;">
+            <img src="~/Content/Images/loading-sm.gif" 
+                 style="width: 100px; height: 100px;margin: 0 auto;position: absolute;top: 15rem;left: 0;right: 0;"/>
+        </div>
         @Html.Action("GetAddressBook", "Contact")
     </div>
 </div>
@@ -76,9 +80,7 @@
         <table class="table table-responsive table-striped" cellspacing="10">
             <thead>
                 <tr>
-                    <th>
-                        Status
-                    </th>
+                    <th>Status</th>
                     <th>Received Date</th>
                     <th>Device</th>
                     <th>Error</th>
