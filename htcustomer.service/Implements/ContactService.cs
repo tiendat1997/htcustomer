@@ -1,11 +1,8 @@
 ﻿using htcustomer.repository;
 using htcustomer.service.Interfaces;
-using System;
+using htcustomer.entity;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using htcustomer.entity;
 using htcustomer.service.ViewModel;
 using htcustomer.service.ViewModel.Contact;
 
@@ -55,7 +52,14 @@ namespace htcustomer.service.Implements
 
         public bool AddCustomer(TblCustomer customer)
         {
-            throw new NotImplementedException();
+            if (customer != null)
+            {
+                customerRepository.Insert(customer);
+                customerRepository.Save();
+                return true;
+            }
+            return false;
         }
+
     }
 }
