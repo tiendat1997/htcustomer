@@ -36,14 +36,16 @@ namespace htcustomer.service.Implements
         public AddressBookViewModel GetAddressBook(string searchValue)
         {
             var customerList = customerRepository.Gets()
-                .Where(e => (searchValue == null) || ((searchValue != null) && ((e.Name + " " + e.Description).ToUpper().Contains(searchValue.ToUpper()))))
+                .Where(e => (searchValue == null) || ((searchValue != null) && ((e.Name + " " + e.Description).ToUpper().Contains(searchValue.ToUpper()))) &&
+                            (e.Disable == true || e.Disable == null))
                 .Select(c => new CustomerViewModel
                 {
                     CustomerID = c.CustomerID,
                     Name = c.Name,
                     Phone = c.Phone,
                     Address = c.Address,
-                    Description = c.Description
+                    Description = c.Description,                   
+                    Disable = c.Disable
                 })
                 .OrderBy(c => c.Name)
                 .ThenBy(c => c.Description)
