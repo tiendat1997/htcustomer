@@ -25,6 +25,7 @@ namespace htcustomer.entity
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TblAccount> TblAccounts { get; set; }
         public virtual DbSet<TblCategory> TblCategories { get; set; }
         public virtual DbSet<TblCustomer> TblCustomers { get; set; }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using htcustomer.entity;
 
 namespace htcustomer.web.Controllers
 {
@@ -34,6 +35,10 @@ namespace htcustomer.web.Controllers
             return PartialView("_AddressBook", addressBook);
         }
 
-
+        public ActionResult AddCustomer(TblCustomer customer)
+        {
+            contactService.AddCustomer(customer);
+            return View("Index");
+        }
     }
 }
