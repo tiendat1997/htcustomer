@@ -8,7 +8,9 @@
                 <h6 class="card-subtitle mb-2 text-muted"><i class="fa fa-phone"></i> &nbsp;&nbsp;@Model.Phone</h6>
             </div>
             <div class="col-md-6">
-                <a href="#">Details &nbsp;&nbsp;<i class="fa fa-angle-double-right"></i></a>
+                <a href=@Url.Action("Index","Contact", new { customerID = Model.CustomerID})>
+                    Details &nbsp;&nbsp;<i class='fa fa - angle - double - right'></i>
+                </a>                
             </div>
         </div>                
     </div>

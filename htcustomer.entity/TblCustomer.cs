@@ -22,7 +22,7 @@ namespace htcustomer.entity
     
         public int CustomerID { get; set; }
         public string Name { get; set; }
-        public Nullable<long> Phone { get; set; }
+        public string Phone { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }
         public Nullable<bool> Disable { get; set; }

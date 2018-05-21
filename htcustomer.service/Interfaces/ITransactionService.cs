@@ -1,4 +1,5 @@
 ﻿using htcustomer.service.ViewModel;
+using htcustomer.service.ViewModel.Contact;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace htcustomer.service.Interfaces
     public interface ITransactionService
     {
         IEnumerable<CustomerTransactionViewModel> GetCustomerTransaction(int customerID);
+        ContactDetailsViewModel GetContactDetails(int customerID);
     }
 }

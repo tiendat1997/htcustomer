@@ -24,7 +24,7 @@ $(function (e) {
             method: 'GET',
             cached: false
         }).done(function (result) {
-            if (result != null) {
+            if (result !== null) {
                 $("#customer-search-result .row").replaceWith(result);                
             }
             else {

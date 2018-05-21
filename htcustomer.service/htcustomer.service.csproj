@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +51,7 @@
     <Compile Include="ViewModel\Contact\ContactDetailsViewModel.cs" />
     <Compile Include="ViewModel\CustomerTransactionViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\Transaction\TransactionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Constant\" />

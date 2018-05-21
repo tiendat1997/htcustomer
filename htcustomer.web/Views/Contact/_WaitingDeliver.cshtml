@@ -1,0 +1,87 @@
+﻿@model Dictionary<string, IEnumerable<htcustomer.service.ViewModel.Transaction.TransactionViewModel>>
+
+<div class="panel panel-success">
+    <div class="panel-heading">Waiting To Deliver &nbsp;<span class="badge">@(Model["FIXED"].Count() + Model["CANNOTFIX"].Count())</span></div>
+    <div class="panel-body">
+        <div style="margin-bottom: 50px;">
+            <h4 style="border-bottom: 0.5px solid #ddd">Fixed Transaction</h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Device</th>
+                        <th>Error</th>
+                        <th>Receive</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var transaction in Model["FIXED"])
+                    {
+                        <tr class="fixed-status">
+                            <td>
+                                <button class="btn btn-sm btn-success"><i class="fa fa-sm fa-send"></i></button>
+                            </td>
+                            <td>
+                                <p>@transaction.Device</p>
+                                <p>Describe something</p>
+                            </td>
+                            <td>
+                                <p>@transaction.Error</p>
+                            </td>
+                            <td>
+                                @transaction.RecieveDate.Value.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                <p>@transaction.Price</p>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h4 style="border-bottom: 0.5px solid #ddd">Cannot Fix Transaction</h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Device</th>
+                        <th>Error</th>
+                        <th>Receive</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var transaction in Model["CANNOTFIX"])
+                    {
+                        <tr class="cannotfix-status">
+                            <td>
+                                <button class="btn btn-sm btn-danger"><i class="fa fa-sm fa-send"></i></button>
+                            </td>
+                            <td>
+                                <p>@transaction.Device</p>
+                                <p>Describe something</p>
+                            </td>
+                            <td>
+                                <p>@transaction.Error</p>
+                            </td>
+                            <td>
+                                @transaction.RecieveDate.Value.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                <p>Reason that cannot fix the problem</p>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+

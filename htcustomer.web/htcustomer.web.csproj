@@ -387,9 +387,13 @@
     <Content Include="Views\Device\_AddBillForm.cshtml" />
     <Content Include="Views\Contact\_CustomerRow.cshtml" />
     <Content Include="Views\Contact\_AddressBook.cshtml" />
+    <Content Include="Views\Contact\_WaitingDeliver.cshtml" />
+    <Content Include="Views\Contact\_NotFixTransaction.cshtml" />
+    <Content Include="Views\Contact\_DeliveredTransaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Transaction\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

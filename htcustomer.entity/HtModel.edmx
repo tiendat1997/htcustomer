@@ -27,7 +27,7 @@
           </Key>
           <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" />
-          <Property Name="Phone" Type="bigint" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" />
           <Property Name="Address" Type="nvarchar" MaxLength="250" />
           <Property Name="Disable" Type="bit" />
@@ -218,7 +218,7 @@
           </Key>
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="Int64" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Disable" Type="Boolean" />
