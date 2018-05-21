@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblDetailPrice" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblProduct" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblProductType" Width="1.5" PointX="2.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblToDo" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblToDo" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblTransaction" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblTransactionStatu" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
         <AssociationConnector Association="HuyThongDiaryDBModel.FK_TblTransaction_TblDevice" ManuallyRouted="false" />
