@@ -46,9 +46,9 @@ namespace htcustomer.web.Controllers
         }
 
         public ActionResult AddCustomer(TblCustomer customer)
-        {
+        {            
             contactService.AddCustomer(customer);
-            return View("Index");
+            return RedirectToAction("Index");
         }
     }
 }

@@ -34,7 +34,7 @@ namespace htcustomer.service.Implements
         {
             var customerList = customerRepository.Gets()
                 .Where(e => (searchValue == null) || ((searchValue != null) && ((e.Name + " " + e.Description).ToUpper().Contains(searchValue.ToUpper()))))
-                .Where(e => e.Disable == false || e.Disable == true)
+                .Where(e => e.Disable != true)
                 .Select(c => new CustomerViewModel
                 {
                     CustomerID = c.CustomerID,
@@ -56,6 +56,7 @@ namespace htcustomer.service.Implements
         {
             if (customer != null)
             {
+                customer.Disable = false;
                 customerRepository.Insert(customer);
                 customerRepository.Save();
                 return true;
