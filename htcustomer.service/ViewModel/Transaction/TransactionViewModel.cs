@@ -14,9 +14,11 @@ namespace htcustomer.service.ViewModel.Transaction
         public TransactionStatus Status { get; set; }       
         public DateTime? RecieveDate { get; set; }        
         public DateTime? DeliveredDate { get; set; }
-        public string Device { get; set; }
+        public string Category { get; set; }
+        public string Description { get; set; }
         public string Error { get; set; }
         public bool? Delivered { get; set; }
-        public double? Price { get; set; }
+        public double? Price { get; set; }        
+        public string Reason { get; set; }
     }
 }

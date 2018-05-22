@@ -46,27 +46,15 @@ namespace htcustomer.service.Implements
                                 Status = (TransactionStatus)t.StatusID,
                                 RecieveDate = t.RecievedDate,
                                 DeliveredDate = t.DeliverDate,
-                                Device = t.Device,
+                                Category = t.TblCategory.Name,
+                                Description = t.Description,
                                 Error = t.Error,
                                 Delivered = t.Delivered,
-                                Price = t.Price
-                            })
+                                Price = t.Price,
+                                Reason = t.Reason
+                            }),
             };
             return model;
-        }
-        public IEnumerable<CustomerTransactionViewModel> GetCustomerTransaction(int customerID)
-        {
-            return transactionRepository.Gets()
-                .Where(t => t.CustomerID == customerID)
-                .Select(t => new CustomerTransactionViewModel()
-                {
-                    TransactionID = t.TransactionID,
-                    Status = (TransactionStatus)t.StatusID,
-                    DeliveredDate = t.DeliverDate,
-                    Device = t.Device,
-                    Error = t.Error,
-                    Delivered = t.Delivered
-                });
-        }
+        }     
     }
 }

@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace htcustomer.service.Interfaces
 {
     public interface ITransactionService
-    {
-        IEnumerable<CustomerTransactionViewModel> GetCustomerTransaction(int customerID);
+    {        
         ContactDetailsViewModel GetContactDetails(int customerID);
     }
 }
