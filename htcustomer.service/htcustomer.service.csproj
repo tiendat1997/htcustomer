@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\TransactionStatus.cs" />
+    <Compile Include="Implements\CategoryService.cs" />
     <Compile Include="Implements\ContactService.cs" />
     <Compile Include="Implements\TransactionService.cs" />
+    <Compile Include="Interfaces\ICategoryService.cs" />
     <Compile Include="Interfaces\IContactService.cs" />
     <Compile Include="Interfaces\ITransactionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
