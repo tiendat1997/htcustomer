@@ -1,0 +1,10 @@
+﻿@model htcustomer.entity.TblCategory
+
+<tr id="@Model.CategoryID">
+    <td>@Model.CategoryID</td>
+    <td class="td-category-name-@Model.CategoryID">@Model.Name</td>
+    <td>
+        <button class="btn btn-sm btn-primary btn-edit-category" data-id="@Model.CategoryID"><i class="fa fa-edit"></i></button>
+        <button class="btn btn-sm btn-danger btn-delete-category" data-id="@Model.CategoryID"><i class="fa fa-remove"></i></button>
+    </td>
+</tr>

@@ -22,6 +22,7 @@ namespace htcustomer.service.Implements
         {
             if (newCategory != null)
             {
+                newCategory.Disable = false;
                 categoryRepo.Insert(newCategory);
                 categoryRepo.Save();
                 return true;
@@ -33,8 +34,13 @@ namespace htcustomer.service.Implements
         {
             if (categoryId > 0)
             {
-                categoryRepo.Delete(categoryId);
-                categoryRepo.Save();
+                var category = categoryRepo.GetByID(categoryId);
+                if (category != null)
+                {
+                    category.Disable = true;
+                    categoryRepo.Edit(category);
+                    categoryRepo.Save();
+                }
                 return true;
             }
             return false;
@@ -46,7 +52,9 @@ namespace htcustomer.service.Implements
             {
                 if (category.CategoryID > 0)
                 {
+                    category.Disable = false;
                     categoryRepo.Edit(category);
+                    categoryRepo.Save();
                     return true;
                 }
             }
@@ -55,7 +63,7 @@ namespace htcustomer.service.Implements
 
         public IEnumerable<TblCategory> GetAllCategories()
         {
-            return categoryRepo.Gets();
+            return categoryRepo.Gets().Where(c => !c.Disable.Value);
         }
     }
 }

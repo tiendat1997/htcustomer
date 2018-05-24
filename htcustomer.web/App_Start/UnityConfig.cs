@@ -48,6 +48,7 @@ namespace htcustomer.web
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IContactService, ContactService>();
             container.RegisterType<ITransactionService, TransactionService>();
+            container.RegisterType<ICategoryService, CategoryService>();
             container.RegisterType(typeof(IRepository<>),typeof(Repository<>));
         }
     }
