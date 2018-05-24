@@ -1,5 +1,6 @@
 ﻿using htcustomer.entity;
 using htcustomer.service.Interfaces;
+using htcustomer.service.ViewModel.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace htcustomer.web.Controllers
             return View(model);
         }
 
-        public ActionResult Add(TblCategory category)
+        public ActionResult Add(CategoryViewModel category)
         {
             categoryService.Add(category);
             return RedirectToAction("Index");
@@ -34,9 +35,8 @@ namespace htcustomer.web.Controllers
         {
             categoryService.Delete(categoryId);
             return Json("Success");
-        }
-
-        public JsonResult Update(TblCategory category)
+        }        
+        public JsonResult Update(CategoryViewModel category)
         {
             categoryService.Edit(category);
             return Json("Success");

@@ -17,7 +17,6 @@
         tdCategoryName.empty();
         tdCategoryName.append(inputCategoryName);
 
-
         //replace EDIT button with SAVE button
         var btnSaveCategory = $("<button></button>");
         btnSaveCategory.addClass("btn btn-sm btn-success btn-save-category");

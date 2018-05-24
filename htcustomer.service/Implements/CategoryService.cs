@@ -1,6 +1,7 @@
 ﻿using htcustomer.entity;
 using htcustomer.repository;
 using htcustomer.service.Interfaces;
+using htcustomer.service.ViewModel.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,52 +19,61 @@ namespace htcustomer.service.Implements
             this.categoryRepo = _categoryRepo;
         }
 
-        public bool Add(TblCategory newCategory)
+        public void Add(CategoryViewModel category)
         {
-            if (newCategory != null)
+            try
             {
-                newCategory.Disable = false;
-                categoryRepo.Insert(newCategory);
+                categoryRepo.Insert(new TblCategory { CategoryID = category.CategoryID, Name = category.Name, Disable = false });
                 categoryRepo.Save();
-                return true;
-            }
-            return false;
+            }catch(Exception ex)
+            {
+
+            }            
         }
 
-        public bool Delete(int categoryId)
+        public void Delete(int categoryId)
         {
-            if (categoryId > 0)
+            try
             {
-                var category = categoryRepo.GetByID(categoryId);
-                if (category != null)
+                if (categoryId > 0)
                 {
-                    category.Disable = true;
-                    categoryRepo.Edit(category);
-                    categoryRepo.Save();
-                }
-                return true;
-            }
-            return false;
-        }
-
-        public bool Edit(TblCategory category)
-        {
-            if (category != null)
-            {
-                if (category.CategoryID > 0)
-                {
-                    category.Disable = false;
-                    categoryRepo.Edit(category);
-                    categoryRepo.Save();
-                    return true;
+                    var category = categoryRepo.GetByID(categoryId);
+                    if (category != null)
+                    {
+                        category.Disable = true;
+                        categoryRepo.Edit(category);
+                        categoryRepo.Save();
+                    }
                 }
             }
-            return false;
+            catch (Exception ex)
+            {
+
+            }
         }
 
-        public IEnumerable<TblCategory> GetAllCategories()
+        public void Edit(CategoryViewModel category)
         {
-            return categoryRepo.Gets().Where(c => !c.Disable.Value);
+            try
+            {
+                categoryRepo.Edit(new TblCategory { CategoryID = category.CategoryID, Name = category.Name });
+                categoryRepo.Save();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public IEnumerable<CategoryViewModel> GetAllCategories()
+        {
+            return categoryRepo.Gets()
+                .Where(c => c.Disable != true)
+                .Select(c => new CategoryViewModel
+                {
+                    CategoryID = c.CategoryID,
+                    Name = c.Name
+                });
         }
     }
 }

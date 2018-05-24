@@ -1,4 +1,5 @@
 ﻿using htcustomer.entity;
+using htcustomer.service.ViewModel.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace htcustomer.service.Interfaces
 {
     public interface ICategoryService
     {
-        IEnumerable<TblCategory> GetAllCategories();
-        bool Edit(TblCategory category);
-        bool Add(TblCategory newCategory);
-        bool Delete(int categoryId);
+        IEnumerable<CategoryViewModel> GetAllCategories();
+        void Edit(CategoryViewModel category);
+        void Add(CategoryViewModel newCategory);
+        void Delete(int categoryId);
 
     }
 }
