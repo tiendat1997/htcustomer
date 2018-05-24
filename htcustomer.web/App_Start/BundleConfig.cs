@@ -11,6 +11,9 @@ namespace htcustomer.web
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
+                        "~/Scripts/toastr.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -30,14 +33,19 @@ namespace htcustomer.web
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css",
                       "~/Content/themes/base/jquery-ui.css",
+                      "~/Content/toastr.css",
                       "~/Content/MyCss/BaseGoogle.css",
                       "~/Content/site.css"));
 
             // Device Bundle
             bundles.Add(new StyleBundle("~/Content/css/device").Include(
-                "~/Content/MyCss/device/device.css"));
+                "~/Content/MyCss/device.css"));
             bundles.Add(new ScriptBundle("~/Scripts/js/device").Include(
                 "~/Scripts/MyScript/device/device.js"));
+
+            // Contact Bundle 
+            bundles.Add(new StyleBundle("~/Content/css/contact").Include(
+                "~/Content/MyCss/contact.css"));
         }
     }
 }

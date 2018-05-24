@@ -230,8 +230,9 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\loading-sm.gif" />
     <Content Include="Content\MyCss\BaseGoogle.css" />
+    <Content Include="Content\MyCss\contact.css" />
     <Content Include="Content\MyCss\CustomSearchBox.css" />
-    <Content Include="Content\MyCss\Device\device.css" />
+    <Content Include="Content\MyCss\device.css" />
     <Content Include="Content\MyCss\FlatButton.css" />
     <Content Include="Content\MyCss\IconCollection.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -275,6 +276,8 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -309,6 +312,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
@@ -326,6 +331,8 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -390,6 +397,8 @@
     <Content Include="Views\Contact\_WaitingDeliver.cshtml" />
     <Content Include="Views\Contact\_NotFixTransaction.cshtml" />
     <Content Include="Views\Contact\_DeliveredTransaction.cshtml" />
+    <Content Include="Views\Contact\_NewCustomer.cshtml" />
+    <Content Include="Views\Contact\_CustomerInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

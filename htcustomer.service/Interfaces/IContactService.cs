@@ -14,7 +14,7 @@ namespace htcustomer.service.Interfaces
         string TestSasuke();
         IEnumerable<CustomerViewModel> GetAllCustomer();
         AddressBookViewModel GetAddressBook(string searchValue);
-        bool AddCustomer(TblCustomer customer);
+        void AddCustomer(CustomerViewModel customer);
     }
     
 

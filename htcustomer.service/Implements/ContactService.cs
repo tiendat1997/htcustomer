@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using htcustomer.service.ViewModel;
 using htcustomer.service.ViewModel.Contact;
+using System;
 
 namespace htcustomer.service.Implements
 {
@@ -21,14 +22,15 @@ namespace htcustomer.service.Implements
         }
         public IEnumerable<CustomerViewModel> GetAllCustomer()
         {
-            var customer = customerRepository.Gets().Select(c => new CustomerViewModel {
+            var customer = customerRepository.Gets().Select(c => new CustomerViewModel
+            {
                 CustomerID = c.CustomerID,
                 Name = c.Name,
                 Phone = c.Phone,
                 Address = c.Address,
                 Description = c.Description
             });
-            return customer; 
+            return customer;
         }
         public AddressBookViewModel GetAddressBook(string searchValue)
         {
@@ -41,7 +43,7 @@ namespace htcustomer.service.Implements
                     Name = c.Name,
                     Phone = c.Phone,
                     Address = c.Address,
-                    Description = c.Description,                   
+                    Description = c.Description,
                     Disable = c.Disable
                 })
                 .OrderBy(c => c.Name)
@@ -52,16 +54,23 @@ namespace htcustomer.service.Implements
             return addressBook;
         }
 
-        public bool AddCustomer(TblCustomer customer)
+        public void AddCustomer(CustomerViewModel customer)
         {
-            if (customer != null)
+            try
             {
                 customer.Disable = false;
-                customerRepository.Insert(customer);
+                customerRepository.Insert(new TblCustomer
+                {
+                    Name = customer.Name,
+                    Description = customer.Description,
+                    Phone = customer.Phone,
+                    Address = customer.Address,
+                    Disable = false
+                });
                 customerRepository.Save();
-                return true;
-            }
-            return false;
+            } catch(Exception ex)
+            {                
+            }            
         }
 
     }

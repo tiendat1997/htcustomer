@@ -29,7 +29,8 @@ namespace htcustomer.entity
         public Nullable<int> TypeID { get; set; }
         public string Error { get; set; }
         public Nullable<bool> Delivered { get; set; }
-        public string Device { get; set; }
+        public string Description { get; set; }
+        public string Reason { get; set; }
     
         public virtual TblCategory TblCategory { get; set; }
         public virtual TblCustomer TblCustomer { get; set; }
