@@ -12,19 +12,19 @@ namespace htcustomer.entity
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
-    public partial class HuyThongDiaryDBEntities : DbContext
+
+    public partial class HtDbContext : DbContext
     {
-        public HuyThongDiaryDBEntities()
-            : base("name=HuyThongDiaryDBEntities")
+        public HtDbContext(string connectionString)
+            : base(connectionString)
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<TblAccount> TblAccounts { get; set; }
         public virtual DbSet<TblCategory> TblCategories { get; set; }
         public virtual DbSet<TblCustomer> TblCustomers { get; set; }

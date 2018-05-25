@@ -17,15 +17,10 @@ namespace htcustomer.web.Controllers
         {
             this.contactService = contactService;
             this.transactionService = transactionService;
-        }
-        public string TestStatus()
-        {
-            return contactService.TestSasuke();
-        }
+        }     
         // GET: Contact
         public ActionResult Index(int? customerID = null)
         {
-
             if (customerID != null)
             {
                 // Get Details of A customer 
