@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 namespace htcustomer.service.Interfaces
 {
     public interface IContactService
-    {
-        string TestSasuke();
+    {        
         IEnumerable<CustomerViewModel> GetAllCustomer();
         AddressBookViewModel GetAddressBook(string searchValue);
-        bool AddCustomer(TblCustomer customer);
+        void AddCustomer(CustomerViewModel customer);
     }
     
 

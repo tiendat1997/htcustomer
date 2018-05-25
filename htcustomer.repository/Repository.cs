@@ -12,44 +12,44 @@ namespace htcustomer.repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly HuyThongDiaryDBEntities _context;
-        private readonly IDbSet<T> dbEntity;
+        private readonly HtDbContext context;
+        private readonly IDbSet<T> dbSet;
 
-        public Repository()
+        public Repository(HtDbContext _context)
         {
-            _context = new HuyThongDiaryDBEntities();
-            dbEntity = _context.Set<T>();
+            context = _context;
+            dbSet = context.Set<T>();
         }
 
         public void Delete(int id)
         {
-            T model = dbEntity.Find(id);
-            dbEntity.Remove(model);
+            T model = dbSet.Find(id);
+            dbSet.Remove(model);
         }
 
         public T GetByID(int id)
         {
-            return dbEntity.Find(id);
+            return dbSet.Find(id);
         }
 
         public IEnumerable<T> Gets()
         {
-            return dbEntity.ToList();
+            return dbSet.ToList();
         }
 
         public void Insert(T model)
         {
-            dbEntity.Add(model);
+            dbSet.Add(model);
         }
 
         public void Save()
         {
-            _context.SaveChanges();
+            context.SaveChanges();
         }
 
         public void Edit(T model)
         {
-            _context.Entry<T>(model).State = EntityState.Modified;
+            context.Entry<T>(model).State = EntityState.Modified;
         }
     }
 }

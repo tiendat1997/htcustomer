@@ -5,30 +5,31 @@ using System.Collections.Generic;
 using System.Linq;
 using htcustomer.service.ViewModel;
 using htcustomer.service.ViewModel.Contact;
+using System;
+using htcustomer.repository.UnitOfWork;
 
 namespace htcustomer.service.Implements
 {
     public class ContactService : IContactService
     {
         private readonly IRepository<TblCustomer> customerRepository;
-        public ContactService(IRepository<TblCustomer> _customerRepository)
+        private readonly IUnitOfWork unitOfWork;
+        public ContactService(IUnitOfWork _unitOfWork,IRepository<TblCustomer> _customerRepository)
         {
+            unitOfWork = _unitOfWork;
             customerRepository = _customerRepository;
-        }
-        public string TestSasuke()
-        {
-            return "Hello Naruto - I don't want to be master of boruto";
-        }
+        }        
         public IEnumerable<CustomerViewModel> GetAllCustomer()
         {
-            var customer = customerRepository.Gets().Select(c => new CustomerViewModel {
+            var customer = customerRepository.Gets().Select(c => new CustomerViewModel
+            {
                 CustomerID = c.CustomerID,
                 Name = c.Name,
                 Phone = c.Phone,
                 Address = c.Address,
                 Description = c.Description
             });
-            return customer; 
+            return customer;
         }
         public AddressBookViewModel GetAddressBook(string searchValue)
         {
@@ -41,7 +42,7 @@ namespace htcustomer.service.Implements
                     Name = c.Name,
                     Phone = c.Phone,
                     Address = c.Address,
-                    Description = c.Description,                   
+                    Description = c.Description,
                     Disable = c.Disable
                 })
                 .OrderBy(c => c.Name)
@@ -52,16 +53,19 @@ namespace htcustomer.service.Implements
             return addressBook;
         }
 
-        public bool AddCustomer(TblCustomer customer)
+        public void AddCustomer(CustomerViewModel customer)
         {
-            if (customer != null)
+            if (customer == null) throw new ArgumentNullException("Null Argument");
+            customer.Disable = false;
+            customerRepository.Insert(new TblCustomer
             {
-                customer.Disable = false;
-                customerRepository.Insert(customer);
-                customerRepository.Save();
-                return true;
-            }
-            return false;
+                Name = customer.Name,
+                Description = customer.Description,
+                Phone = customer.Phone,
+                Address = customer.Address,
+                Disable = false
+            });
+            unitOfWork.Save();
         }
 
     }

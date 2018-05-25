@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using htcustomer.entity;
+using htcustomer.service.ViewModel;
 
 namespace htcustomer.web.Controllers
 {
@@ -16,15 +17,10 @@ namespace htcustomer.web.Controllers
         {
             this.contactService = contactService;
             this.transactionService = transactionService;
-        }
-        public string TestStatus()
-        {
-            return contactService.TestSasuke();
-        }
+        }     
         // GET: Contact
         public ActionResult Index(int? customerID = null)
         {
-
             if (customerID != null)
             {
                 // Get Details of A customer 
@@ -44,10 +40,22 @@ namespace htcustomer.web.Controllers
 
             return PartialView("_AddressBook", addressBook);
         }
-
-        public ActionResult AddCustomer(TblCustomer customer)
-        {            
-            contactService.AddCustomer(customer);
+        [HttpGet]
+        public ActionResult AddCustomer()
+        {
+            return PartialView("_NewCustomer", new CustomerViewModel());
+        }
+        [HttpPost]
+        public ActionResult AddCustomer(CustomerViewModel customer)
+        {           
+            try
+            {
+                contactService.AddCustomer(customer);
+                
+            } catch(Exception ex)
+            {
+                
+            }
             return RedirectToAction("Index");
         }
     }

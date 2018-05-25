@@ -1,10 +1,13 @@
+using htcustomer.entity;
 using htcustomer.repository;
+using htcustomer.repository.UnitOfWork;
 using htcustomer.service.Implements;
 using htcustomer.service.Interfaces;
 using System;
 using System.Web.Mvc;
 using Unity;
-
+using Unity.AspNet.Mvc;
+using Unity.Injection;
 
 namespace htcustomer.web
 {
@@ -46,6 +49,8 @@ namespace htcustomer.web
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<HtDbContext>(new PerRequestLifetimeManager(), new InjectionConstructor("name=HuyThongDiaryDBEntities"));
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<IContactService, ContactService>();
             container.RegisterType<ITransactionService, TransactionService>();
             container.RegisterType<ICategoryService, CategoryService>();

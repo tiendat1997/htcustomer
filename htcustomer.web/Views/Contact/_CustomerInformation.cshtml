@@ -1,0 +1,27 @@
+﻿@model htcustomer.service.ViewModel.CustomerViewModel
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-8">Customer Information</div>
+            <div class="col-md-4 text-right">
+                <button class="btn btn-sm btn-primary"><i class="fa fa-edit"></i>&nbsp;Edit</button>
+                <button class="btn btn-sm btn-danger"><i class="fa fa-remove"></i>&nbsp;Remove</button>
+            </div>
+        </div>        
+    </div>
+    <div class="panel-body">
+        <div class="col-md-6"> 
+            <i class="fa fa-2x fa-address-book"></i>&nbsp;&nbsp;
+            <p style="display:inline-block">@Model.Name.ToUpper()</p><br />
+            <i class="fa fa-2x fa-flag"></i>&nbsp;&nbsp;
+            <p style="display:inline-block">@Model.Description</p>
+        </div>
+        <div class="col-md-6">
+            <i class="fa fa-2x fa-phone"></i>&nbsp;&nbsp;&nbsp;
+            <p style="color:#737070; display:inline-block">@Model.Phone</p><br />
+            <i class="fa fa-2x fa-address-book"></i>&nbsp;&nbsp;&nbsp;
+            <p style="display:inline-block">@(Model.Address ?? "Empty")</p>
+        </div>
+    </div>
+</div>
