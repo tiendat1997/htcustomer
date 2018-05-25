@@ -100,7 +100,8 @@
           <Property Name="TypeID" Type="int" />
           <Property Name="Error" Type="nvarchar(max)" />
           <Property Name="Delivered" Type="bit" />
-          <Property Name="Device" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="TblTransactionStatus">
           <Key>
@@ -306,7 +307,8 @@
           <Property Name="TypeID" Type="Int32" />
           <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Delivered" Type="Boolean" />
-          <Property Name="Device" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TblCategory" Relationship="Self.FK_TblTransaction_TblDevice" FromRole="TblTransaction" ToRole="TblCategory" />
           <NavigationProperty Name="TblCustomer" Relationship="Self.FK_TblTransaction_TblCustomer" FromRole="TblTransaction" ToRole="TblCustomer" />
           <NavigationProperty Name="TblDetailPrices" Relationship="Self.FK_TblDetailPrice_TblTransaction" FromRole="TblTransaction" ToRole="TblDetailPrice" />
@@ -380,7 +382,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="HuyThongDiaryDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TblAccounts" EntityType="Self.TblAccount" />
           <EntitySet Name="TblCategories" EntityType="Self.TblCategory" />
@@ -417,7 +419,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HuyThongDiaryDBModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="HuyThongDiaryDBModelStoreContainer" CdmEntityContainer="HuyThongDiaryDBEntities">
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="HuyThongDiaryDBModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -520,7 +522,8 @@
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="Error" ColumnName="Error" />
                 <ScalarProperty Name="Delivered" ColumnName="Delivered" />
-                <ScalarProperty Name="Device" ColumnName="Device" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
