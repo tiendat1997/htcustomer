@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using htcustomer.entity;
 using htcustomer.service.ViewModel;
+using htcustomer.service.Helper;
+using htcustomer.service.Enums;
 
 namespace htcustomer.web.Controllers
 {
@@ -17,7 +19,7 @@ namespace htcustomer.web.Controllers
         {
             this.contactService = contactService;
             this.transactionService = transactionService;
-        }     
+        }
         // GET: Contact
         public ActionResult Index(int? customerID = null)
         {
@@ -29,7 +31,7 @@ namespace htcustomer.web.Controllers
             }
             else
             {
-                                                
+
             }
             return View();
         }
@@ -47,16 +49,23 @@ namespace htcustomer.web.Controllers
         }
         [HttpPost]
         public ActionResult AddCustomer(CustomerViewModel customer)
-        {           
+        {
             try
             {
-                contactService.AddCustomer(customer);
-                
-            } catch(Exception ex)
-            {
-                
+                if (!ModelState.IsValid)
+                {
+                    var errors = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
+
+                    return Json(new JsonMessage { Status = JsonResultStatus.Unvalidated, Message = "UnValidate customer", Errors = errors }, JsonRequestBehavior.AllowGet);
+                }
+                var result = contactService.AddCustomer(customer);
+                if (!result) return Json(new JsonMessage { Status = JsonResultStatus.Unvalidated, Message = "Customer has existed before !!!" }, JsonRequestBehavior.AllowGet);
             }
-            return RedirectToAction("Index");
+            catch (Exception ex)
+            {
+                return Json(new JsonMessage { Status = JsonResultStatus.Fail, Message = "Error during create customer" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new JsonMessage { Status = JsonResultStatus.Success, Message = "Adding customer successfully" }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult DisableCustomer(int customerID)
         {
