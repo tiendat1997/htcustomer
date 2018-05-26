@@ -1,49 +1,50 @@
 ﻿@model htcustomer.service.ViewModel.CustomerViewModel
 
-@using (Html.BeginForm("AddCustomer", "Contact")) 
+@using (Html.BeginForm("AddCustomer", "Contact", FormMethod.Post, new { id = "new-customer-form" }))
 {
     @Html.AntiForgeryToken()
-    
-<div class="container form-horizontal">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    <div class="container form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Phone, new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form-control",
+                        type = "phone",
+                        required = "required",
+                        pattern = "(09|01[2|6|8|9])+([0-9]{8})\\b",                                                  
+                    }
+                })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-plus"></i>&nbsp;Create
+                </button>
+            </div>
         </div>
     </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-success">
-                <i class="fa fa-plus"></i>&nbsp;Create
-            </button>
-        </div>
-    </div>
-</div>
 }

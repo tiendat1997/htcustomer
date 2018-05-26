@@ -14,11 +14,11 @@ namespace htcustomer.service.Implements
     {
         private readonly IRepository<TblCustomer> customerRepository;
         private readonly IUnitOfWork unitOfWork;
-        public ContactService(IUnitOfWork _unitOfWork,IRepository<TblCustomer> _customerRepository)
+        public ContactService(IUnitOfWork _unitOfWork, IRepository<TblCustomer> _customerRepository)
         {
             unitOfWork = _unitOfWork;
             customerRepository = _customerRepository;
-        }        
+        }
         public IEnumerable<CustomerViewModel> GetAllCustomer()
         {
             var customer = customerRepository.Gets().Select(c => new CustomerViewModel
@@ -52,10 +52,20 @@ namespace htcustomer.service.Implements
             var addressBook = new AddressBookViewModel { customerList = customerList };
             return addressBook;
         }
+        // Existed Name + Description  - return true if existed
+        public bool Existed(CustomerViewModel customer)
+        {
+            var result = customerRepository.Gets()
+                         .Where(c => c.Name.ToUpper().Equals(customer.Name.ToUpper()) &&
+                                c.Description.ToUpper().Equals(customer.Description.ToUpper()));
+            return (result.Count() > 0) ? true : false;
+        }
 
-        public void AddCustomer(CustomerViewModel customer)
+        public bool AddCustomer(CustomerViewModel customer)
         {
             if (customer == null) throw new ArgumentNullException("Null Argument");
+            if (Existed(customer) == true) return false;
+
             customer.Disable = false;
             customerRepository.Insert(new TblCustomer
             {
@@ -66,6 +76,7 @@ namespace htcustomer.service.Implements
                 Disable = false
             });
             unitOfWork.Save();
+            return true;
         }
 
     }

@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\JsonResultStatus.cs" />
     <Compile Include="Enums\TransactionStatus.cs" />
+    <Compile Include="Helper\JsonMessage.cs" />
     <Compile Include="Implements\CategoryService.cs" />
     <Compile Include="Implements\ContactService.cs" />
     <Compile Include="Implements\TransactionService.cs" />
@@ -58,7 +60,6 @@
   <ItemGroup>
     <Folder Include="Constant\" />
     <Folder Include="Enum\" />
-    <Folder Include="Helper\" />
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>

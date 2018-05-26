@@ -10,7 +10,63 @@ function toggleLoadingCustomerIcon(isShowed) {
         $(".address-book").css("opactiy","1");
     }    
 }
+
+function toggleModal(modal, isShowed) {
+    if (isShowed) {
+        // Show
+    }
+    else {
+        // Hide
+        $(modal).modal("hide");        
+    }
+}
+
+function showNotification(result) {
+    if (result.Status === 'Success') {
+        toastr.success(result.Message);
+    }
+    else if (result.Status === 'Unvalidated') {
+        toastr.warning(result.Message);
+    }
+    else if (result.Status === 'Failure') {
+        toastr.error(result.Message);
+    }
+}
+
 $(function (e) {
+    // custom validation message for form input
+    //$("form input").on("invalid", function (e) {
+    //    if ($(this).attr("type") === 'phone') {
+    //        this.setCustomValidity("Phone is not a valid format !");
+    //    }
+    //    else if ($(this).attr("type") == 'email') {
+    //        this.setCustomValidity("Email is not a valid format !");
+    //    }
+    //});   
+    $("#new-customer-modal").on("hidden.bs.modal", function (e) {
+        $($(this).find("form")).trigger("reset");
+    });
+   
+    $("#new-customer-form").on("submit", function (e) {
+        e.preventDefault();        
+        var currentModal = $(this).parents(".modal");
+        var url = $(this).attr("action");
+        var data = $(this).serialize();
+        var method = $(this).attr("method");         
+
+        $.ajax({
+            url : url,
+            method : method,
+            data: data,
+            cached : false,
+        }).done(function (result) {
+            showNotification(result);
+            if (result.Status === 'Success') {
+                toggleModal(currentModal, false);                
+            }
+        });
+    });
+
     $("#customer-search-form").on("submit", function (e) {
         e.preventDefault();
         toggleLoadingCustomerIcon(true); // Show Loading Gif 
