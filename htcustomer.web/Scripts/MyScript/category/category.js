@@ -11,8 +11,8 @@
         var tdCategoryName = $(".td-category-name-" + id);
         var categoryName = tdCategoryName.html();
         var inputCategoryName = $('<input type="text"></input>');
-        inputCategoryName.addClass("form-control category-"+id+"-name");
-        inputCategoryName.prop('required',true);
+        inputCategoryName.addClass("form-control category-" + id + "-name");
+        inputCategoryName.prop('required', true);
         inputCategoryName.val(categoryName);
         tdCategoryName.empty();
         tdCategoryName.append(inputCategoryName);
@@ -26,11 +26,11 @@
             var id = $(this).attr('data-id');
             var name = $(".category-" + id + "-name").val();
             UpdateCategory(id, name);
-        }); 
+        });
 
         $(this).replaceWith(btnSaveCategory);
 
-    })
+    });
 
 });
 

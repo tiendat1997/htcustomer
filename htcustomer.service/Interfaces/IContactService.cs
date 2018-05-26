@@ -14,6 +14,8 @@ namespace htcustomer.service.Interfaces
         IEnumerable<CustomerViewModel> GetAllCustomer();
         AddressBookViewModel GetAddressBook(string searchValue);
         void AddCustomer(CustomerViewModel customer);
+        void DisableCustomer(int customerID);
+        void UpdateCustomer(CustomerViewModel customer);
     }
     
 

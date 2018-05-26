@@ -58,5 +58,15 @@ namespace htcustomer.web.Controllers
             }
             return RedirectToAction("Index");
         }
+        public ActionResult DisableCustomer(int customerID)
+        {
+            contactService.DisableCustomer(customerID);
+            return RedirectToAction("Index", new { customerID });
+        }
+        public ActionResult UpdateCustomer(CustomerViewModel customer)
+        {
+            contactService.UpdateCustomer(customer);
+            return RedirectToAction("Index", new { customerID = customer.CustomerID });
+        }
     }
 }

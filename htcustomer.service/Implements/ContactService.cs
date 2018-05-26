@@ -68,5 +68,34 @@ namespace htcustomer.service.Implements
             unitOfWork.Save();
         }
 
+        public void DisableCustomer(int customerID)
+        {
+            var customer = customerRepository.GetByID(customerID);
+            customer.Disable = true;
+            customerRepository.Edit(new TblCustomer()
+            {
+                CustomerID = customer.CustomerID,
+                Name = customer.Name,
+                Description = customer.Description,
+                Phone = customer.Phone,
+                Address = customer.Address,
+                Disable = customer.Disable
+            });
+            unitOfWork.Save();
+        }
+
+        public void UpdateCustomer(CustomerViewModel customer)
+        {
+            customerRepository.Edit(new TblCustomer()
+            {
+                CustomerID = customer.CustomerID,
+                Name = customer.Name,
+                Description = customer.Description,
+                Phone = customer.Phone,
+                Address = customer.Address,
+                Disable = customer.Disable
+            });
+            unitOfWork.Save();
+        }
     }
 }
