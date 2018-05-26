@@ -4,14 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b2cfb6e400c24f42a3af0b8ef71ce46c" Name="Diagram1">
-        <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblAccount" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="c0c69e04d0ae4d9dbf5a7ebd2aeca676" Name="Diagram1">
+        <EntityTypeShape EntityType="HuyThongDiaryDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblAccount" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblCategory" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblCustomer" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblDetailPrice" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblProduct" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblProductType" Width="1.5" PointX="2.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblToDo" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblToDo" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblTransaction" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="HuyThongDiaryDBModel.TblTransactionStatu" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
         <AssociationConnector Association="HuyThongDiaryDBModel.FK_TblTransaction_TblDevice" ManuallyRouted="false" />
