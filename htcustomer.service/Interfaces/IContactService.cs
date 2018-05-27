@@ -16,7 +16,7 @@ namespace htcustomer.service.Interfaces
         bool AddCustomer(CustomerViewModel customer);
         bool Existed(CustomerViewModel customer);
         void DisableCustomer(int customerID);
-        void UpdateCustomer(CustomerViewModel customer);
+        bool UpdateCustomer(CustomerViewModel customer);
     }
     
 

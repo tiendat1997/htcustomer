@@ -14,7 +14,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Add New Contact</h4>
             </div>
-            @Html.Action("AddCustomer","Contact")          
+            @Html.Action("AddCustomer", "Contact")
         </div>
     </div>
 </div>
@@ -33,7 +33,7 @@
     </div>
     <div id="customer-search-result">
         <div id="loading-customer" class="customer-load-wrapper">
-            <img src="~/Content/Images/loading-sm.gif" class="loader-sm"/>
+            <img src="~/Content/Images/loading-sm.gif" class="loader-sm" />
         </div>
         @Html.Action("GetAddressBook", "Contact")
     </div>
@@ -44,21 +44,23 @@
             <i class="fa fa-plus"></i> &nbsp New Contact
         </button>
     </div>
-    @if (Model == null)
-    {
-        <h1>There are no customer was Selected</h1>
-    }
-    else
-    {
-        <div class="row customer-info">        
-            @Html.Partial("_CustomerInformation", Model.Customer)            
-        </div>
-        <div class="row">
-            @Html.Partial("_WaitingDeliver", Model.WaitingDeliver)
-            @Html.Partial("_NotFixTransaction", Model.NotFixTransaction)
-            @Html.Partial("_DeliveredTransaction", Model.DeliveredTransaction)
-        </div>
-    }
+    <div class="row" id="customer-wrapper">
+        @if (Model == null || Model.Customer == null)
+        {
+            <h1>There are no customer was Selected</h1>
+        }
+        else
+        {
+            <div class="row customer-info">
+                @Html.Partial("_CustomerInformation", Model.Customer)
+            </div>
+            <div class="row transaction-info">
+                @Html.Partial("_WaitingDeliver", Model.WaitingDeliver)
+                @Html.Partial("_NotFixTransaction", Model.NotFixTransaction)
+                @Html.Partial("_DeliveredTransaction", Model.DeliveredTransaction)
+            </div>
+        }
+    </div>
 </div>
 @section scripts {
     <script src="~/Scripts/MyScript/contact/contact.js"></script>

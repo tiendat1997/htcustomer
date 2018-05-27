@@ -29,7 +29,8 @@ namespace htcustomer.service.Implements
         {
             ContactDetailsViewModel model = new ContactDetailsViewModel
             {
-                Customer = customerRepository.Gets().Where(c => c.CustomerID == customerID)
+                Customer = customerRepository.Gets()
+                            .Where(c => c.CustomerID == customerID && c.Disable != true)
                             .Select(c => new CustomerViewModel
                             {
                                 CustomerID = c.CustomerID,
