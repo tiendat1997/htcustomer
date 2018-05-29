@@ -51,3 +51,8 @@ p.cannotfix-status {
     margin-bottom: 20px;
     margin-top: 20px;
 }
+
+
+#edit-customer-form input {
+    display: inline-block;
+}

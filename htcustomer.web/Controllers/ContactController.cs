@@ -55,7 +55,6 @@ namespace htcustomer.web.Controllers
                 if (!ModelState.IsValid)
                 {
                     var errors = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
-
                     return Json(new JsonMessage { Status = JsonResultStatus.Unvalidated, Message = "UnValidate customer", Errors = errors }, JsonRequestBehavior.AllowGet);
                 }
                 var result = contactService.AddCustomer(customer);
@@ -69,13 +68,32 @@ namespace htcustomer.web.Controllers
         }
         public ActionResult DisableCustomer(int customerID)
         {
-            contactService.DisableCustomer(customerID);
-            return RedirectToAction("Index", new { customerID });
+            try
+            {
+                contactService.DisableCustomer(customerID);                
+            } 
+            catch(Exception ex)
+            {
+                return Json(new JsonMessage { Status = JsonResultStatus.Fail, Message = "Error during remove customer" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new JsonMessage { Status = JsonResultStatus.Success, Message = "Removing customer successfully"},JsonRequestBehavior.AllowGet);
         }
         public ActionResult UpdateCustomer(CustomerViewModel customer)
         {
-            contactService.UpdateCustomer(customer);
-            return RedirectToAction("Index", new { customerID = customer.CustomerID });
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    var errors = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
+                    return Json(new JsonMessage { Status = JsonResultStatus.Unvalidated, Message = "Unvalidated customer", Errors = errors }, JsonRequestBehavior.AllowGet);
+                }
+                contactService.UpdateCustomer(customer);
+            }
+            catch(Exception ex)
+            {
+                return Json(new JsonMessage { Status = JsonResultStatus.Fail, Message = "Error during editing customer" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new JsonMessage { Status = JsonResultStatus.Success, Message = "Editing customer successfully" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -81,32 +81,41 @@ namespace htcustomer.service.Implements
 
         public void DisableCustomer(int customerID)
         {
-            var customer = customerRepository.GetByID(customerID);
-            customer.Disable = true;
-            customerRepository.Edit(new TblCustomer()
+            if (customerID == 0) throw new ArgumentNullException("Null Argument");                        
+            try
             {
-                CustomerID = customer.CustomerID,
-                Name = customer.Name,
-                Description = customer.Description,
-                Phone = customer.Phone,
-                Address = customer.Address,
-                Disable = customer.Disable
-            });
-            unitOfWork.Save();
+                var customer = customerRepository.GetByID(customerID);
+                customer.Disable = true;
+                customerRepository.Edit(customer);
+                unitOfWork.Save();
+            } 
+            catch(Exception ex)
+            {
+                throw new Exception("Error during remove customer");
+            }
+            
         }
 
-        public void UpdateCustomer(CustomerViewModel customer)
+        public bool UpdateCustomer(CustomerViewModel customer)
         {
-            customerRepository.Edit(new TblCustomer()
+            var entity = customerRepository.GetByID(customer.CustomerID);
+            if (entity == null) throw new ArgumentNullException("Null Argument");
+            if (Existed(customer) == true) return false;            
+            try
             {
-                CustomerID = customer.CustomerID,
-                Name = customer.Name,
-                Description = customer.Description,
-                Phone = customer.Phone,
-                Address = customer.Address,
-                Disable = customer.Disable
-            });
-            unitOfWork.Save();
+                entity.Name = customer.Name;
+                entity.Description = customer.Description;
+                entity.Phone = customer.Phone;
+                entity.Address = customer.Address;
+                entity.Disable = customer.Disable;
+                customerRepository.Edit(entity);
+                unitOfWork.Save();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error during updating");
+            }
+            return true; 
         }
     }
 }
