@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace htcustomer.service.Enums
 {
-    public enum TransactionStatus
+    public enum TransactionStatus : int
     {
         NotFix=1,
         Fixed=2,

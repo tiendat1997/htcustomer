@@ -1,4 +1,5 @@
-﻿<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+﻿@model htcustomer.service.ViewModel.Transaction.TransactionListHomeViewModel
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 
 <style>
     #customer-id {
@@ -267,7 +268,33 @@
         <h3>@Html.ActionLink("Not Fix", "Index", "Device", new { statusId = 0 }, null) <span>(23)</span></h3>
         <div class="table table-condensed table-striped list-container">
             <div class="list-group">
-                <div class="list-group-item" style="position: relative">
+                @foreach (var transaction in Model.NotFixTransactions)
+                {
+                    <div class="list-group-item" style="position: relative">
+                        <button class="btn btn-sm btn-primary btn-action"><i class="fa fa-check"></i></button>
+                        <h5 class="list-group-item-heading">
+                            <label class="label device-title">Laptop</label>
+                            <a href="#" data-placement="bottom" data-toggle="tooltip" title="@transaction.Customer.Phone">@transaction.Customer.Name</a>
+                            <hr class="seperator-device" />
+                        </h5>
+                        <div class="list-group-item-text">
+                            <label class="label device-error">Error</label>
+                            <ul>
+                                <li><p>@transaction.Error</p></li>
+                            </ul>
+
+                            <label class="label device-description">Description</label>
+                            <ul>
+                                <li>
+                                    <p>@transaction.DeviceDescription</p>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                }
+
+                @*<div class="list-group-item" style="position: relative">
                     <button class="btn btn-sm btn-primary btn-action"><i class="fa fa-check"></i></button>
                     <h5 class="list-group-item-heading">
                         <label class="label device-title">Laptop</label>
@@ -288,29 +315,7 @@
                         </ul>
 
                     </div>
-                </div>
-                <div class="list-group-item" style="position: relative">
-                    <button class="btn btn-sm btn-primary btn-action"><i class="fa fa-check"></i></button>
-                    <h5 class="list-group-item-heading">
-                        <label class="label device-title">Laptop</label>
-                        <a href="#" data-placement="bottom" data-toggle="tooltip" title="02134343344">Anh Nam</a>
-                        <hr class="seperator-device" />
-                    </h5>
-                    <div class="list-group-item-text">
-                        <label class="label device-error">Error</label>
-                        <ul>
-                            <li><p>Mo may khong len </p></li>
-                        </ul>
-
-                        <label class="label device-description">Description</label>
-                        <ul>
-                            <li>
-                                <p>Asus Mau Den</p>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
@@ -318,35 +323,39 @@
         <h3>@Html.ActionLink("Fixed", "Index", "Device", new { statusId = 1 }, null) <span>(23)</span></h3>
         <div class="table table-condensed table-striped list-container">
             <div class="list-group">
-                <div class="list-group-item" style="position: relative">
-                    <button class="btn btn-sm btn-success btn-action"><i class="fa fa-send"></i></button>
-                    <h5 class="list-group-item-heading">
-                        <label class="label device-title">Laptop</label>
-                        <a href="#" data-placement="bottom" data-toggle="tooltip" title="02134343344">Anh Nam</a>
-                        <hr class="seperator-device" />
-                    </h5>
-                    <div class="list-group-item-text">
-                        <label class="label device-price">Price</label>
+                @foreach (var transaction in Model.FixedTransactions)
+                {
+                    <div class="list-group-item" style="position: relative">
+                        <button class="btn btn-sm btn-success btn-action"><i class="fa fa-send"></i></button>
+                        <h5 class="list-group-item-heading">
+                            <label class="label device-title">Laptop</label>
+                            <a href="#" data-placement="bottom" data-toggle="tooltip" title="@transaction.Customer.Phone">@transaction.Customer.Name</a>
+                            <hr class="seperator-device" />
+                        </h5>
+                        <div class="list-group-item-text">
+                            <label class="label device-price">Price</label>
 
-                        <a data-toggle="collapse" data-target="#1-price">120.000 vnd</a>
-                        <div id="1-price" class="collapse">
+                            <a data-toggle="collapse" data-target="#1-price">120.000 vnd</a>
+                            <div id="1-price" class="collapse">
+                                <ul>
+                                    <li>Thay pin</li>
+                                    <li>Cai lai window</li>
+                                </ul>
+                            </div>
+                            <br />
+
+                            <label class="label device-description">Description</label>
                             <ul>
-                                <li>Thay pin</li>
-                                <li>Cai lai window</li>
+                                <li>
+                                    <p>@transaction.DeviceDescription</p>
+                                </li>
                             </ul>
+
                         </div>
-                        <br />
-
-                        <label class="label device-description">Description</label>
-                        <ul>
-                            <li>
-                                <p>Asus Mau Den</p>
-                            </li>
-                        </ul>
-
                     </div>
-                </div>
-                <div class="list-group-item" style="position: relative">
+                }
+
+                @*<div class="list-group-item" style="position: relative">
                     <button class="btn btn-sm btn-success btn-action"><i class="fa fa-send"></i></button>
                     <h5 class="list-group-item-heading">
                         <label class="label device-title">Laptop</label>
@@ -373,7 +382,7 @@
                         </ul>
 
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
@@ -381,29 +390,33 @@
         <h3>@Html.ActionLink("Cannot Fix", "Index", "Device", new { statusId = 2 }, null) <span>(23)</span></h3>
         <div class="table table-condensed table-striped list-container">
             <div class="list-group">
-                <div class="list-group-item" style="position: relative">
-                    <button class="btn btn-sm btn-danger btn-action"><i class="fa fa-send"></i></button>
-                    <h5 class="list-group-item-heading">
-                        <label class="label device-title">Laptop</label>
-                        <a href="#" data-placement="bottom" data-toggle="tooltip" title="02134343344">Anh Hung</a>
-                        <hr class="seperator-device" />
-                    </h5>
-                    <div class="list-group-item-text">
-                        <label class="label device-description">Description</label>
-                        <ul>
-                            <li>
-                                <p>Asus Mau Den</p>
-                            </li>
-                        </ul>
-                        <label class="label device-note">Note</label>
-                        <ul>
-                            <li>
-                                The fee is very high for fixing
-                            </li>
-                        </ul>
+                @foreach (var transaction in Model.CannotFixTransactions)
+                {
+                    <div class="list-group-item" style="position: relative">
+                        <button class="btn btn-sm btn-danger btn-action"><i class="fa fa-send"></i></button>
+                        <h5 class="list-group-item-heading">
+                            <label class="label device-title">Laptop</label>
+                            <a href="#" data-placement="bottom" data-toggle="tooltip" title="@transaction.Customer.Phone">@transaction.Customer.Name</a>
+                            <hr class="seperator-device" />
+                        </h5>
+                        <div class="list-group-item-text">
+                            <label class="label device-description">Description</label>
+                            <ul>
+                                <li>
+                                    <p>@transaction.DeviceDescription</p>
+                                </li>
+                            </ul>
+                            <label class="label device-note">Note</label>
+                            <ul>
+                                <li>
+                                    The fee is very high for fixing
+                                </li>
+                            </ul>
 
+                        </div>
                     </div>
-                </div>
+                }
+
             </div>
         </div>
     </div>

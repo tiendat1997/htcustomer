@@ -1,4 +1,5 @@
-﻿using System;
+﻿using htcustomer.service.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,17 @@ namespace htcustomer.web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ITransactionService transactionService;
+
+        public HomeController(ITransactionService _transactionService)
+        {
+            this.transactionService = _transactionService;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var model = transactionService.GetListTransactionHome();
+            return View(model);
         }
 
         public ActionResult About()

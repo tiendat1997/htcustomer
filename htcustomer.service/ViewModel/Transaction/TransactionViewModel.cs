@@ -1,4 +1,5 @@
 ﻿using htcustomer.service.Enums;
+using htcustomer.service.ViewModel.Category;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,9 +13,9 @@ namespace htcustomer.service.ViewModel.Transaction
     {
         public int TransactionID { get; set; }
         public TransactionStatus Status { get; set; }       
-        public DateTime? RecieveDate { get; set; }        
+        public DateTime? RecievedDate { get; set; }        
         public DateTime? DeliveredDate { get; set; }
-        public string Category { get; set; }
+        public CategoryViewModel Category { get; set; }
         public string Description { get; set; }
         public string Error { get; set; }
         public bool? Delivered { get; set; }

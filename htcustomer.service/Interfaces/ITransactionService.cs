@@ -1,5 +1,7 @@
-﻿using htcustomer.service.ViewModel;
+﻿using htcustomer.service.Enums;
+using htcustomer.service.ViewModel;
 using htcustomer.service.ViewModel.Contact;
+using htcustomer.service.ViewModel.Transaction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +13,8 @@ namespace htcustomer.service.Interfaces
     public interface ITransactionService
     {        
         ContactDetailsViewModel GetContactDetails(int customerID);
+        TransactionListHomeViewModel GetListTransactionHome();
+        IEnumerable<TransactionViewModel> GetListTransaction(TransactionStatus status, int? month = null, int? year = null, int? categoryId = null);
+
     }
 }
