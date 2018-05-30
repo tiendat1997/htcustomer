@@ -15,7 +15,10 @@ namespace htcustomer.service.ViewModel.Transaction
         public CustomerViewModel Customer { get; set; }
         public string DeviceDescription { get; set; }
         public TransactionStatus Status { get; set; }
+        public double Price { get; set; }
+        public string CannotFixNote { get; set; }
         public string Error { get; set; }
+        public IEnumerable<PriceDetailViewModel> ListPriceDetail { get; set; }
 
     }
 }

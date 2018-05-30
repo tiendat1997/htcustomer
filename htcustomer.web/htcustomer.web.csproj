@@ -401,6 +401,7 @@
     <Content Include="Views\Contact\_NewCustomer.cshtml" />
     <Content Include="Views\Contact\_CustomerInformation.cshtml" />
     <Content Include="Views\Category\_CategoryRow.cshtml" />
+    <Content Include="Views\Shared\_DetailPriceTransaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -448,7 +449,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50109</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50649/htcustomer/home</IISUrl>
+          <IISUrl>http://localhost:50109/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

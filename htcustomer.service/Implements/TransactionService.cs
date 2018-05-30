@@ -19,16 +19,19 @@ namespace htcustomer.service.Implements
         private readonly IRepository<TblTransaction> transactionRepository;
         private readonly IRepository<TblCustomer> customerRepository;
         private readonly IRepository<TblCategory> categoryRepository;
-        
+        private readonly IRepository<TblDetailPrice> priceDetailRepository;
+
 
         public TransactionService(
             IRepository<TblTransaction> _transactionRepository,
             IRepository<TblCustomer> _customerRepository,
-            IRepository<TblCategory> _categoryRepository)
+            IRepository<TblCategory> _categoryRepository,
+            IRepository<TblDetailPrice> _priceDetailRepository)
         {
             transactionRepository = _transactionRepository;
             customerRepository = _customerRepository;
             categoryRepository = _categoryRepository;
+            priceDetailRepository = _priceDetailRepository;
         }
         public ContactDetailsViewModel GetContactDetails(int customerID)
         {
@@ -71,45 +74,60 @@ namespace htcustomer.service.Implements
         {
             var transactions = transactionRepository.Gets()
                                                     .Where(t => (TransactionStatus)t.StatusID.Value == status)
-                                                    .Select(t => new TransactionViewModel()
-                                                    {
-                                                        TransactionID = t.TransactionID,
-                                                        DeliveredDate = t.DeliverDate,
-                                                        Description = t.Description,
-                                                        Error = t.Error,
-                                                        Price = t.Price,
-                                                        Reason = t.Reason,
-                                                        Delivered = t.Delivered,
-                                                        RecievedDate = t.RecievedDate,
-                                                        Status = (TransactionStatus)t.StatusID,
-                                                        Category = categoryRepository.Gets().Where(c => c.CategoryID == categoryId).Select(c => new CategoryViewModel()
-                                                        {
-                                                            CategoryID = c.CategoryID,
-                                                            Name = c.Name
-                                                        }).SingleOrDefault()
-                                                    }); 
+                                                    ; 
             if (month != null && year != null)
             {
-                transactions.Where(t => t.RecievedDate.Value.Month == month && t.RecievedDate.Value.Year == year);
+               transactions = transactions.Where(t => t.RecievedDate.Value.Month == month && t.RecievedDate.Value.Year == year);
             }
-            else
+            else 
             {
-                transactions.Where(t => t.RecievedDate.Value.Month == DateTime.Now.Month && t.RecievedDate.Value.Year == DateTime.Now.Year);
+                transactions = transactions.Where(t => t.RecievedDate.Value.Month == DateTime.Now.Month && t.RecievedDate.Value.Year == DateTime.Now.Year);
+
             }
 
             if (categoryId != null)
             {
-                transactions.Where(t => t.Category.CategoryID == categoryId);
+                transactions = transactions.Where(t => t.TypeID == categoryId);
             }
 
 
-            return transactions.ToList();
+            return transactions.Select(t => new TransactionViewModel()
+            {
+                TransactionID = t.TransactionID,
+                DeliveredDate = t.DeliverDate,
+                Description = t.Description,
+                Error = t.Error,
+                Price = t.Price,
+                Reason = t.Reason,
+                Delivered = t.Delivered,
+                RecievedDate = t.RecievedDate,
+                Status = (TransactionStatus)t.StatusID,
+                Category = categoryRepository.Gets().Where(c => c.CategoryID == t.TypeID).Select(c => new CategoryViewModel()
+                {
+                    CategoryID = c.CategoryID,
+                    Name = c.Name
+                }).SingleOrDefault(),
+                Customer = customerRepository.Gets().Where(c => c.CustomerID == t.CustomerID).Select(c => new CustomerViewModel()
+                {
+                    CustomerID = c.CustomerID,
+                    Name = c.Name,
+                    Phone = c.Phone
+                }).SingleOrDefault(),
+                ListPriceDetail = priceDetailRepository.Gets().Where(p => p.TransactionID == t.TransactionID).Select(p => new PriceDetailViewModel()
+                {
+                    TransactionID = p.TransactionID.Value,
+                    Description = p.Description,
+                    Price = p.Price.Value
+                })
+            }).ToList();
         }
 
         public TransactionListHomeViewModel GetListTransactionHome()
         {
             var transactions = transactionRepository.Gets()
-                                                    .Where(t => t.DeliverDate.Value.Month == DateTime.Now.Month)
+                                                    //.Where(t => t.RecievedDate.Value.Month == DateTime.Now.Month && t.RecievedDate.Value.Year == DateTime.Now.Year
+                                                    //              && !t.Delivered.Value)
+                                                    .Where(t => !t.Delivered.Value)
                                                     .Select(t => new TransactionHomeViewModel()
                                                     {
                                                         TransactionID = t.TransactionID,
@@ -125,8 +143,16 @@ namespace htcustomer.service.Implements
                                                             Phone = c.Phone
                                                         }).SingleOrDefault(),
                                                         DeviceDescription = t.Description,
+                                                        Price = t.Price.Value,
                                                         Error = t.Error,
-                                                        Status = (TransactionStatus)t.StatusID.Value
+                                                        Status = (TransactionStatus)t.StatusID.Value,
+                                                        CannotFixNote = t.Reason,
+                                                        ListPriceDetail = priceDetailRepository.Gets().Where(p => p.TransactionID == t.TransactionID).Select(p => new PriceDetailViewModel()
+                                                        {
+                                                            TransactionID = p.TransactionID.Value,
+                                                            Description = p.Description,
+                                                            Price = p.Price.Value
+                                                        })
                                                     });
                                                     
             return new TransactionListHomeViewModel()

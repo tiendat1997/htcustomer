@@ -1,0 +1,8 @@
+﻿@model IEnumerable<htcustomer.service.ViewModel.Transaction.PriceDetailViewModel>
+
+<ul>
+    @foreach(var itemPrice in Model)
+    {
+        <li>@itemPrice.Description - <b>@itemPrice.Price,000 vnd</b></li>
+    }
+</ul>

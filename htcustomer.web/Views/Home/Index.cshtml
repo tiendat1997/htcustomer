@@ -265,7 +265,7 @@
 </div>
 <div class="row">
     <div class="col-md-4 col-sm-12 col-xs-12 ">
-        <h3>@Html.ActionLink("Not Fix", "Index", "Device", new { statusId = 0 }, null) <span>(23)</span></h3>
+        <h3>@Html.ActionLink("Not Fix", "Index", "Device", new { statusId = 1 }, null) <span>(@Model.NotFixTransactions.Count())</span></h3>
         <div class="table table-condensed table-striped list-container">
             <div class="list-group">
                 @foreach (var transaction in Model.NotFixTransactions)
@@ -273,7 +273,7 @@
                     <div class="list-group-item" style="position: relative">
                         <button class="btn btn-sm btn-primary btn-action"><i class="fa fa-check"></i></button>
                         <h5 class="list-group-item-heading">
-                            <label class="label device-title">Laptop</label>
+                            <label class="label device-title">@transaction.Category.Name</label>
                             <a href="#" data-placement="bottom" data-toggle="tooltip" title="@transaction.Customer.Phone">@transaction.Customer.Name</a>
                             <hr class="seperator-device" />
                         </h5>
@@ -320,7 +320,7 @@
         </div>
     </div>
     <div class="col-md-4 col-xs-12">
-        <h3>@Html.ActionLink("Fixed", "Index", "Device", new { statusId = 1 }, null) <span>(23)</span></h3>
+        <h3>@Html.ActionLink("Fixed", "Index", "Device", new { statusId = 2 }, null) <span>(@Model.FixedTransactions.Count())</span></h3>
         <div class="table table-condensed table-striped list-container">
             <div class="list-group">
                 @foreach (var transaction in Model.FixedTransactions)
@@ -328,19 +328,16 @@
                     <div class="list-group-item" style="position: relative">
                         <button class="btn btn-sm btn-success btn-action"><i class="fa fa-send"></i></button>
                         <h5 class="list-group-item-heading">
-                            <label class="label device-title">Laptop</label>
+                            <label class="label device-title">@transaction.Category.Name</label>
                             <a href="#" data-placement="bottom" data-toggle="tooltip" title="@transaction.Customer.Phone">@transaction.Customer.Name</a>
                             <hr class="seperator-device" />
                         </h5>
                         <div class="list-group-item-text">
                             <label class="label device-price">Price</label>
 
-                            <a data-toggle="collapse" data-target="#1-price">120.000 vnd</a>
+                            <a data-toggle="collapse" data-target="#1-price"><b>@transaction.Price,000 vnd</b></a>
                             <div id="1-price" class="collapse">
-                                <ul>
-                                    <li>Thay pin</li>
-                                    <li>Cai lai window</li>
-                                </ul>
+                                @Html.Partial("_DetailPriceTransaction",transaction.ListPriceDetail)
                             </div>
                             <br />
 
@@ -387,7 +384,7 @@
         </div>
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
-        <h3>@Html.ActionLink("Cannot Fix", "Index", "Device", new { statusId = 2 }, null) <span>(23)</span></h3>
+        <h3>@Html.ActionLink("Cannot Fix", "Index", "Device", new { statusId = 3 }, null) <span>(@Model.CannotFixTransactions.Count())</span></h3>
         <div class="table table-condensed table-striped list-container">
             <div class="list-group">
                 @foreach (var transaction in Model.CannotFixTransactions)
@@ -395,7 +392,7 @@
                     <div class="list-group-item" style="position: relative">
                         <button class="btn btn-sm btn-danger btn-action"><i class="fa fa-send"></i></button>
                         <h5 class="list-group-item-heading">
-                            <label class="label device-title">Laptop</label>
+                            <label class="label device-title">@transaction.Category.Name</label>
                             <a href="#" data-placement="bottom" data-toggle="tooltip" title="@transaction.Customer.Phone">@transaction.Customer.Name</a>
                             <hr class="seperator-device" />
                         </h5>
@@ -409,7 +406,7 @@
                             <label class="label device-note">Note</label>
                             <ul>
                                 <li>
-                                    The fee is very high for fixing
+                                    @transaction.CannotFixNote
                                 </li>
                             </ul>
 

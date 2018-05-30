@@ -19,19 +19,20 @@ namespace htcustomer.web.Controllers
 
 
         // GET: Device
-        public ActionResult Index(int statusId = 0)
+        public ActionResult Index(int statusId = (int)TransactionStatus.NotFix)
         {
             var transactions = transactionService.GetListTransaction((TransactionStatus)statusId);
-            if (statusId == 1)
+          
+            if (statusId == (int)TransactionStatus.Fixed)
             {
                 return View("FixedDevice", transactions); 
             }
-            else if (statusId == 2)
+            else if (statusId == (int)TransactionStatus.CannotFix)
             {
                 return View("CannotFixDevice",transactions);
             }
-
             return View("NotFixDevice", transactions);
+
         }
 
         // Render Partial View for Device Tabs

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<htcustomer.service.ViewModel.Transaction.TransactionViewModel>
+@{
     ViewBag.Title = "FixedDevice";
 }
 @section styles {
@@ -23,35 +24,35 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <button class="btn btn-success"><i class="fa fa-send"></i></button>
-                </td>
-                <td>
-                    <p>Laptop </p>
-                    <p>Asus, mau den</p>
-                </td>
-                <td>
-                    Hu o dia
-                    Man hinh bi hu.
-                </td>
-                <td>
-                    <p>Anh Nam</p>
-                </td>
-                <td>
-                    <p>0123456780</p>
-                </td>
-                <td>
-                    12/2/2018
-                </td>
-                <td>
-                    <p>150.000vnd</p>
-                    <ul>
-                        <li>Thay man hinh</li>
-                        <li>Cai lai win</li>
-                    </ul>
-                </td>
-            </tr>
+            @foreach (var transaction in Model)
+            {
+                <tr>
+                    <td>
+                        <button class="btn btn-success"><i class="fa fa-send"></i></button>
+                    </td>
+                    <td>
+                        <p>@transaction.Category.Name</p>
+                        <p>@transaction.Description</p>
+                    </td>
+                    <td>
+                       @transaction.Error
+                    </td>
+                    <td>
+                        <p>@transaction.Customer.Name</p>
+                    </td>
+                    <td>
+                        <p>@transaction.Customer.Phone</p>
+                    </td>
+                    <td>
+                        @transaction.RecievedDate
+                    </td>
+                    <td>
+                        <p><b>@transaction.Price,000 vnd</b></p>
+                        @Html.Partial("_DetailPriceTransaction", transaction.ListPriceDetail)
+                    </td>
+                </tr>
+            }
+
         </tbody>
     </table>
 </div>

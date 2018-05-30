@@ -21,5 +21,7 @@ namespace htcustomer.service.ViewModel.Transaction
         public bool? Delivered { get; set; }
         public double? Price { get; set; }        
         public string Reason { get; set; }
+        public CustomerViewModel Customer { get; set; }
+        public IEnumerable<PriceDetailViewModel> ListPriceDetail { get; set; }
     }
 }

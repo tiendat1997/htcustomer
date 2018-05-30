@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<htcustomer.service.ViewModel.Transaction.TransactionViewModel>
+
 @{
     ViewBag.Title = "CannotFix";
 }
@@ -25,31 +26,34 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <button class="btn btn-danger"><i class="fa fa-send"></i></button>
-                </td>
-                <td>
-                    <p>Laptop </p>
-                    <p>Asus, mau den</p>
-                </td>
-                <td>
-                    Hu o dia
-                    Man hinh bi hu.
-                </td>
-                <td>
-                    <p>Anh Nam</p>
-                </td>
-                <td>
-                    <p>0123456780</p>
-                </td>
-                <td>
-                    12/2/2018
-                </td>
-                <td>
-                    Write down the reason why cannot fix
-                </td>
-            </tr>
+            @foreach (var transaction in Model)
+            {
+                <tr>
+                    <td>
+                        <button class="btn btn-danger"><i class="fa fa-send"></i></button>
+                    </td>
+                    <td>
+                        <p>@transaction.Category.Name </p>
+                        <p>@transaction.Description</p>
+                    </td>
+                    <td>
+                        @transaction.Error
+                    </td>
+                    <td>
+                        <p>@transaction.Customer.Name</p>
+                    </td>
+                    <td>
+                        <p>@transaction.Customer.Phone</p>
+                    </td>
+                    <td>
+                       @transaction.RecievedDate
+                    </td>
+                    <td>
+                        @transaction.Reason
+                    </td>
+                </tr>
+            }
+
         </tbody>
     </table>
 </div>
