@@ -125,35 +125,35 @@ namespace htcustomer.service.Implements
         public TransactionListHomeViewModel GetListTransactionHome()
         {
             var transactions = transactionRepository.Gets()
-                        //.Where(t => t.RecievedDate.Value.Month == DateTime.Now.Month && t.RecievedDate.Value.Year == DateTime.Now.Year
-                        //              && !t.Delivered.Value)
-                        .Where(t => t.Delivered.HasValue == true)
-                        .Select(t => new TransactionHomeViewModel()
-                        {
-                            TransactionID = t.TransactionID,
-                            Category = categoryRepository.Gets().Where(c => c.CategoryID == t.TypeID).Select(c => new CategoryViewModel()
-                            {
-                                CategoryID = c.CategoryID,
-                                Name = c.Name
-                            }).SingleOrDefault(),
-                            Customer = customerRepository.Gets().Where(c => c.CustomerID == t.CustomerID).Select(c => new CustomerViewModel()
-                            {
-                                CustomerID = c.CustomerID,
-                                Name = c.Name,
-                                Phone = c.Phone
-                            }).SingleOrDefault(),
-                            DeviceDescription = t.Description,
-                            Price = t.Price.Value,
-                            Error = t.Error,
-                            Status = (TransactionStatus)t.StatusID.Value,
-                            CannotFixNote = t.Reason,
-                            ListPriceDetail = priceDetailRepository.Gets().Where(p => p.TransactionID == t.TransactionID).Select(p => new PriceDetailViewModel()
-                            {
-                                TransactionID = p.TransactionID.Value,
-                                Description = p.Description,
-                                Price = p.Price.Value
-                            })
-                        });
+                                                    //.Where(t => t.RecievedDate.Value.Month == DateTime.Now.Month && t.RecievedDate.Value.Year == DateTime.Now.Year
+                                                    //              && !t.Delivered.Value)
+                                                    .Where(t => t.Delivered.HasValue? t.Delivered.Value == true : false)
+                                                    .Select(t => new TransactionHomeViewModel()
+                                                    {
+                                                        TransactionID = t.TransactionID,
+                                                        Category = categoryRepository.Gets().Where(c => c.CategoryID == t.TypeID).Select(c => new CategoryViewModel()
+                                                        {
+                                                            CategoryID = c.CategoryID,
+                                                            Name = c.Name
+                                                        }).SingleOrDefault(),
+                                                        Customer = customerRepository.Gets().Where(c => c.CustomerID == t.CustomerID).Select(c => new CustomerViewModel()
+                                                        {
+                                                            CustomerID = c.CustomerID,
+                                                            Name = c.Name,
+                                                            Phone = c.Phone
+                                                        }).SingleOrDefault(),
+                                                        DeviceDescription = t.Description,
+                                                        Price = t.Price.Value,
+                                                        Error = t.Error,
+                                                        Status = (TransactionStatus)t.StatusID.Value,
+                                                        CannotFixNote = t.Reason,
+                                                        ListPriceDetail = priceDetailRepository.Gets().Where(p => p.TransactionID == t.TransactionID).Select(p => new PriceDetailViewModel()
+                                                        {
+                                                            TransactionID = p.TransactionID.Value,
+                                                            Description = p.Description,
+                                                            Price = p.Price.Value
+                                                        })
+                                                    });
                                                     
             return new TransactionListHomeViewModel()
             {
