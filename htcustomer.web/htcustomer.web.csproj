@@ -449,7 +449,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50109</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50109/</IISUrl>
+          <IISUrl>http://localhost/htcustomer</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
