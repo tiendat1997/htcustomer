@@ -127,7 +127,7 @@ namespace htcustomer.service.Implements
             var transactions = transactionRepository.Gets()
                                                     //.Where(t => t.RecievedDate.Value.Month == DateTime.Now.Month && t.RecievedDate.Value.Year == DateTime.Now.Year
                                                     //              && !t.Delivered.Value)
-                                                    .Where(t => t.Delivered.HasValue? t.Delivered.Value : false)
+                                                    .Where(t => t.Delivered.HasValue? t.Delivered.Value == true : false)
                                                     .Select(t => new TransactionHomeViewModel()
                                                     {
                                                         TransactionID = t.TransactionID,
