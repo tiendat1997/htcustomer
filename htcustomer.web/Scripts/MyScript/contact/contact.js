@@ -37,14 +37,8 @@ function showNotification(result) {
         toastr.error(result.Message);
     }
 }
-function initCollapse() {
-    $('#delivered-panel').collapse();
-    $('#notfix-panel').collapse();
-    $('#waiting-panel').collapse();
-}
 
 $(function (e) {
-    initCollapse();
     // custom validation message for form input
     //$("form input").on("invalid", function (e) {
     //    if ($(this).attr("type") === 'phone') {

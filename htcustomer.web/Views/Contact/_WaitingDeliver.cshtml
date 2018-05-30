@@ -1,10 +1,8 @@
 ﻿@model Dictionary<string, IEnumerable<htcustomer.service.ViewModel.Transaction.TransactionViewModel>>
 
 <div class="panel panel-success">
-    <div class="panel-heading" data-toggle="collapse" data-target="#waiting-panel" aria-expanded="false">
-        Waiting To Deliver &nbsp;<span class="badge">@(Model["FIXED"].Count() + Model["CANNOTFIX"].Count())</span>
-    </div>
-    <div class="panel-body" id="waiting-panel">
+    <div class="panel-heading">Waiting To Deliver &nbsp;<span class="badge">@(Model["FIXED"].Count() + Model["CANNOTFIX"].Count())</span></div>
+    <div class="panel-body">
         <div style="margin-bottom: 50px;">
             <h4 style="border-bottom: 0.5px solid #ddd">Fixed Transaction</h4>
             <table class="table table-striped table-hover">
