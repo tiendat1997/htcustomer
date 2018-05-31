@@ -1,4 +1,4 @@
-﻿// Showing Loading Icon when searching customer : 
+﻿// Showing Loading Icon when searching customer :
 // isShowed = true -> show else hide
 function toggleLoadingCustomerIcon(isShowed) {
     if (isShowed) {
@@ -38,7 +38,13 @@ function showNotification(result) {
     }
 }
 
+function initCollapse() {
+    $('#delivered-panel').collapse();
+    $('#notfix-panel').collapse();
+    $('#waiting-panel').collapse();
+}
 $(function (e) {
+    initCollapse();
     // custom validation message for form input
     //$("form input").on("invalid", function (e) {
     //    if ($(this).attr("type") === 'phone') {
