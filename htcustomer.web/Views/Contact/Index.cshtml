@@ -18,48 +18,57 @@
         </div>
     </div>
 </div>
-<div class="col-md-4">
-    <div class="row">
-        <form class="navbar-form" role="search" id="customer-search-form">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search" name="searchCustomer">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit" data-url="@Url.Action("GetAddressBook","Contact")">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </button>
-                </div>
+<div class="col-md-3">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="row">
+                <form class="navbar-form" role="search" id="customer-search-form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="searchCustomer">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit" data-url="@Url.Action("GetAddressBook","Contact")">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    <div id="customer-search-result">
-        <div id="loading-customer" class="customer-load-wrapper">
-            <img src="~/Content/Images/loading-sm.gif" class="loader-sm" />
         </div>
-        @Html.Action("GetAddressBook", "Contact")
+        <div class="panel-body">
+            <div id="customer-search-result">
+                <div id="loading-customer" class="customer-load-wrapper">
+                    <img src="~/Content/Images/loading-sm.gif" class="loader-sm" />
+                </div>
+                @Html.Action("GetAddressBook", "Contact")
+            </div>
+        </div>
     </div>
 </div>
-<div class="col-md-8">
-    <div class="row">
-        <button class="btn btn-info" data-toggle="modal" data-target="#new-customer-modal" style="float:right;">
+<div class="col-md-9 panel">
+
+    <div class="panel-heading">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#new-customer-modal" style="float:right;">
             <i class="fa fa-plus"></i> &nbsp New Contact
         </button>
     </div>
-    <div class="row" id="customer-wrapper">
-        @if (Model == null || Model.Customer == null)
-        {
-            <h1>There are no customer was Selected</h1>
-        }
-        else
-        {
-            <div class="row customer-info">
-                @Html.Partial("_CustomerInformation", Model.Customer)
-            </div>
-            <div class="row transaction-info">
-                @Html.Partial("_WaitingDeliver", Model.WaitingDeliver)
-                @Html.Partial("_NotFixTransaction", Model.NotFixTransaction)
-                @Html.Partial("_DeliveredTransaction", Model.DeliveredTransaction)
-            </div>
-        }
+    <div class="panel-body">
+        <div class="row" id="customer-wrapper">
+            @if (Model == null || Model.Customer == null)
+            {
+                <h4 class="alert alert-warning"><i class="fa fa-warning"></i> &nbsp;There are no customer was Selected</h4>
+            }
+            else
+            {
+                <div class="customer-info">
+                    @Html.Partial("_CustomerInformation", Model.Customer)
+                </div>
+                <div class="transaction-info">
+                    @Html.Partial("_WaitingDeliver", Model.WaitingDeliver)
+                    @Html.Partial("_NotFixTransaction", Model.NotFixTransaction)
+                    @Html.Partial("_DeliveredTransaction", Model.DeliveredTransaction)
+                </div>
+            }
+        </div>
     </div>
 </div>
 @section scripts {

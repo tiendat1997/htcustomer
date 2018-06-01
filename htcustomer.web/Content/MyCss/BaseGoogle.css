@@ -4,11 +4,17 @@
 }
 
 .navbar {
-    background-color: #4897d9;
+    background: transparent;
+    margin-bottom: 50px;
 }
-.nav > li > a:hover {
-    background-color: #286090;
+.nav > li > a {
+    background-color: #151d22;
+    margin: 0 10px;    
 }
+    .nav > li > a:hover {
+        background-color: #151d22;
+        color: #f5cc03;
+    }
 .navbar-brand {
     background-color: black;
 }
@@ -20,7 +26,7 @@
     padding-bottom: 5px;
     border-bottom: 2px #f5cc03 solid;
 }
-.navbar .signup-link {
+.navbar .signout-link {
     margin-left: 30px;
     font-weight: bold;
     font-size: 15px;
@@ -29,6 +35,10 @@
     color: #fff;
     line-height: 1;
     border: 2px solid #fff;
+}
+.navbar .signout-link:hover{
+    background-color: #2980b9;
+    color: white;
 }
 
 .navbar a {
@@ -156,3 +166,8 @@ label.device-description {
 label.device-note {
     color: #666694;
 }
+
+.panel.transaction{
+    margin: 10px auto;
+}
+

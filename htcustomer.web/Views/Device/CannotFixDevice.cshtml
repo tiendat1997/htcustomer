@@ -7,55 +7,58 @@
     @Styles.Render("~/Content/css/device")
 }
 
-<div class="row">
+<div class="col-md-12">
     @Html.Action("PartialTabs", "Device")
     @Html.Action("PartialFilter", "Device")
 </div>
 
-<div class="row">
-    <table class="table table-responsive table-striped">
-        <thead>
-            <tr>
-                <th>Action</th>
-                <th>Device</th>
-                <th>Error</th>
-                <th>Customer</th>
-                <th>Contact</th>
-                <th>Received Date</th>
-                <th>Note</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var transaction in Model)
-            {
-                <tr>
-                    <td>
-                        <button class="btn btn-danger"><i class="fa fa-send"></i></button>
-                    </td>
-                    <td>
-                        <p>@transaction.Category.Name </p>
-                        <p>@transaction.Description</p>
-                    </td>
-                    <td>
-                        @transaction.Error
-                    </td>
-                    <td>
-                        <p>@transaction.Customer.Name</p>
-                    </td>
-                    <td>
-                        <p>@transaction.Customer.Phone</p>
-                    </td>
-                    <td>
-                       @transaction.RecievedDate
-                    </td>
-                    <td>
-                        @transaction.Reason
-                    </td>
-                </tr>
-            }
-
-        </tbody>
-    </table>
+<div class="col-md-12">
+    <div class="panel">
+        <div class="panel-body">
+            <table class="table table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Device</th>
+                        <th>Error</th>
+                        <th>Customer</th>
+                        <th>Contact</th>
+                        <th>Received Date</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var transaction in Model)
+                    {
+                        <tr>
+                            <td>
+                                <button class="btn btn-danger"><i class="fa fa-send"></i></button>
+                            </td>
+                            <td>
+                                <p>@transaction.Category.Name </p>
+                                <p>@transaction.Description</p>
+                            </td>
+                            <td>
+                                @transaction.Error
+                            </td>
+                            <td>
+                                <p>@transaction.Customer.Name</p>
+                            </td>
+                            <td>
+                                <p>@transaction.Customer.Phone</p>
+                            </td>
+                            <td>
+                                @transaction.RecievedDate
+                            </td>
+                            <td>
+                                @transaction.Reason
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 @section scripts {
     @Scripts.Render("~/Scripts/js/device")

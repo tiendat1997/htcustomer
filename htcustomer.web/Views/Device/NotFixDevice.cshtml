@@ -6,52 +6,56 @@
 @section styles {
     @Styles.Render("~/Content/css/device")
 }
-<div class="row">
+<div class="col-md-12">
     @Html.Action("PartialTabs", "Device")
     @Html.Action("PartialFilter", "Device")
 </div>
 
-<div class="row">
-    <table class="table table-responsive table-striped">
-        <thead>
-            <tr>
-                <th>Action</th>
-                <th>Device</th>
-                <th>Error</th>
-                <th>Customer</th>
-                <th>Contact</th>
-                <th>Received Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var transaction in Model)
-            {
-                <tr>
-                    <td>
-                        <button class="btn btn-success" data-toggle="popover" id="btn-open-popover" data-url=@Url.Action("AddToBillForm", "Device")><i class="fa fa-check"></i></button>
-                        <button class="btn btn-danger"><i class="fa fa-stop"></i></button>
-                    </td>
-                    <td>
-                        <p>@transaction.Category.Name </p>
-                        <p>@transaction.Description</p>
-                    </td>
-                    <td>
-                        @transaction.Error
-                    </td>
-                    <td>
-                        <p>@transaction.Customer.Name</p>
-                    </td>
-                    <td>
-                        <p>@transaction.Customer.Phone</p>
-                    </td>
-                    <td>
-                        @transaction.RecievedDate
-                    </td>
-                </tr>
-            }
+<div class="col-md-12">
+    <div class="panel">
+        <div class="panel-body">
+            <table class="table table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Device</th>
+                        <th>Error</th>
+                        <th>Customer</th>
+                        <th>Contact</th>
+                        <th>Received Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var transaction in Model)
+                    {
+                        <tr>
+                            <td>
+                                <button class="btn btn-success" data-toggle="popover" id="btn-open-popover" data-url=@Url.Action("AddToBillForm", "Device")><i class="fa fa-check"></i></button>
+                                <button class="btn btn-danger"><i class="fa fa-stop"></i></button>
+                            </td>
+                            <td>
+                                <p>@transaction.Category.Name </p>
+                                <p>@transaction.Description</p>
+                            </td>
+                            <td>
+                                @transaction.Error
+                            </td>
+                            <td>
+                                <p>@transaction.Customer.Name</p>
+                            </td>
+                            <td>
+                                <p>@transaction.Customer.Phone</p>
+                            </td>
+                            <td>
+                                @transaction.RecievedDate
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-        </tbody>
-    </table>
 </div>
 @section scripts {
     @Scripts.Render("~/Scripts/js/device")

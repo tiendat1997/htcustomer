@@ -35,7 +35,7 @@ namespace htcustomer.web
                       "~/Content/themes/base/jquery-ui.css",
                       "~/Content/toastr.css",
                       "~/Content/MyCss/BaseGoogle.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
 
             // Device Bundle
             bundles.Add(new StyleBundle("~/Content/css/device").Include(

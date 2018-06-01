@@ -58,7 +58,8 @@ namespace htcustomer.service.Implements
             var result = customerRepository.Gets()
                          .Where(c => c.Name.ToUpper().Equals(customer.Name.ToUpper()) &&
                                 c.Description.ToUpper().Equals(customer.Description.ToUpper()));
-            return (result.Count() > 0) ? true : false;
+            
+            return (result != null) ? (result.Count() > 0  ? true : false) : false;
         }
 
         public bool AddCustomer(CustomerViewModel customer)
