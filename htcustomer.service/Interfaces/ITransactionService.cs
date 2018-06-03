@@ -14,7 +14,7 @@ namespace htcustomer.service.Interfaces
     {        
         ContactDetailsViewModel GetContactDetails(int customerID);
         TransactionListHomeViewModel GetListTransactionHome();
-        IEnumerable<TransactionViewModel> GetListTransaction(TransactionStatus status, int? month = null, int? year = null, int? categoryId = null);
+        TransactionListViewModel GetListTransaction(TransactionStatus status, int? month = null, int? year = null, int? categoryId = null);
 
     }
 }

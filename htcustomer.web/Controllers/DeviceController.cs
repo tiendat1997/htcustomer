@@ -22,19 +22,18 @@ namespace htcustomer.web.Controllers
         public ActionResult Index(int statusId = (int)TransactionStatus.NotFix)
         {
             var transactions = transactionService.GetListTransaction((TransactionStatus)statusId);
-          
-            if (statusId == (int)TransactionStatus.Fixed)
-            {
-                return View("FixedDevice", transactions); 
-            }
-            else if (statusId == (int)TransactionStatus.CannotFix)
-            {
-                return View("CannotFixDevice",transactions);
-            }
-            return View("NotFixDevice", transactions);
-
+            return View("Index", transactions);
         }
 
+        public ActionResult FilterTransaction(int statusId = (int)TransactionStatus.NotFix, int? month = null, int? year = null, int? categoryId = null) {
+            var viewModel = transactionService.GetListTransaction((TransactionStatus)statusId, month, year, categoryId);
+
+            if (statusId == (int)TransactionStatus.NotFix) return PartialView("_NotFixDevice", viewModel.Transactions);
+            if (statusId == (int)TransactionStatus.Fixed) return PartialView("_FixedDevice", viewModel.Transactions);
+
+            return PartialView("_CannotFixDevice", viewModel.Transactions);                
+        }
+                
         // Render Partial View for Device Tabs
         public ActionResult PartialTabs()
         {

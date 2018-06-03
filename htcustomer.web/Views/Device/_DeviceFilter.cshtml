@@ -2,14 +2,13 @@
     <form id="device-filter-form">
         <div class="form-group">
             <label for="startDate">Month / Year </label>
-            <input name="startDate" id="startDate" class="form-control date-picker" />
+            <input name="dateFilter"id="dateFilter" class="form-control date-picker"
+                   data-status-id = "@TempData["CurrentStatus"]"
+                   data-url= "@Url.Action("FilterTransaction","Device")"/>
         </div>
         <div class="form-group">
             <label for="selectDevice">Devices</label>
-            <select class="form-control" id="selectDevice">
-                <option>Mustard</option>
-                <option>Ketchup</option>
-                <option>Relish</option>
+            <select class="form-control" id="selectDevice" data-url="@Url.Action("GetListCategory","Category")">                
             </select>
         </div>
     </form>

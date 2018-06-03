@@ -41,6 +41,12 @@ namespace htcustomer.web.Controllers
             categoryService.Edit(category);
             return Json("Success");
         }
+        
+        public JsonResult GetListCategory()
+        {
+            var categoryList = categoryService.GetAllCategories();
+            return Json(categoryList, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

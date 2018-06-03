@@ -1,7 +1,33 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿@using htcustomer.service.Enums
+@model htcustomer.service.ViewModel.Transaction.TransactionListViewModel
 
-<h2>Device Page</h2>
+@{
+    ViewBag.Title = "Transaction";
+    TempData["CurrentStatus"] = (int)@Model.Status;
+}
+@section styles {
+    @Styles.Render("~/Content/css/device")
+}
+<div class="col-md-12">
+    @Html.Action("PartialTabs", "Device")
+    @Html.Action("PartialFilter", "Device")
+</div>
+<div class="col-md-12" id="transaction-wrapper">
+    @if (Model.Status == TransactionStatus.NotFix)
+    {
+        @Html.Partial("_NotFixDevice", Model.Transactions)
+    }
+    else if (Model.Status == TransactionStatus.Fixed)
+    {
+        @Html.Partial("_FixedDevice", Model.Transactions)
+    }
+    else
+    {
+        @Html.Partial("_CannotFixDevice", Model.Transactions)
+    }
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/js/device")
+}
 

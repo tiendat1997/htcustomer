@@ -14,6 +14,9 @@ namespace htcustomer.web
             bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
                         "~/Scripts/toastr.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                        "~/Scripts/moment.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 

@@ -1,15 +1,79 @@
-﻿$(function () {
+﻿function filterTransaction() {
+    var datePicker = $('#dateFilter');
+    var datetime = new Date($(datePicker).val());    
+    var month = datetime.getMonth() + 1;
+    var year = datetime.getFullYear();
+    var categoryId = $('#selectDevice option:selected').attr('id');
+    var url = $(datePicker).data('url');
+    var statusId = $(datePicker).data('status-id');
+    var replacedContent = $('#transaction-wrapper .panel');
+    
+    $.ajax({
+        url: url,
+        method: 'get',
+        cache: false,
+        data: {
+            statusId: statusId,
+            month: month,
+            year: year,
+            categoryId : categoryId
+        },
+    }).done(function (result) {
+        $(replacedContent).replaceWith(result);
+    });
+}
+
+function loadCategoryList() {
+    var select = $('#selectDevice');
+    var url = $(select).data('url');
+    
+    $.ajax({
+        url: url,
+        cache: false,
+        method: 'GET'
+    }).done(function (data) {
+        if (data != null) {
+            $(select).append($(`<option>All</option>`));
+            data.forEach(function (category) {
+                $(select).append($(`<option id=${category.CategoryID}>${category.Name}</option>`));
+            });
+        }
+        else {
+          
+        }
+    }).fail(function (message) {
+        toastr.error("Error during loading cateogy list");
+    });
+}
+
+$(function () {
+    // load all category 
+    loadCategoryList();
+
     $('.date-picker').datepicker({
         changeMonth: true,
         changeYear: true,
         showButtonPanel: true,
-        dateFormat: 'MM yy',
-        onClose: function (dateText, inst) {
-            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
-        }
+        dateFormat: 'MM yy',        
+        onClose: function (dateText, instant) {            
+            $(this).datepicker('setDate', new Date(instant.selectedYear, instant.selectedMonth, 1));
+            // Calling ajax function 
+            filterTransaction();
+        },       
+    });
+    $('.date-picker').datepicker('setDate', new Date());
+
+    $('.filter-tab').on('click', function () {
+        var statusId = $(this).data('status-id');
+        $('#dateFilter').data('status-id', statusId);
+
+        filterTransaction();
+    });
+
+    $('#selectDevice').on('change', function () {
+        filterTransaction();
     });
 });
-
 
 $(function () {
     $('[data-toggle="popover"]').each(function (e) {      

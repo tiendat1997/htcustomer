@@ -58,6 +58,7 @@
     <Compile Include="ViewModel\Transaction\PriceDetailViewModel.cs" />
     <Compile Include="ViewModel\Transaction\TransactionHomeViewModel.cs" />
     <Compile Include="ViewModel\Transaction\TransactionListHomeViewModel.cs" />
+    <Compile Include="ViewModel\Transaction\TransactionListViewModel.cs" />
     <Compile Include="ViewModel\Transaction\TransactionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

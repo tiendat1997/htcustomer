@@ -1,4 +1,10 @@
-﻿body {
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+    font-family: "Roboto" , sans-serif;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
     background-position: center;

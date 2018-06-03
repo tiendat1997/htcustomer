@@ -1,32 +1,30 @@
 ﻿@model IEnumerable<htcustomer.service.ViewModel.Transaction.TransactionViewModel>
 
-@{
-    ViewBag.Title = "NotFixDevice";
-}
-@section styles {
-    @Styles.Render("~/Content/css/device")
-}
-<div class="col-md-12">
-    @Html.Action("PartialTabs", "Device")
-    @Html.Action("PartialFilter", "Device")
-</div>
-
-<div class="col-md-12">
-    <div class="panel">
-        <div class="panel-body">
-            <table class="table table-responsive table-striped">
-                <thead>
+<div class="panel">
+    <div class="panel-body">
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Device</th>
+                    <th>Error</th>
+                    <th>Customer</th>
+                    <th>Contact</th>
+                    <th>Received Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model == null || Model.Count() == 0)
+                {
                     <tr>
-                        <th>Action</th>
-                        <th>Device</th>
-                        <th>Error</th>
-                        <th>Customer</th>
-                        <th>Contact</th>
-                        <th>Received Date</th>
+                        <td colspan="5">
+                            <h4 class="alert alert-warning"><i class="fa fa-warning"></i> &nbsp;There are no transaction</h4>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var transaction in Model)
+                }
+                else
+                {
+                    foreach (var transaction in Model)
                     {
                         <tr>
                             <td>
@@ -51,13 +49,11 @@
                             </td>
                         </tr>
                     }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
-
 </div>
-@section scripts {
-    @Scripts.Render("~/Scripts/js/device")
-}
+
+
 

@@ -1,7 +1,7 @@
 ﻿<div class="col-md-6">
-    <div class="btn-group" style="width:auto;">
-        @Html.ActionLink("Not Fix", "Index", "Device", new { statusId = 1 }, new { @class = "btn btn-lg btn-primary" })
-        @Html.ActionLink("Fixed", "Index", "Device", new { statusId = 2 }, new { @class = "btn btn-lg btn-primary" })
-        @Html.ActionLink("Cannot Fix", "Index", "Device", new { statusId = 3 }, new { @class = "btn btn-lg btn-primary" })
+    <div class="btn-group" style="width:auto;" data-url="@Url.Action("Filter")">
+        <button class="btn btn-lg btn-primary filter-tab" data-status-id="1">Not Fix</button>
+        <button class="btn btn-lg btn-primary filter-tab" data-status-id="2">Fixed</button>
+        <button class="btn btn-lg btn-primary filter-tab" data-status-id="3">Cannot Fix</button>        
     </div>
 </div>
