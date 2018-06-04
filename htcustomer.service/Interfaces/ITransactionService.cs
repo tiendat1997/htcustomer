@@ -16,6 +16,8 @@ namespace htcustomer.service.Interfaces
         TransactionListHomeViewModel GetListTransactionHome();
         TransactionListViewModel GetListTransaction(TransactionStatus status, int? month = null, int? year = null, int? categoryId = null);
         bool FixedTransaction(int transactionID, IEnumerable<PriceDetailViewModel> priceDetails);
+        bool CannotFixTransaction(int transactionID, string reason = "");
+        bool DeliverTransaction(int transactionID);
 
     }
 }

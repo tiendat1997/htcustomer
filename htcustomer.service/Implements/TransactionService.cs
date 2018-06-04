@@ -34,6 +34,34 @@ namespace htcustomer.service.Implements
             priceDetailRepository = _priceDetailRepository;
         }
 
+        public bool CannotFixTransaction(int transactionID, string reason = "")
+        {
+            var transaction = transactionRepository.GetByID(transactionID);
+            if (transaction != null)
+            {
+                transaction.StatusID = (int)TransactionStatus.CannotFix;
+                transaction.Reason = reason;
+                transactionRepository.Edit(transaction);
+                transactionRepository.Save();
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeliverTransaction(int transactionID)
+        {
+            var transaction = transactionRepository.GetByID(transactionID);
+            if (transaction != null)
+            {
+                transaction.Delivered = true;
+                transaction.DeliverDate = DateTime.Now;
+                transactionRepository.Edit(transaction);
+                transactionRepository.Save();
+                return true;
+            }
+            return false;
+        }
+
         public bool FixedTransaction(int transactionID, IEnumerable<PriceDetailViewModel> priceDetails)
         {
             var transaction = transactionRepository.GetByID(transactionID);
