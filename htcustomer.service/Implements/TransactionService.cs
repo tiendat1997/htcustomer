@@ -33,6 +33,34 @@ namespace htcustomer.service.Implements
             categoryRepository = _categoryRepository;
             priceDetailRepository = _priceDetailRepository;
         }
+
+        public bool FixedTransaction(int transactionID, IEnumerable<PriceDetailViewModel> priceDetails)
+        {
+            var transaction = transactionRepository.GetByID(transactionID);
+            if (transaction != null)
+            {
+                if (priceDetails != null || priceDetails.Count() > 0)
+                {
+                    foreach (var priceDetail in priceDetails)
+                    {
+                        priceDetailRepository.Insert(new TblDetailPrice()
+                        {
+                            Description = priceDetail.Description,
+                            Price = priceDetail.Price,
+                            TransactionID = priceDetail.TransactionID
+                        });
+                        transaction.Price = priceDetails.Sum(x => x.Price);
+                    }
+                }
+                transaction.StatusID = (int)TransactionStatus.Fixed;
+                transactionRepository.Edit(transaction);
+                transactionRepository.Save();
+                return true;
+            }
+            
+            return false;
+        }
+
         public ContactDetailsViewModel GetContactDetails(int customerID)
         {
             ContactDetailsViewModel model = new ContactDetailsViewModel

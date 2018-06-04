@@ -15,6 +15,7 @@ namespace htcustomer.service.Interfaces
         ContactDetailsViewModel GetContactDetails(int customerID);
         TransactionListHomeViewModel GetListTransactionHome();
         TransactionListViewModel GetListTransaction(TransactionStatus status, int? month = null, int? year = null, int? categoryId = null);
+        bool FixedTransaction(int transactionID, IEnumerable<PriceDetailViewModel> priceDetails);
 
     }
 }
