@@ -4,11 +4,11 @@
     font-family: "Roboto" , sans-serif;
 }
 
-body {
-    padding-top: 50px;
+body {    
     padding-bottom: 20px;
     background-position: center;
-    background-image: url("Images/background.jpg");
+    /*background-image: url("Images/background.jpg");*/
+    background-color: #eceef0;
     background-size: cover;
     background-attachment: fixed;
 }
