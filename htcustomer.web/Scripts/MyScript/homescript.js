@@ -67,16 +67,16 @@ $(function () {
             }
         }
     })
-        .autocomplete("option", "appendTo", ".inform")
-        .autocomplete("instance")._renderItem = function (ul, item) {
-            var row = $("<div>").addClass("row");
-            $("<div>").addClass("col-md-6").text(item.label).appendTo(row);
-            $("<div>").addClass("col-md-6").text(item.description).appendTo(row);
+        //.autocomplete("option", "appendTo", ".inform")
+        //.autocomplete("instance")._renderItem = function (ul, item) {
+        //    var row = $("<div>").addClass("row");
+        //    $("<div>").addClass("col-md-6").text(item.label).appendTo(row);
+        //    $("<div>").addClass("col-md-6").text(item.description).appendTo(row);
 
-            return $("<li>")
-                .append(row)
-                .appendTo(ul);
-        };
+        //    return $("<li>")
+        //        .append(row)
+        //        .appendTo(ul);
+        //};
 });
 
 function addDevice(customerId) {

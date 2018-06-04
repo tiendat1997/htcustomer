@@ -13,14 +13,16 @@
     <div class="navbar">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <p class="title">HT</p>
+                <p class="title"><i class="fa fa-home"></i> Huy Thong</p>
             </a>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-left">
                 <li>@Html.ActionLink("Fixing", "Index", "Home")</li>
                 <li>@Html.ActionLink("Contacts", "Index", "Contact")</li>
                 <li>@Html.ActionLink("Category", "Index", "Category")</li>
                 <li>@Html.ActionLink("Repository", "Index", "Repository")</li>
-                <li><a>To Do List <span class="badge">5</span></a></li>
+                <li><a>To Do List <span class="badge">5</span></a></li>               
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
                 <li class="sep"></li>
                 <li><a href="/accounts/signup/" class="signout-link"><i class="fa fa-sign-out"></i></a></li>
             </ul>
