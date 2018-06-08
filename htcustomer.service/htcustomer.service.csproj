@@ -56,6 +56,7 @@
     <Compile Include="ViewModel\Contact\ContactDetailsViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\Transaction\PriceDetailViewModel.cs" />
+    <Compile Include="ViewModel\Transaction\TransactionCreateViewModel.cs" />
     <Compile Include="ViewModel\Transaction\TransactionHomeViewModel.cs" />
     <Compile Include="ViewModel\Transaction\TransactionListHomeViewModel.cs" />
     <Compile Include="ViewModel\Transaction\TransactionListViewModel.cs" />
