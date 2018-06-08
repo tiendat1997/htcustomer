@@ -9,7 +9,7 @@ namespace htcustomer.service.ViewModel.Transaction
 {
     public class TransactionListViewModel
     {
-        public TransactionStatus Status { get; set; }
+        public TransactionStatus? Status { get; set; }
         public IEnumerable<TransactionViewModel> Transactions { get; set; }
     }
 }

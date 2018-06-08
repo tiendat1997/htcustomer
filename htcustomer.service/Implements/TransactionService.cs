@@ -145,9 +145,13 @@ namespace htcustomer.service.Implements
             return model;
         }
 
-        public TransactionListViewModel GetListTransaction(TransactionStatus status, int? month = null, int? year = null, int? categoryId = null)
+        public TransactionListViewModel GetListTransaction(TransactionStatus? status = null, int? month = null, int? year = null, int? categoryId = null, bool isDelivered = false)
         {
-            var transactions = transactionRepository.Gets().Where(t => (TransactionStatus)t.StatusID.Value == status);
+            var transactions = transactionRepository.Gets();
+            if(status != null)
+            {
+                transactions = transactions.Where(t => t.StatusID == (int)status);
+            }
             if (month != null && year != null)
             {
                 transactions = transactions.Where(t => t.RecievedDate.Value.Month == month && t.RecievedDate.Value.Year == year);
@@ -160,11 +164,11 @@ namespace htcustomer.service.Implements
             {
                 transactions = transactions.Where(t => t.TypeID == categoryId);
             }
-
+            
             var result = new TransactionListViewModel
             {
                 Status = status,
-                Transactions = transactions.Select(t => new TransactionViewModel()
+                Transactions = transactions.Where(t => t.Delivered == isDelivered).Select(t => new TransactionViewModel()
                 {
                     TransactionID = t.TransactionID,
                     DeliveredDate = t.DeliverDate,
