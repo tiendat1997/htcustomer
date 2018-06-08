@@ -18,6 +18,7 @@ namespace htcustomer.service.Interfaces
         bool FixedTransaction(int transactionID, IEnumerable<PriceDetailViewModel> priceDetails);
         bool CannotFixTransaction(int transactionID, string reason = "");
         bool DeliverTransaction(int transactionID);
+        bool Add(TransactionCreateViewModel transaction);
 
     }
 }

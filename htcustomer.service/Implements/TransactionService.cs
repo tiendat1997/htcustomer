@@ -34,6 +34,25 @@ namespace htcustomer.service.Implements
             priceDetailRepository = _priceDetailRepository;
         }
 
+        public bool Add(TransactionCreateViewModel transaction)
+        {
+            if (transaction != null)
+            {
+                transactionRepository.Insert(new TblTransaction() {
+                    CustomerID = transaction.CustomerID,
+                    Delivered = false,
+                    Description = transaction.Description,
+                    Error = transaction.Error,
+                    RecievedDate = DateTime.Now,
+                    StatusID = (int)TransactionStatus.NotFix,
+                    TypeID = transaction.TypeID
+                });
+                transactionRepository.Save();
+                return true;
+            }
+            return false;
+        }
+
         public bool CannotFixTransaction(int transactionID, string reason = "")
         {
             var transaction = transactionRepository.GetByID(transactionID);
