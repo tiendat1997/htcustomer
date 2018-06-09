@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<htcustomer.service.ViewModel.Transaction.TransactionViewModel>
 
+@using htcustomer.service.Enums
+
 <div class="panel">
     <div class="panel-body">
         <table class="table table-responsive table-striped">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Device</th>
                     <th>Error</th>
                     <th>Customer</th>
@@ -28,6 +31,13 @@
                     foreach (var transaction in Model)
                     {
                     <tr>
+                        @if (transaction.Status == TransactionStatus.CannotFix)
+                        {
+                            <td class="bg-td-danger" data-toggle="tooltip" data-placement="right" title="@TransactionStatus.CannotFix.ToString()"> </td>
+                        }
+                        else {
+                            <td class="bg-td-success" data-toggle="tooltip" data-placement="right" title="@TransactionStatus.Fixed.ToString()"></td>
+                        }
                         <td>
                             <p>@transaction.Category.Name</p>
                             <p>@transaction.Description</p>

@@ -9,3 +9,9 @@
     #device-filter-form .form-group {
         display: inline-block;
     }
+.bg-td-danger {
+    background-color: #d9534f;
+}
+.bg-td-success {
+    background-color: #5cb85c;
+}
