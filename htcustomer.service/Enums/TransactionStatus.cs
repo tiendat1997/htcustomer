@@ -10,6 +10,7 @@ namespace htcustomer.service.Enums
     {
         NotFix=1,
         Fixed=2,
-        CannotFix=3
+        CannotFix=3,
+        Delivered=4
     }
 }

@@ -21,9 +21,13 @@
     {
         @Html.Partial("_FixedDevice", Model.Transactions)
     }
-    else
+    else if(Model.Status == TransactionStatus.CannotFix)
     {
         @Html.Partial("_CannotFixDevice", Model.Transactions)
+    }
+    else if(Model.Status == TransactionStatus.Delivered)
+    {
+        @Html.Partial("_DeliveredDevice", Model.Transactions)
     }
 </div>
 

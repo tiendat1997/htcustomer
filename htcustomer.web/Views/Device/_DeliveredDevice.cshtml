@@ -1,0 +1,73 @@
+﻿@model IEnumerable<htcustomer.service.ViewModel.Transaction.TransactionViewModel>
+
+@using htcustomer.service.Enums
+
+<div class="panel">
+    <div class="panel-body">
+        <table class="table table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Device</th>
+                    <th>Error</th>
+                    <th>Customer</th>
+                    <th>Contact</th>
+                    <th>Received Date</th>
+                    <th>Price</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model == null || Model.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="5">
+                            <h4 class="alert alert-warning"><i class="fa fa-warning"></i> &nbsp;There are no transaction</h4>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var transaction in Model)
+                    {
+                    <tr>
+                        @if (transaction.Status == TransactionStatus.CannotFix)
+                        {
+                            <td class="bg-td-danger" data-toggle="tooltip" data-placement="right" title="@TransactionStatus.CannotFix.ToString()"> </td>
+                        }
+                        else {
+                            <td class="bg-td-success" data-toggle="tooltip" data-placement="right" title="@TransactionStatus.Fixed.ToString()"></td>
+                        }
+                        <td>
+                            <p>@transaction.Category.Name</p>
+                            <p>@transaction.Description</p>
+                        </td>
+                        <td>
+                            @transaction.Error
+                        </td>
+                        <td>
+                            <p>@transaction.Customer.Name</p>
+                        </td>
+                        <td>
+                            <p>@transaction.Customer.Phone</p>
+                        </td>
+                        <td>
+                            @transaction.RecievedDate
+                        </td>
+                        <td>
+                            <p><b>@transaction.Price,000 vnd</b></p>
+                            @Html.Partial("_DetailPriceTransaction", transaction.ListPriceDetail)
+                        </td>
+                        <td>
+                            @transaction.Reason
+                        </td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
