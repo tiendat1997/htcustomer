@@ -3,7 +3,7 @@
 @using (Html.BeginForm("AddCustomer", "Contact", FormMethod.Post, new { id = "new-customer-form" }))
 {
     @Html.AntiForgeryToken()
-    <div class="container form-horizontal">
+    <div class="container form-horizontal">        
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

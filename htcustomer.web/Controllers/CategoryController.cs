@@ -42,9 +42,9 @@ namespace htcustomer.web.Controllers
             return Json("Success");
         }
         
-        public JsonResult GetListCategory()
+        public ActionResult GetListCategory()
         {
-            var categoryList = categoryService.GetAllCategories();
+            var categoryList = categoryService.GetAllCategories();            
             return Json(categoryList, JsonRequestBehavior.AllowGet);
         }
 
