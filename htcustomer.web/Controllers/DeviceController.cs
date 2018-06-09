@@ -30,8 +30,9 @@ namespace htcustomer.web.Controllers
 
             if (statusId == (int)TransactionStatus.NotFix) return PartialView("_NotFixDevice", viewModel.Transactions);
             if (statusId == (int)TransactionStatus.Fixed) return PartialView("_FixedDevice", viewModel.Transactions);
+            if (statusId == (int)TransactionStatus.CannotFix) return PartialView("_CannotFixDevice", viewModel.Transactions);
 
-            return PartialView("_CannotFixDevice", viewModel.Transactions);                
+            return PartialView("_DeliveredDevice", viewModel.Transactions);                
         }
                 
         // Render Partial View for Device Tabs
