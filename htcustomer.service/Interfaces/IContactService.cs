@@ -13,7 +13,7 @@ namespace htcustomer.service.Interfaces
     {        
         IEnumerable<CustomerViewModel> GetAllCustomer();
         AddressBookViewModel GetAddressBook(string searchValue);
-        bool AddCustomer(CustomerViewModel customer);
+        int AddCustomer(CustomerViewModel customer);
         bool Existed(CustomerViewModel customer);
         void DisableCustomer(int customerID);
         bool UpdateCustomer(CustomerViewModel customer);

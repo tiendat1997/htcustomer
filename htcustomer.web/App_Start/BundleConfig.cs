@@ -39,6 +39,8 @@ namespace htcustomer.web
                       "~/Content/toastr.css",
                       "~/Content/MyCss/BaseGoogle.css",
                       "~/Content/Site.css"));
+            // Home Bundle 
+            bundles.Add(new StyleBundle("~/Content/css/home").Include("~/Content/MyCss/home.css"));
 
             // Device Bundle
             bundles.Add(new StyleBundle("~/Content/css/device").Include(

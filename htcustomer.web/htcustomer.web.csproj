@@ -235,6 +235,7 @@
     <Content Include="Content\MyCss\CustomSearchBox.css" />
     <Content Include="Content\MyCss\device.css" />
     <Content Include="Content\MyCss\FlatButton.css" />
+    <Content Include="Content\MyCss\home.css" />
     <Content Include="Content\MyCss\IconCollection.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -407,6 +408,8 @@
     <Content Include="Views\Contact\_CustomerInformation.cshtml" />
     <Content Include="Views\Category\_CategoryRow.cshtml" />
     <Content Include="Views\Shared\_DetailPriceTransaction.cshtml" />
+    <Content Include="Views\Home\_NewTransaction.cshtml" />
+    <Content Include="Views\Home\_AddCustomer.cshtml" />
     <Content Include="Views\Device\_DeliveredDevice.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -55,29 +55,31 @@ namespace htcustomer.service.Implements
         // Existed Name + Description  - return true if existed
         public bool Existed(CustomerViewModel customer)
         {
-            var result = customerRepository.Gets()
-                         .Where(c => c.Name.ToUpper().Equals(customer.Name.ToUpper()) &&
-                                c.Description.ToUpper().Equals(customer.Description.ToUpper()));
-            
-            return (result != null) ? (result.Count() > 0  ? true : false) : false;
+            var result = customerRepository
+                .Gets()
+                .Where(c => c.Name.ToUpper().Equals(customer.Name.ToUpper()) && (customer.Description == null || c.Description.ToUpper().Equals(customer.Description.ToUpper())));    
+            if (!result.Any())
+                return false;
+            return true;
         }
 
-        public bool AddCustomer(CustomerViewModel customer)
+        public int AddCustomer(CustomerViewModel customer)
         {
             if (customer == null) throw new ArgumentNullException("Null Argument");
-            if (Existed(customer) == true) return false;
+            if (Existed(customer) == true) return -1;
 
             customer.Disable = false;
-            customerRepository.Insert(new TblCustomer
+            var newCustomer = new TblCustomer
             {
                 Name = customer.Name,
                 Description = customer.Description,
                 Phone = customer.Phone,
                 Address = customer.Address,
                 Disable = false
-            });
+            };
+            customerRepository.Insert(newCustomer);
             unitOfWork.Save();
-            return true;
+            return newCustomer.CustomerID;
         }
 
         public void DisableCustomer(int customerID)

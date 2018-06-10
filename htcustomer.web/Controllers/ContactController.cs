@@ -35,11 +35,16 @@ namespace htcustomer.web.Controllers
             }
             return View();
         }
-        public ActionResult GetAddressBook(string searchCustomer)
+        public ActionResult GetAddressBook(string searchCustomer, bool? callFromHome = false)
         {
             var addressBook = contactService.GetAddressBook(searchCustomer);
+            if (callFromHome == true)
+            { 
+                // SEARCH FROM HOME 
+                return Json(addressBook.customerList, JsonRequestBehavior.AllowGet);
+            }
+            // SEARCH FROM CONTACT 
             TempData["reload-url"] = "htcustomer/Contact/";
-
             return PartialView("_AddressBook", addressBook);
         }
         [HttpGet]
@@ -58,7 +63,7 @@ namespace htcustomer.web.Controllers
                     return Json(new JsonMessage { Status = JsonResultStatus.Unvalidated, Message = "UnValidate customer", Errors = errors }, JsonRequestBehavior.AllowGet);
                 }
                 var result = contactService.AddCustomer(customer);
-                if (!result) return Json(new JsonMessage { Status = JsonResultStatus.Unvalidated, Message = "Customer has existed before !!!" }, JsonRequestBehavior.AllowGet);
+                if (result == -1) return Json(new JsonMessage { Status = JsonResultStatus.Unvalidated, Message = "Customer has existed before !!!" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -94,6 +99,6 @@ namespace htcustomer.web.Controllers
                 return Json(new JsonMessage { Status = JsonResultStatus.Fail, Message = "Error during editing customer" }, JsonRequestBehavior.AllowGet);
             }
             return Json(new JsonMessage { Status = JsonResultStatus.Success, Message = "Editing customer successfully" }, JsonRequestBehavior.AllowGet);
-        }
+        }      
     }
 }

@@ -1,0 +1,36 @@
+﻿@model htcustomer.service.ViewModel.Transaction.TransactionViewModel
+
+@using (Html.BeginForm("AddTransaction", "Home", FormMethod.Post, new { id = "transaction-info-form", @class = "inner" }))
+{
+    <div class="form-group">
+        <label class="control-label" for="device-select">Device</label>
+        @Html.DropDownListFor(model => model.Category.CategoryID,
+                                                       new List<SelectListItem>(),
+                                                       new { id = "device-select", @class = "form-control", data_url = @Url.Action("GetListCategory", "Category") })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Error)
+        @Html.TextAreaFor(model => model.Error, new { @class = "form-control", required = "required" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+    </div>
+    <hr />
+    <div class="form-group" id="customer-info">
+        @Html.HiddenFor(model => model.Customer.CustomerID)
+        <label class="control-label" for="customer-chooser">
+            Choose a customer
+            &nbsp; <i id="add-customer-btn" data-url="@Url.Action("AddCustomerInfo","Home")" style="display:none;" class="fa fa-plus-circle"></i>
+        </label>
+        @Html.TextBoxFor(model => model.Customer.Name, new { id = "customer-chooser", @class = "form-control", data_url = @Url.Action("GetAddressBook", "Contact"), required = "required" })
+        <h5 id="not-found-search"></h5>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+@section scripts {
+    @*<script>
+        addEventListenerForNewTransaction();
+    </script>*@
+}

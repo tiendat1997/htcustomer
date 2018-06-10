@@ -1,53 +1,66 @@
-﻿$(document).ready(function (e) {
-    $('[data-toggle="tooltip"]').tooltip();   
-    $('#add-customer-btn').click(function (e) {
-        e.preventDefault();
-        $("#add-device-modal").modal("hide");
-        $("#add-customer-modal").modal("show");    
-    });
-});
+﻿function loadCategoryList() {
+    var select = $('#device-select');
+    var url = $(select).data('url');
+    var categoryId = $('#reload-category-id').val();
 
-$(function () {
-    var customers = [
-        {
-            customerId: "cust01",
-            label: "Tien Dat",
-            description: "Dai Truyen Hinh",
-            phone: "0123456789",
-        },
-        {
-            customerId: "cust02",
-            label: "Huy Thong",
-            description: "Dai Truyen Hinh",
-            phone: "01218351464",
-        },
-        {
-            customerId: "cust03",
-            label: "Thuy Ngoc ",
-            description: "Dai Truyen Hinh",
-            phone: "0123456789",
-        },
-        {
-            customerId: "cust04",
-            label: "Bach Tuyet",
-            description: "Dai Truyen Hinh",
-            phone: "0995539831",
-        },
-        {
-            customerId: "cust05",
-            label: "Huy Vu",
-            description: "Dai Truyen Hinh",
-            phone: "0123345566",
+    $.ajax({
+        method: 'GET',
+        url: url,
+        cached: false
+    }).done(function (data) {
+        if (data.length > 0) {
+            data.forEach(function (category) {
+                $(select).append(`<option value=${category.CategoryID}>${category.Name}</option>`);
+            });
+            // selected : 
+            if (categoryId !== null || categoryId.length > 0) {
+                $('#device-select').val(categoryId).attr('selected', 'selected');
+            }
+            else {
+                $('#device-select').children[0].attr('selected', 'selected');
+            }
         }
-    ]
-    
-    $("#customer").autocomplete({
-        minLength: 3,
-        source: customers,
+    });            
+}
+function initForm() {
+    $('#customer-info label i').css('display', 'none');
+    $('#not-found-search').removeClass('alert alert-warning').text('');
+    $('#transaction-info-form').trigger('reset');
+}
+
+function addEventListenerForNewTransaction() {
+    $("#customer-chooser").autocomplete({
+        minLength: 1,
+        source: function (request, response) {
+            // CALLING AJAX
+            var cusChooser = $('#customer-chooser');
+            var searchVal = request.term;
+            var url = $(cusChooser).data('url');
+
+            $.ajax({
+                url: url,
+                method: 'GET',
+                cached: false,
+                data: {
+                    'searchCustomer': searchVal,
+                    'callFromHome': true
+                },
+            }).done(function (data) {
+                var customData = data.map(function (customer) {
+                    return {
+                        customerId: customer.CustomerID,
+                        label: `${customer.Name} (${customer.Description})`,
+                        phone: customer.Phone,
+                        description: customer.Description
+                    };
+                });
+                response(customData);
+            });
+
+        },
         focus: function (event, ui) {
-            var customerInfo = ui.item.value + " - " + ui.item.description;
-            $("#customerId").val(ui.item.customerId);
-            $("#customer").val(customerInfo);
+            $("#Customer_CustomerID").val(ui.item.customerId);
+            $("#customer-chooser").val(ui.item.value);
             return false;
         },
         select: function (event, ui) {
@@ -58,25 +71,104 @@ $(function () {
         },
         response: function (event, ui) {
             if (ui.content.length === 0) {
-                $("#not-found-search").text("No results found ! Please add new customer...");
-                $("#add-customer-btn").css("display", "block");
+                $("#not-found-search").attr('class', 'alert alert-warning').text("No results found ! Please add new customer...");
+                $("#add-customer-btn").css("display", "inline-block");
+                $("#Customer_CustomerID").val(null);
             }
             else {
-                $("#not-found-search").text("");
+                $("#not-found-search").removeClass('alert alert-warning').text("");
                 $("#add-customer-btn").css("display", "none");
             }
         }
-    })
-        //.autocomplete("option", "appendTo", ".inform")
-        //.autocomplete("instance")._renderItem = function (ul, item) {
-        //    var row = $("<div>").addClass("row");
-        //    $("<div>").addClass("col-md-6").text(item.label).appendTo(row);
-        //    $("<div>").addClass("col-md-6").text(item.description).appendTo(row);
+    });
 
-        //    return $("<li>")
-        //        .append(row)
-        //        .appendTo(ul);
-        //};
+    $('#transaction-info-form').on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        var url = $(form).attr('action');
+        var data = $(form).serialize();
+        var method = $(form).attr('method');
+        var modalBody = $('#add-transaction-modal .modal-body .inner');
+        var foundCustomer = $('#Customer_CustomerID');
+
+        if ($(foundCustomer).val() === "" || $(foundCustomer).val() === null) {
+            toastr.warning("Please choose customer");
+            return;
+        }
+        
+        $.ajax({
+            url: url,
+            method: method,
+            cached: false,
+            data: data
+        }).done(function (message) {
+            if (message.Status === 'Success') {
+                toastr.success(message.Message);                                
+            }
+            else {
+                toastr.warning(message.Message);
+            }
+        });
+        
+    });
+}
+
+function addListenerForAddForm() {
+
+    $('#add-customer-form').on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        var url = $(form).attr('action');
+        var data = $(form).serialize();
+        var method = $(form).attr('method');
+        var modalBody = $('#add-transaction-modal .modal-body .inner');
+
+        $.ajax({
+            url: url,
+            method: method,
+            cached: false,
+            data: data   
+        }).done(function (data) {
+            if (data.Status === undefined || data.Status === null) {
+                $("#reload-category-id").val($('#Category_CategoryID').val());
+                // success: return partial view 
+                modalBody.replaceWith(data);
+                addEventListenerForNewTransaction();
+                loadCategoryList();
+            }
+            else {
+                toastr.warning(data.Message);
+            }
+        });
+    })
+}
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    $('#add-transaction-btn').on('click', function () {
+        initForm();
+    });
+    addEventListenerForNewTransaction();
+    loadCategoryList();
+
+    $('#add-customer-btn').click(function (e) {
+        e.preventDefault();
+        var btn = this;
+        var url = $(btn).data('url');
+        var data = $('#transaction-info-form').serialize();
+        var modalBody = $('#add-transaction-modal .modal-body .inner');
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            cached: false,
+            data: data,
+        }).done(function (data) {
+            modalBody.replaceWith(data);
+        });
+
+    });
+      
 });
 
 function addDevice(customerId) {
