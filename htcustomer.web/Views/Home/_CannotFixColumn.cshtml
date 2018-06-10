@@ -1,0 +1,17 @@
+﻿@model IEnumerable<htcustomer.service.ViewModel.Transaction.TransactionHomeViewModel>
+
+<div class="panel panel-danger transaction" id="cannot-fix-column">
+    <div class="panel-heading">
+        <h3>@Html.ActionLink("Cannot Fix", "Index", "Device", new { statusId = 3 }, null) <span class="badge">@Model.Count()</span></h3>
+    </div>
+    <div class="">
+        <div class="table table-condensed table-striped list-container">
+            <div class="list-group">
+                @foreach (var transaction in Model)
+                {
+                    @Html.Partial("_CannotFixTransaction", transaction)  
+                }
+            </div>
+        </div>
+    </div>
+</div>

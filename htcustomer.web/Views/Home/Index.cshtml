@@ -27,121 +27,13 @@
 </div>
 <div class="row">
     <div class="col-md-4 col-sm-12 col-xs-12">
-        <div class="panel panel-default transaction">
-            <div class="panel-heading">
-                <h3>@Html.ActionLink("Not Fix", "Index", "Device", new { statusId = 1 }, null) <span class="badge">@Model.NotFixTransactions.Count()</span></h3>
-            </div>
-            <div class="">
-                <div class="table table-condensed table-striped list-container">
-                    <div class="list-group">
-                        @foreach (var transaction in Model.NotFixTransactions)
-                        {
-                            <div class="list-group-item" style="position: relative">
-                                <button class="btn btn-sm btn-primary btn-action"><i class="fa fa-check"></i></button>
-                                <h5 class="list-group-item-heading">
-                                    <label class="label device-title">@transaction.Category.Name</label>
-                                    <a href="#" data-placement="bottom" data-toggle="tooltip" title="@transaction.Customer.Phone">@transaction.Customer.Name</a>
-                                    <hr class="seperator-device" />
-                                </h5>
-                                <div class="list-group-item-text">
-                                    <label class="label device-error">Error</label>
-                                    <ul>
-                                        <li><p>@transaction.Error</p></li>
-                                    </ul>
-
-                                    <label class="label device-description">Description</label>
-                                    <ul>
-                                        <li>
-                                            <p>@transaction.DeviceDescription</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
+       @Html.Partial("_NotFixColumn", Model.NotFixTransactions);
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
-        <div class="panel panel-success transaction">
-            <div class="panel-heading">
-                <h3>@Html.ActionLink("Fixed", "Index", "Device", new { statusId = 2 }, null) <span class="badge">@Model.FixedTransactions.Count()</span></h3>
-            </div>
-            <div class="">
-                <div class="table table-condensed table-striped list-container">
-                    <div class="list-group">
-                        @foreach (var transaction in Model.FixedTransactions)
-                        {
-                            <div class="list-group-item" style="position: relative">
-                                <button class="btn btn-sm btn-success btn-action"><i class="fa fa-send"></i></button>
-                                <h5 class="list-group-item-heading">
-                                    <label class="label device-title">@transaction.Category.Name</label>
-                                    <a href="#" data-placement="bottom" data-toggle="tooltip" title="@transaction.Customer.Phone">@transaction.Customer.Name</a>
-                                    <hr class="seperator-device" />
-                                </h5>
-                                <div class="list-group-item-text">
-                                    <label class="label device-price">Price</label>
-
-                                    <a data-toggle="collapse" data-target="#1-price"><b>@transaction.Price,000 vnd</b></a>
-                                    <div id="1-price" class="collapse">
-                                        @Html.Partial("_DetailPriceTransaction", transaction.ListPriceDetail)
-                                    </div>
-                                    <br />
-
-                                    <label class="label device-description">Description</label>
-                                    <ul>
-                                        <li>
-                                            <p>@transaction.DeviceDescription</p>
-                                        </li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Partial("_FixedColumn", Model.FixedTransactions)
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
-        <div class="panel panel-danger transaction">
-            <div class="panel-heading">
-                <h3>@Html.ActionLink("Cannot Fix", "Index", "Device", new { statusId = 3 }, null) <span class="badge">@Model.CannotFixTransactions.Count()</span></h3>
-            </div>
-            <div class="">
-                <div class="table table-condensed table-striped list-container">
-                    <div class="list-group">
-                        @foreach (var transaction in Model.CannotFixTransactions)
-                        {
-                            <div class="list-group-item" style="position: relative">
-                                <button class="btn btn-sm btn-danger btn-action"><i class="fa fa-send"></i></button>
-                                <h5 class="list-group-item-heading">
-                                    <label class="label device-title">@transaction.Category.Name</label>
-                                    <a href="#" data-placement="bottom" data-toggle="tooltip" title="@transaction.Customer.Phone">@transaction.Customer.Name</a>
-                                    <hr class="seperator-device" />
-                                </h5>
-                                <div class="list-group-item-text">
-                                    <label class="label device-description">Description</label>
-                                    <ul>
-                                        <li>
-                                            <p>@transaction.DeviceDescription</p>
-                                        </li>
-                                    </ul>
-                                    <label class="label device-note">Note</label>
-                                    <ul>
-                                        <li>
-                                            @transaction.CannotFixNote
-                                        </li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Partial("_CannotFixColumn", Model.CannotFixTransactions)
     </div>
 </div>
 

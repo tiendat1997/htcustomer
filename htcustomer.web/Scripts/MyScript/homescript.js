@@ -22,6 +22,11 @@
         }
     });            
 }
+function closeModal(form) {
+    var parentModal = $(form).closest('.modal');
+    $(parentModal).modal('hide');
+    initForm();
+}
 function initForm() {
     $('#customer-info label i').css('display', 'none');
     $('#not-found-search').removeClass('alert alert-warning').text('');
@@ -34,7 +39,7 @@ function addEventListenerForNewTransaction() {
         source: function (request, response) {
             // CALLING AJAX
             var cusChooser = $('#customer-chooser');
-            var searchVal = request.term;
+            var searchVal = request.term; 
             var url = $(cusChooser).data('url');
 
             $.ajax({
@@ -103,7 +108,9 @@ function addEventListenerForNewTransaction() {
             data: data
         }).done(function (message) {
             if (message.Status === 'Success') {
-                toastr.success(message.Message);                                
+                closeModal(form);
+                toastr.success(message.Message);
+
             }
             else {
                 toastr.warning(message.Message);
