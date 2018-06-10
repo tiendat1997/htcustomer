@@ -152,7 +152,7 @@ namespace htcustomer.service.Implements
             {
                 if(status != TransactionStatus.Delivered)
                 {
-                    transactions = transactions.Where(t => t.StatusID == (int)status);
+                    transactions = transactions.Where(t => t.StatusID == (int)status && t.Delivered == false);
                 }
                 else
                 {
