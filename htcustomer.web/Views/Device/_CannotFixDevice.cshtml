@@ -28,9 +28,9 @@
                 {
                     foreach (var transaction in Model)
                     {
-                        <tr>
+                        <tr id="transaction-detail-@transaction.TransactionID">
                             <td>
-                                <button class="btn btn-danger"><i class="fa fa-send"></i></button>
+                                <button class="btn btn-danger btn-deliver-transaction" data-url="@Url.Action("DeliverTransaction","Device", new {transactionId = transaction.TransactionID })" data-id="@transaction.TransactionID"><i class="fa fa-send"></i></button>
                             </td>
                             <td>
                                 <p>@transaction.Category.Name </p>

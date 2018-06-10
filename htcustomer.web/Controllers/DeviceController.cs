@@ -1,4 +1,5 @@
 ﻿using htcustomer.service.Enums;
+using htcustomer.service.Helper;
 using htcustomer.service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,16 @@ namespace htcustomer.web.Controllers
         public ActionResult AddToBillForm()
         {
             return PartialView("_AddBillForm");
+        }
+
+        public JsonResult DeliverTransaction(int transactionId)
+        {
+            bool result = transactionService.DeliverTransaction(transactionId);
+            if (result)
+            {
+                return Json(new JsonMessage() { Status = JsonResultStatus.Success, Message = "Deliver Success" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new JsonMessage() { Status = JsonResultStatus.Fail, Message = "Deliver Fail!" }, JsonRequestBehavior.AllowGet);
         }
     }
 }
