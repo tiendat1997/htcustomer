@@ -1,0 +1,18 @@
+﻿@model IEnumerable<htcustomer.service.ViewModel.Transaction.TransactionHomeViewModel>
+
+<div class="panel panel-default transaction" id="not-fix-column">
+    <div class="panel-heading">
+        <h3>@Html.ActionLink("Not Fix", "Index", "Device", new { statusId = 1 }, null) <span class="badge">@Model.Count()</span></h3>
+    </div>
+    <div class="">
+        <div class="table table-condensed table-striped list-container">
+            <div class="list-group">
+                @foreach (var transaction in Model)
+                {        
+                    @Html.Partial("_NotFixTransaction",transaction)
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

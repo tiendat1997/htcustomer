@@ -1,0 +1,24 @@
+﻿@model htcustomer.service.ViewModel.Transaction.TransactionHomeViewModel
+
+<div class="list-group-item" style="position: relative">
+    <button class="btn btn-sm btn-primary btn-action"><i class="fa fa-check"></i></button>
+    <h5 class="list-group-item-heading">
+        <label class="label device-title">@Model.Category.Name</label>
+        <a href="#" data-placement="bottom" data-toggle="tooltip" title="@Model.Customer.Phone">@Model.Customer.Name</a>
+        <hr class="seperator-device" />
+    </h5>
+    <div class="list-group-item-text">
+        <label class="label device-error">Error</label>
+        <ul>
+            <li><p>@Model.Error</p></li>
+        </ul>
+
+        <label class="label device-description">Description</label>
+        <ul>
+            <li>
+                <p>@Model.DeviceDescription</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
