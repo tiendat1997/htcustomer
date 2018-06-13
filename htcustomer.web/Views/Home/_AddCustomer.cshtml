@@ -7,34 +7,36 @@
     @Html.HiddenFor(model => model.Category.CategoryID)
     @Html.HiddenFor(model => model.Description)
     @Html.HiddenFor(model => model.Error)
-    <div class="modal-body">
-        <div class="form-group">
-            @Html.LabelFor(model => model.Customer.Name)
-            @Html.TextBoxFor(model => model.Customer.Name, new { @class = "form-control", required = "required" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Customer.Description)
-            @Html.TextBoxFor(model => model.Customer.Description, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Customer.Phone)
-            @Html.TextBoxFor(model => model.Customer.Phone, new
-            {
-                @class = "form-control",
-                type = "phone",
-                required = "required",
-                pattern = "^[0-9]{10,12}$",
-            })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Customer.Address)
-            @Html.TextBoxFor(model => model.Customer.Address, new { @class = "form-control", required = "required", })
-        </div>
+<div class="modal-body">
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer.Name)
+        @Html.TextBoxFor(model => model.Customer.Name, new { @class = "form-control", required = "required" })
     </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" type="submit">Add</button>
-        <button class="btn btn-danger">Cancel</button>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer.Description)
+        @Html.TextBoxFor(model => model.Customer.Description, new { @class = "form-control" })
     </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer.Phone)
+        @Html.TextBoxFor(model => model.Customer.Phone, new
+        {
+            @class = "form-control",
+            type = "phone",
+            required = "required",
+            pattern = "^[0-9]{10,12}$",
+        })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer.Address)
+        @Html.TextBoxFor(model => model.Customer.Address, new { @class = "form-control", required = "required", })
+    </div>
+    <input id="is-cancel" type="hidden" name="isCancelled" value="false"/>
+</div>
+<div class="modal-footer">
+    
+    <input class="btn btn-primary" name="action" type="submit" value="Save"/>
+    <input class="btn btn-danger" name="action" type="submit" value="Cancel"/>
+</div>
 }
 
 

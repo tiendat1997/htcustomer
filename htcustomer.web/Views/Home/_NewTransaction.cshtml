@@ -5,8 +5,8 @@
     <div class="form-group">
         <label class="control-label" for="device-select">Device</label>
         @Html.DropDownListFor(model => model.Category.CategoryID,
-                                                       new List<SelectListItem>(),
-                                                       new { id = "device-select", @class = "form-control", data_url = @Url.Action("GetListCategory", "Category") })
+                                                                 new List<SelectListItem>(),
+                                                                 new { id = "device-select", @class = "form-control", data_url = @Url.Action("GetListCategory", "Category") })
     </div>
     <div class="form-group">
         @Html.LabelFor(model => model.Error)
@@ -30,7 +30,7 @@
     <button type="submit" class="btn btn-primary">Save</button>
 }
 @section scripts {
-    @*<script>
-        addEventListenerForNewTransaction();
-    </script>*@
+    <script>
+            addEventListenerForNewTransaction();
+    </script>
 }

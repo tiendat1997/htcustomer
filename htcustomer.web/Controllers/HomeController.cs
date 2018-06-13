@@ -30,7 +30,6 @@ namespace htcustomer.web.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
@@ -65,10 +64,17 @@ namespace htcustomer.web.Controllers
             return PartialView("_AddCustomer", transaction);
         }
         [HttpPost]
-        public ActionResult AddCustomer(TransactionViewModel transaction)
+        public ActionResult AddCustomer(TransactionViewModel transaction,  bool? isCancelled = false)
         {
             try
             {
+                if (isCancelled == true)
+                {
+                    transaction.Customer.Name = "";
+                    return PartialView("_NewTransaction", transaction);
+                }   
+                    
+                
                 if (!ModelState.IsValid)
                 {
                     var errors = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();

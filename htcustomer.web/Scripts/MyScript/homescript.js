@@ -22,18 +22,48 @@
         }
     });            
 }
+function resetNewTransactionForm() {
+    var form = $('#transaction-info-form');    
+    $(form).find('#Error').val(null);
+    $(form).find('#Description').val(null);
+}
+
 function closeModal(form) {
     var parentModal = $(form).closest('.modal');
     $(parentModal).modal('hide');
-    initForm();
+    initForm();    
 }
+
 function initForm() {
     $('#customer-info label i').css('display', 'none');
     $('#not-found-search').removeClass('alert alert-warning').text('');
     $('#transaction-info-form').trigger('reset');
+    $('#transaction-info-form').find('input').val(null);
+    resetNewTransactionForm();
 }
 
 function addEventListenerForNewTransaction() {
+    $('#add-transaction-btn').on('click', function () {        
+        initForm();
+    });
+
+    $('#add-customer-btn').click(function (e) {
+        e.preventDefault();
+        var btn = this;
+        var url = $(btn).data('url');
+        var data = $('#transaction-info-form').serialize();
+        var modalBody = $('#add-transaction-modal .modal-body .inner');
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            cached: false,
+            data: data,
+        }).done(function (data) {
+            modalBody.replaceWith(data);
+        });
+    });
+
     $("#customer-chooser").autocomplete({
         minLength: 1,
         source: function (request, response) {
@@ -78,7 +108,7 @@ function addEventListenerForNewTransaction() {
             if (ui.content.length === 0) {
                 $("#not-found-search").attr('class', 'alert alert-warning').text("No results found ! Please add new customer...");
                 $("#add-customer-btn").css("display", "inline-block");
-                $("#Customer_CustomerID").val(null);
+                $("#Customer_CustomerID").val(null);                
             }
             else {
                 $("#not-found-search").removeClass('alert alert-warning').text("");
@@ -110,7 +140,6 @@ function addEventListenerForNewTransaction() {
             if (message.Status === 'Success') {
                 closeModal(form);
                 toastr.success(message.Message);
-
             }
             else {
                 toastr.warning(message.Message);
@@ -122,13 +151,25 @@ function addEventListenerForNewTransaction() {
 
 function addListenerForAddForm() {
 
+    $('#add-customer-form input[type=submit]').on('click', function (e) {
+        var submitBtn = $(this);
+        var form = $('#add-customer-form');
+        var isCanceled = $(submitBtn).val() === 'Cancel';
+        if (isCanceled) {
+            $(form).find('#is-cancel').val(true);
+            // remove required field 
+            $(form).find('input').attr('required', null).attr('pattern', null);
+        }                
+    });
+
     $('#add-customer-form').on('submit', function (e) {
         e.preventDefault();
         var form = this;
         var url = $(form).attr('action');
-        var data = $(form).serialize();
+        var data = $(form).serialize();               
         var method = $(form).attr('method');
         var modalBody = $('#add-transaction-modal .modal-body .inner');
+        var isCancel = $('#is-cancel').val();
 
         $.ajax({
             url: url,
@@ -137,13 +178,15 @@ function addListenerForAddForm() {
             data: data   
         }).done(function (data) {
             if (data.Status === undefined || data.Status === null) {
-                $("#reload-category-id").val($('#Category_CategoryID').val());
+                $("#reload-category-id").val($('#Category_CategoryID').val());                
                 // success: return partial view 
                 modalBody.replaceWith(data);
+                if (isCancel === true)
+                    $('#customer-chooser').val(null);
+
                 addEventListenerForNewTransaction();
                 loadCategoryList();
-            }
-            else {
+            } else {
                 toastr.warning(data.Message);
             }
         });
@@ -151,31 +194,10 @@ function addListenerForAddForm() {
 }
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-    $('#add-transaction-btn').on('click', function () {
-        initForm();
-    });
+    $('[data-toggle="tooltip"]').tooltip();   
     addEventListenerForNewTransaction();
     loadCategoryList();
-
-    $('#add-customer-btn').click(function (e) {
-        e.preventDefault();
-        var btn = this;
-        var url = $(btn).data('url');
-        var data = $('#transaction-info-form').serialize();
-        var modalBody = $('#add-transaction-modal .modal-body .inner');
-
-        $.ajax({
-            url: url,
-            method: 'POST',
-            cached: false,
-            data: data,
-        }).done(function (data) {
-            modalBody.replaceWith(data);
-        });
-
-    });
-      
+        
 });
 
 function addDevice(customerId) {
