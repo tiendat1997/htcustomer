@@ -77,23 +77,6 @@ $(function () {
     $('#selectDevice').on('change', function () {
         filterTransaction();
     });
-
-    $(document).on('click', ".btn-deliver-transaction",function () {
-        var url = $(this).data("url");
-        var id = $(this).data("id");
-        $.ajax({
-            type: "GET",
-            url: url,
-            cache: false
-        }).done(function (data) {
-            if (data.Status === "Success") {
-                $("#transaction-detail-" + id).remove();
-                toastr.success(data.Message);
-            } else {
-                toastr.error(data.Message);
-            }
-            });
-    });
 });
 
 $(function () {

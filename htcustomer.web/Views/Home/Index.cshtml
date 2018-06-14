@@ -2,7 +2,7 @@
 <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 @Styles.Render("~/Content/css/home")
 
-<div class="container demo">   
+<div class="container demo">
     <!-- Modal -->
     <div class="modal right fade" id="add-transaction-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -27,7 +27,7 @@
 </div>
 <div class="row">
     <div class="col-md-4 col-sm-12 col-xs-12">
-       @Html.Partial("_NotFixColumn", Model.NotFixTransactions);
+        @Html.Partial("_NotFixColumn", Model.NotFixTransactions);
     </div>
     <div class="col-md-4 col-sm-12 col-xs-12">
         @Html.Partial("_FixedColumn", Model.FixedTransactions)
@@ -39,4 +39,5 @@
 
 @section scripts {
     <script src="~/Scripts/MyScript/homescript.js"></script>
+    <script src="~/Scripts/MyScript/deliverscript.js"></script>
 }
