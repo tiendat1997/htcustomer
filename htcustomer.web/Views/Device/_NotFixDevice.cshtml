@@ -28,7 +28,7 @@
                     {
                         <tr>
                             <td>
-                                <button class="btn btn-success" data-toggle="popover" id="btn-open-popover" data-url=@Url.Action("AddToBillForm", "Device")><i class="fa fa-check"></i></button>
+                                <button class="btn btn-success" data-toggle="popover" id="btn-open-popover" data-transaction-id="@transaction.TransactionID" data-url=@Url.Action("GetBillForm", "Device")><i class="fa fa-check"></i></button>
                                 <button class="btn btn-danger"><i class="fa fa-stop"></i></button>
                             </td>
                             <td>
@@ -54,6 +54,7 @@
         </table>
     </div>
 </div>
+
 
 
 

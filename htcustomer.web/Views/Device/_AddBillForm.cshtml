@@ -1,17 +1,21 @@
-﻿<form>
-    <div class="expandable" data-count="1">
-        <div class="form-group">            
-            <input class="form-control" name="name[]" type="text" id="name[]" placeholder="Enter Description.">
-        </div>
-        <div class="form-group form-inline">           
-            <input class="form-control" type="number" placeholder="price" />
+﻿@model htcustomer.service.ViewModel.Device.PriceTransactionViewModel
+
+@using (Html.BeginForm("MakeAsFixDevice", "Device", FormMethod.Post, new { id = $"popover-{Model.TransactionID}" }))
+{
+    @Html.HiddenFor(m => m.TransactionID)
+    <div class="expandable" data-count="0">
+        <div class="form-group">
+            <input class="form-control" name="PriceList[0].Description" type="text" placeholder="Enter Description" required>
+            <input class="form-control" type="number" name="PriceList[0].Price" placeholder="price" required/>
+            <button class="btn btn-sm" id=@("remove-btn-0-" + Model.TransactionID) style="float: right"><i class="fa fa-remove"></i></button>
         </div>
     </div>
-    <button class="btn add-more" id="add-more" type="button">Add Item</button>
-
+    <button class="btn btn-sm btn-default" id=@("add-more-detail-" + Model.TransactionID) type="button"><i class="fa fa-plus"></i>&nbsp; Add Item</button>
     <hr />
     <div class="form-group">
-        <button type="button" class="btn btn-success">Save</button>
+        <input type="submit" class="btn btn-success" value="Save"/>
         <button type="button" class="btn btn-danger" data-dismiss="popover">Close</button>
     </div>
-</form>
+}
+
+

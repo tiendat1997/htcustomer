@@ -1,10 +1,12 @@
 ﻿using htcustomer.entity;
 using htcustomer.repository;
+using htcustomer.repository.UnitOfWork;
 using htcustomer.service.Enums;
 using htcustomer.service.Interfaces;
 using htcustomer.service.ViewModel;
 using htcustomer.service.ViewModel.Category;
 using htcustomer.service.ViewModel.Contact;
+using htcustomer.service.ViewModel.Device;
 using htcustomer.service.ViewModel.Transaction;
 using System;
 using System.Collections.Generic;
@@ -20,25 +22,29 @@ namespace htcustomer.service.Implements
         private readonly IRepository<TblCustomer> customerRepository;
         private readonly IRepository<TblCategory> categoryRepository;
         private readonly IRepository<TblDetailPrice> priceDetailRepository;
-
+        private readonly IUnitOfWork unitOfWork;
 
         public TransactionService(
             IRepository<TblTransaction> _transactionRepository,
             IRepository<TblCustomer> _customerRepository,
             IRepository<TblCategory> _categoryRepository,
-            IRepository<TblDetailPrice> _priceDetailRepository)
+            IRepository<TblDetailPrice> _priceDetailRepository,
+            IUnitOfWork _unitOfWork
+            )
         {
             transactionRepository = _transactionRepository;
             customerRepository = _customerRepository;
             categoryRepository = _categoryRepository;
             priceDetailRepository = _priceDetailRepository;
+            unitOfWork = _unitOfWork;
         }
 
         public bool Add(TransactionViewModel transaction)
         {
             if (transaction != null)
             {
-                transactionRepository.Insert(new TblTransaction() {
+                transactionRepository.Insert(new TblTransaction()
+                {
                     CustomerID = transaction.Customer.CustomerID,
                     Delivered = false,
                     Description = transaction.Description,
@@ -83,28 +89,34 @@ namespace htcustomer.service.Implements
 
         public bool FixedTransaction(int transactionID, IEnumerable<PriceDetailViewModel> priceDetails)
         {
-            var transaction = transactionRepository.GetByID(transactionID);
-            if (transaction != null)
+            try
             {
-                if (priceDetails != null || priceDetails.Count() > 0)
+                var transaction = transactionRepository.GetByID(transactionID);
+                if (transaction != null)
                 {
-                    foreach (var priceDetail in priceDetails)
+                    if (priceDetails != null || priceDetails.Count() > 0)
                     {
-                        priceDetailRepository.Insert(new TblDetailPrice()
+                        foreach (var priceDetail in priceDetails)
                         {
-                            Description = priceDetail.Description,
-                            Price = priceDetail.Price,
-                            TransactionID = priceDetail.TransactionID
-                        });
-                        transaction.Price = priceDetails.Sum(x => x.Price);
+                            priceDetailRepository.Insert(new TblDetailPrice()
+                            {
+                                Description = priceDetail.Description,
+                                Price = priceDetail.Price,
+                                TransactionID = transactionID
+                            });
+                            transaction.Price = priceDetails.Sum(x => x.Price);
+                        }
                     }
-                }
-                transaction.StatusID = (int)TransactionStatus.Fixed;
-                transactionRepository.Edit(transaction);
-                transactionRepository.Save();
-                return true;
+                    transaction.StatusID = (int)TransactionStatus.Fixed;
+                    transactionRepository.Edit(transaction);
+                    unitOfWork.Save();
+                    return true;
+                }                
             }
-            
+            catch (Exception ex)
+            {
+                throw new Exception("Error during check fixed transaction");
+            }
             return false;
         }
 
@@ -148,9 +160,9 @@ namespace htcustomer.service.Implements
         public TransactionListViewModel GetListTransaction(TransactionStatus? status = null, int? month = null, int? year = null, int? categoryId = null)
         {
             var transactions = transactionRepository.Gets();
-            if(status != null)
+            if (status != null)
             {
-                if(status != TransactionStatus.Delivered)
+                if (status != TransactionStatus.Delivered)
                 {
                     transactions = transactions.Where(t => t.StatusID == (int)status && t.Delivered == false);
                 }
@@ -171,7 +183,7 @@ namespace htcustomer.service.Implements
             {
                 transactions = transactions.Where(t => t.TypeID == categoryId);
             }
-            
+
             var result = new TransactionListViewModel
             {
                 Status = status,
@@ -248,6 +260,22 @@ namespace htcustomer.service.Implements
                 FixedTransactions = transactions.Where(t => t.Status == TransactionStatus.Fixed).ToList(),
                 NotFixTransactions = transactions.Where(t => t.Status == TransactionStatus.NotFix).ToList()
             };
+        }
+
+        public PriceTransactionViewModel GetTransactionToAddPrice(int transactionId)
+        {
+            var result = new PriceTransactionViewModel
+            {
+                TransactionID = transactionId,
+                PriceList = priceDetailRepository.Gets()
+                    .Where(item => item.TransactionID == transactionId)
+                    .Select(item => new PriceDetailViewModel
+                    {
+                        Price = item.Price ?? 0,
+                        Description = item.Description
+                    })
+            };
+            return result;
         }
     }
 }

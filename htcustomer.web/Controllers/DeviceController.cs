@@ -1,6 +1,8 @@
 ﻿using htcustomer.service.Enums;
 using htcustomer.service.Helper;
 using htcustomer.service.Interfaces;
+using htcustomer.service.ViewModel.Device;
+using htcustomer.service.ViewModel.Transaction;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +29,7 @@ namespace htcustomer.web.Controllers
         }
 
         public ActionResult FilterTransaction(int statusId = (int)TransactionStatus.NotFix, int? month = null, int? year = null, int? categoryId = null) {
+
             var viewModel = transactionService.GetListTransaction((TransactionStatus)statusId, month, year, categoryId);
 
             if (statusId == (int)TransactionStatus.NotFix) return PartialView("_NotFixDevice", viewModel.Transactions);
@@ -48,9 +51,27 @@ namespace htcustomer.web.Controllers
             return PartialView("_DeviceFilter");
         }
 
-        public ActionResult AddToBillForm()
+        public ActionResult GetBillForm(int transactionId)
         {
-            return PartialView("_AddBillForm");
+            var result = transactionService.GetTransactionToAddPrice(transactionId);
+            return PartialView("_AddBillForm", result);
+        }
+        [HttpPost]
+        public ActionResult MakeAsFixDevice(PriceTransactionViewModel model)
+        {
+            bool result;
+            try
+            {
+                result = transactionService.FixedTransaction(model.TransactionID, model.PriceList);
+                if (result == false)
+                    return Json(new JsonMessage() { Status = JsonResultStatus.Fail, Message = "Fix action is unsuccessful" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new JsonMessage() { Status = JsonResultStatus.Fail, Message = "Fix action is unsuccessful" });
+            }
+
+            return Json(new JsonMessage() { Status = JsonResultStatus.Success, Message = "Fix action is successful" });            
         }
 
         public JsonResult DeliverTransaction(int transactionId)

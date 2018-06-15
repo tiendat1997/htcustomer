@@ -20,6 +20,7 @@
         },
     }).done(function (result) {
         $(replacedContent).replaceWith(result);
+        initPopover();
     });
 }
 
@@ -49,8 +50,43 @@ function loadCategoryList() {
 function DeliverTransaction() {
 
 }
+function reIndexPriceDetail(currentWrapper) {
+    $(currentWrapper).children(".form-group").toArray().forEach(function (group, index) {        
+        $($(group).children(".form-control")[0]).attr("name", "PriceList["+ index +"].Description");
+        $($(group).children(".form-control")[1]).attr("name", "PriceList["+ index +"].Price")
+    });
+}
+function removePriceDetail(btn) {
+
+    var parentForm = $(btn).parents("form");
+    var priceWrapper = $(parentForm).find('.expandable');
+    var currentDiv = $(btn).parents(".form-group");
+    var count = $(priceWrapper).data('count');
+    
+    if (count == 0) return;
+
+    $(currentDiv).remove();
+    $(priceWrapper).data('count', count - 1);
+    reIndexPriceDetail(priceWrapper);
+}
+
+function newPriceDetials(index) {
+    var formGroup = $("<div class='form-group'></div>");
+    var description = $(`<input class="form-control" name="PriceList[${index}].Description" type="text" placeholder="Enter Description" required/>`);
+    var price = $(`<input class="form-control" name="PriceList[${index}].Price" type="Number" placeholder="price" required/>`);
+    var deleteBtn = $(`<button class='btn btn-sm' style='float: right'><i class='fa fa-remove'></i></button>`);
+    $(deleteBtn).on('click', function (e) {
+        e.preventDefault();        
+        removePriceDetail(this);
+    });
+    formGroup.append(description).append(price).append(deleteBtn);
+    return formGroup;
+}
+
+
 
 $(function () {
+    initPopover();   
     // load all category 
     loadCategoryList();
 
@@ -96,36 +132,91 @@ $(function () {
     });
 });
 
-$(function () {
-    $('[data-toggle="popover"]').each(function (e) {      
-        var button = $(this);       
 
-        button.popover({
+function addListenerInPopover(caller) {
+    var transactionId = $(caller).data("transaction-id");
+    var currentTransaction = $(caller).closest("tr");
+
+    $(`#add-more-detail-${transactionId}`).on('click', function (e) {
+        var btn = $(this);
+        var parentDiv = $(btn).parents('form').find('.expandable');
+        var count = $(parentDiv).data('count');
+        var priceDetail = newPriceDetials(count + 1);
+        parentDiv.append(priceDetail);
+        $(parentDiv).data('count', count + 1);
+    });
+
+    $(`#popover-${transactionId}`).on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        var url = $(form).attr("action");
+        var method = $(form).attr("method");
+        var data = $(form).serialize();
+
+        $.ajax({
+            url: url,
+            method: method,
+            cached: false,
+            data: data
+        }).done(function (data) {
+            if (data.Status === 'Success') {
+                toastr.success(data.Message);
+                $(currentTransaction).remove();
+                $(caller).popover("hide");
+            }
+            else {
+                toastr.error(data.Message);
+            }
+        });
+    });
+   
+}
+
+function initFirstPriceDetail(caller) {
+    var transactionId = $(caller).data('transaction-id');
+    var removeBtn = $(`#remove-btn-0-${transactionId}`);    
+    $(removeBtn).on('click', function (e) {
+        e.preventDefault();
+        removePriceDetail(this);
+    });
+}
+
+function initPopover() {    
+
+    $('[data-toggle="popover"]').each(function (e) {
+        var caller = $(this);
+
+        caller.popover({
             content: function () {
                 var urlAction = $(this).data("url");
+                var transactionId = $(this).data('transaction-id');
                 var content = '';
                 $.ajax({
                     url: urlAction,
                     method: 'GET',
                     cache: false,
                     async: false,
-                    data: {}
+                    data: { 'transactionId': transactionId }
                 }).done(function (result) {
-                    content = result;
+                    content = result;                    
                 });
                 return content;
             },
             html: true,
             trigger: 'click',
-            title: 'Price Details: Device_Name'
-        }).on('shown.bs.popover', function (e) {          
-            button.data('bs.popover').tip().find('[data-dismiss="popover"]').on('click', function (e) {
-                button.popover('hide');     
-                button.data("bs.popover").inState.click = false;
+            title: 'Price Details'
+        }).on('shown.bs.popover', function (e) {
+            caller.data('bs.popover').tip().find('[data-dismiss="popover"]').on('click', function (e) {
+                caller.popover('hide');
+                caller.data("bs.popover").inState.click = false;
             });
+            addListenerInPopover(caller);
+            initFirstPriceDetail(caller);
         });
-    }); 
-});
+    });
+}
+
+
 
 
 

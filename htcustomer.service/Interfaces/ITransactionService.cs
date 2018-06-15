@@ -1,6 +1,7 @@
 ﻿using htcustomer.service.Enums;
 using htcustomer.service.ViewModel;
 using htcustomer.service.ViewModel.Contact;
+using htcustomer.service.ViewModel.Device;
 using htcustomer.service.ViewModel.Transaction;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace htcustomer.service.Interfaces
         bool CannotFixTransaction(int transactionID, string reason = "");
         bool DeliverTransaction(int transactionID);
         bool Add(TransactionViewModel transaction);
+        PriceTransactionViewModel GetTransactionToAddPrice(int transactionId);
 
     }
 }
