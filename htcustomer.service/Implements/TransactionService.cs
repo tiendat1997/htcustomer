@@ -61,14 +61,21 @@ namespace htcustomer.service.Implements
 
         public bool CannotFixTransaction(int transactionID, string reason = "")
         {
-            var transaction = transactionRepository.GetByID(transactionID);
-            if (transaction != null)
+            try
             {
-                transaction.StatusID = (int)TransactionStatus.CannotFix;
-                transaction.Reason = reason;
-                transactionRepository.Edit(transaction);
-                transactionRepository.Save();
-                return true;
+                var transaction = transactionRepository.GetByID(transactionID);
+                if (transaction != null)
+                {
+                    transaction.StatusID = (int)TransactionStatus.CannotFix;
+                    transaction.Reason = reason;
+                    transactionRepository.Edit(transaction);
+                    unitOfWork.Save();
+                    return true;
+                }                
+            }
+            catch(Exception ex)
+            {
+                return false;
             }
             return false;
         }

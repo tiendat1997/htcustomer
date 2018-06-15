@@ -71,8 +71,23 @@ namespace htcustomer.web.Controllers
                 return Json(new JsonMessage() { Status = JsonResultStatus.Fail, Message = "Fix action is unsuccessful" });
             }
 
-            return Json(new JsonMessage() { Status = JsonResultStatus.Success, Message = "Fix action is successful" });            
+            return Json(new JsonMessage() { Status = JsonResultStatus.Success, Message = "Fix action is successful" });
         }
+        public ActionResult GetReasonForm(int transactionId)
+        {
+            return PartialView("_AddReason", transactionId);
+        }
+        [HttpPost] 
+        public ActionResult AddReasonForCannotFix(int transactionId, string reason)
+        {
+            bool result = transactionService.CannotFixTransaction(transactionId, reason);
+            if (result == false)
+            {
+                return Json(new JsonMessage { Status = JsonResultStatus.Fail, Message = "Something went wrong with adding description"});
+            }
+            return Json(new JsonMessage { Status = JsonResultStatus.Success, Message = "Add reason succesfully"});
+        }
+      
 
         public JsonResult DeliverTransaction(int transactionId)
         {

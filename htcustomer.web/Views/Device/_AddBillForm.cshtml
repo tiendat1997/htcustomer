@@ -1,6 +1,6 @@
 ﻿@model htcustomer.service.ViewModel.Device.PriceTransactionViewModel
 
-@using (Html.BeginForm("MakeAsFixDevice", "Device", FormMethod.Post, new { id = $"popover-{Model.TransactionID}" }))
+@using (Html.BeginForm("MakeAsFixDevice", "Device", FormMethod.Post, new { id = $"popover-fix-{Model.TransactionID}" }))
 {
     @Html.HiddenFor(m => m.TransactionID)
     <div class="expandable" data-count="0">
