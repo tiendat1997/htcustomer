@@ -20,9 +20,9 @@
                 <tbody>
                     @foreach (var transaction in Model["FIXED"])
                     {
-                        <tr class="fixed-status">
+                        <tr class="fixed-status" id="transaction-detail-@transaction.TransactionID">
                             <td>
-                                <button class="btn btn-sm btn-success"><i class="fa fa-sm fa-send"></i></button>
+                                <button class="btn btn-sm btn-success btn-deliver-transaction" data-id="@transaction.TransactionID" data-url="@Url.Action("DeliverTransaction","Device",new { transactionId=transaction.TransactionID, getTransactionRow = true})"><i class="fa fa-sm fa-send"></i></button>
                             </td>
                             <td>
                                 <p>@transaction.Category.Name</p>
@@ -59,12 +59,12 @@
 
                     @foreach (var transaction in Model["CANNOTFIX"])
                     {
-                        <tr class="cannotfix-status">
+                        <tr class="cannotfix-status" id="transaction-detail-@transaction.TransactionID">
                             <td>
-                                <button class="btn btn-sm btn-danger"><i class="fa fa-sm fa-send"></i></button>
+                                <button class="btn btn-sm btn-danger btn-deliver-transaction" data-id="@transaction.TransactionID" data-url="@Url.Action("DeliverTransaction","Device",new { transactionId=transaction.TransactionID, getTransactionRow = true})"><i class="fa fa-sm fa-send"></i></button>
                             </td>
                             <td>
-                                <p>@transaction.Category</p>
+                                <p>@transaction.Category.Name</p>
                                 <p>@transaction.Description</p>
                             </td>
                             <td>

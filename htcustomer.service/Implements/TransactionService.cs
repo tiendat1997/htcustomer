@@ -80,7 +80,7 @@ namespace htcustomer.service.Implements
             return false;
         }
 
-        public bool DeliverTransaction(int transactionID)
+        public TransactionViewModel DeliverTransaction(int transactionID)
         {
             var transaction = transactionRepository.GetByID(transactionID);
             if (transaction != null)
@@ -89,9 +89,27 @@ namespace htcustomer.service.Implements
                 transaction.DeliverDate = DateTime.Now;
                 transactionRepository.Edit(transaction);
                 transactionRepository.Save();
-                return true;
+                return new TransactionViewModel() {
+                    TransactionID = transaction.TransactionID,
+                    Status = (TransactionStatus)transaction.StatusID,
+                    Category = new CategoryViewModel()
+                    {
+                        CategoryID = transaction.TblCategory.CategoryID,
+                        Name = transaction.TblCategory.Name
+                    },
+                    Error = transaction.Error,
+                    RecievedDate = transaction.RecievedDate,
+                    DeliveredDate = transaction.DeliverDate,
+                    Price = transaction.Price,
+                    ListPriceDetail = transaction.TblDetailPrices.Select(p => new PriceDetailViewModel()
+                    {
+                        TransactionID = p.TransactionID.HasValue ? p.TransactionID.Value : 0 ,
+                        Description = p.Description,
+                        Price = p.Price.HasValue ? p.Price.Value : 0
+                    })
+                };
             }
-            return false;
+            return null;
         }
 
         public bool FixedTransaction(int transactionID, IEnumerable<PriceDetailViewModel> priceDetails)
@@ -158,7 +176,13 @@ namespace htcustomer.service.Implements
                                 Error = t.Error,
                                 Delivered = t.Delivered,
                                 Price = t.Price,
-                                Reason = t.Reason
+                                Reason = t.Reason,
+                                ListPriceDetail = t.TblDetailPrices.Select(p => new PriceDetailViewModel()
+                                {
+                                    TransactionID = p.TransactionID.HasValue ? p.TransactionID.Value : 0,
+                                    Description = p.Description,
+                                    Price = p.Price.HasValue ? p.Price.Value : 0
+                                })
                             }),
             };
             return model;

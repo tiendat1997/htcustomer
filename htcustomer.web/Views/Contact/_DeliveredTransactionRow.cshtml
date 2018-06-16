@@ -1,0 +1,26 @@
+﻿@model htcustomer.service.ViewModel.Transaction.TransactionViewModel
+<tr>
+    <td>
+        @Model.Status
+    </td>
+    <td>
+        <p>@Model.Category.Name</p>
+        <p>@Model.Description</p>
+    </td>
+    <td>
+        <p>@Model.Error</p>
+    </td>
+    <td>
+        @Model.RecievedDate.Value.ToString("dd/MM/yyyy")
+    </td>
+    <td>
+        @Model.DeliveredDate.Value.ToString("dd/MM/yyyy")
+    </td>
+    <td>
+        @Model.Price
+        @Html.Partial("_DetailPriceTransaction", Model.ListPriceDetail)
+    </td>
+    <td>
+        @Model.Reason
+    </td>
+</tr>

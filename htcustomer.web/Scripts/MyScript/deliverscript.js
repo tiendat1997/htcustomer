@@ -7,15 +7,26 @@
             url: url,
             cache: false
         }).done(function (data) {
-            if (data.Status === "Success") {
+            if (data.Status === "Failure") {
+                toastr.error(data.Message);
+            } else {
                 var $transaction = $("#transaction-detail-" + id);
                 var $count = $transaction.closest(".panel").find(".badge");
                 var currentCount = parseInt($count.html());
                 $count.html(currentCount - 1);
                 $transaction.remove();
-                toastr.success(data.Message);
-            } else {
-                toastr.error(data.Message);
+                if (data.Status === "Success") {
+                    toastr.success(data.Message);
+                }
+                if (data.Status == null || data.Status == undefined) {
+                    console.log(data);
+                    $("#delivered-panel").find("tbody").append(data);
+                    var $count = $("#delivered-panel").closest(".panel").find(".badge");
+                    var currentCount = parseInt($count.html());
+                    $count.html(currentCount + 1);
+                    toastr.success("Success");
+                }
+                
             }
         });
     });

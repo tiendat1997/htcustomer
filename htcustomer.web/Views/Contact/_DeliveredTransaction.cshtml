@@ -14,32 +14,13 @@
                     <th>Receive</th>
                     <th>Deliver</th>
                     <th>Price</th>
+                    <th>Note</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var transaction in Model)
                 {
-                    <tr>
-                        <td>
-                            @transaction.Status
-                        </td>
-                        <td>
-                            <p>@transaction.Category.Name</p>
-                            <p>@transaction.Description</p>
-                        </td>
-                        <td>
-                            <p>@transaction.Error</p>
-                        </td>
-                        <td>
-                            @transaction.RecievedDate.Value.ToString("dd/MM/yyyy")
-                        </td>
-                        <td>
-                            @transaction.DeliveredDate.Value.ToString("dd/MM/yyyy")
-                        </td>
-                        <td>
-                            @transaction.Price
-                        </td>
-                    </tr>
+                    @Html.Partial("_DeliveredTransactionRow", transaction);
                 }
             </tbody>
         </table>

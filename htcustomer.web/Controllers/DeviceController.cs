@@ -89,12 +89,19 @@ namespace htcustomer.web.Controllers
         }
       
 
-        public JsonResult DeliverTransaction(int transactionId)
+        public ActionResult DeliverTransaction(int transactionId, bool getTransactionRow = false)
         {
-            bool result = transactionService.DeliverTransaction(transactionId);
-            if (result)
+            TransactionViewModel result = transactionService.DeliverTransaction(transactionId);
+            if (result != null)
             {
-                return Json(new JsonMessage() { Status = JsonResultStatus.Success, Message = "Deliver Success" }, JsonRequestBehavior.AllowGet);
+                if (!getTransactionRow)
+                {
+                    return Json(new JsonMessage() { Status = JsonResultStatus.Success, Message = "Deliver Success" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return PartialView("~/Views/Contact/_DeliveredTransactionRow.cshtml", result);
+                }
             }
             return Json(new JsonMessage() { Status = JsonResultStatus.Fail, Message = "Deliver Fail!" }, JsonRequestBehavior.AllowGet);
         }
