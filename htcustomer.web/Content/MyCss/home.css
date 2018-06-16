@@ -171,3 +171,10 @@
 #add-customer-btn:hover {
     font-size: x-large;
 }
+
+
+.popover {
+    top: -5px !important;
+    left: -125.25px !important;
+}
+

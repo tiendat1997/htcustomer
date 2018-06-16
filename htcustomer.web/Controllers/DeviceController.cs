@@ -57,8 +57,9 @@ namespace htcustomer.web.Controllers
             return PartialView("_AddBillForm", result);
         }
         [HttpPost]
-        public ActionResult MakeAsFixDevice(PriceTransactionViewModel model)
+        public ActionResult MakeAsFixDevice(PriceTransactionViewModel model, bool? callFromHome = false)
         {
+
             bool result;
             try
             {
@@ -104,6 +105,6 @@ namespace htcustomer.web.Controllers
                 }
             }
             return Json(new JsonMessage() { Status = JsonResultStatus.Fail, Message = "Deliver Fail!" }, JsonRequestBehavior.AllowGet);
-        }
+        }        
     }
 }

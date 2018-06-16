@@ -3,12 +3,13 @@
 <div class="list-group-item" style="position: relative" id="transaction-detail-@Model.TransactionID">
     <div class="panel">
         <div class="panel-heading">
-            <div class="col-md-6">
-                <div>@Model.Category.Name</div>
-                <div>@Model.Customer.Name - (@Model.Customer.Phone)</div>
+            <div class="col-md-8">
+                <div><i class="fa fa-tag"></i>&nbsp;&nbsp;@Model.Category.Name</div>
+                <div><i class="fa fa-address-book"></i>&nbsp;&nbsp;@Model.Customer.Name</div>
+                <div><i class="fa fa-phone"></i>&nbsp;&nbsp;@Model.Customer.Phone</div>
                 <hr />
             </div>
-            <div class="col-md-6 text-right">
+            <div class="col-md-4 text-right">
                 <button class="btn btn-sm btn-danger btn-deliver-transaction" data-id="@Model.TransactionID" data-url="@Url.Action("DeliverTransaction","Device",new { transactionId=Model.TransactionID})"><i class="fa fa-send"></i></button>
             </div>
         </div>

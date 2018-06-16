@@ -187,6 +187,7 @@ namespace htcustomer.service.Implements
             };
             return model;
         }
+        
 
         public TransactionListViewModel GetListTransaction(TransactionStatus? status = null, int? month = null, int? year = null, int? categoryId = null)
         {
@@ -251,6 +252,7 @@ namespace htcustomer.service.Implements
 
             return result;
         }
+        
 
         public TransactionListHomeViewModel GetListTransactionHome()
         {
@@ -291,6 +293,39 @@ namespace htcustomer.service.Implements
                 FixedTransactions = transactions.Where(t => t.Status == TransactionStatus.Fixed).ToList(),
                 NotFixTransactions = transactions.Where(t => t.Status == TransactionStatus.NotFix).ToList()
             };
+        }
+        public TransactionHomeViewModel GetTransactionToReload(int transactionId)
+        {
+            var transaction = transactionRepository
+                                .Gets()
+                                .Where(tran => tran.TransactionID == transactionId)
+                                .Select(t => new TransactionHomeViewModel
+                                {
+                                    TransactionID = t.TransactionID,
+                                    Category = new CategoryViewModel()
+                                    {
+                                        CategoryID = t.TblCategory.CategoryID,
+                                        Name = t.TblCategory.Name
+                                    },
+                                    Customer = new CustomerViewModel()
+                                    {
+                                        CustomerID = t.TblCustomer.CustomerID,
+                                        Name = t.TblCustomer.Name,
+                                        Phone = t.TblCustomer.Phone
+                                    },
+                                    Error = t.Error,
+                                    Price = t.Price ?? 0,
+                                    Status = (TransactionStatus)t.StatusID,
+                                    DeviceDescription = t.Description,
+                                    CannotFixNote = t.Reason,
+                                    ListPriceDetail = t.TblDetailPrices.Select(p => new PriceDetailViewModel()
+                                    {
+                                        TransactionID = p.TransactionID.Value,
+                                        Description = p.Description,
+                                        Price = p.Price.Value
+                                    })
+                                }).FirstOrDefault();                                                    
+            return transaction;                                
         }
 
         public PriceTransactionViewModel GetTransactionToAddPrice(int transactionId)

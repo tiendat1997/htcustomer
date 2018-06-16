@@ -63,7 +63,7 @@ function removePriceDetail(btn) {
     var currentDiv = $(btn).parents(".form-group");
     var count = $(priceWrapper).data('count');
 
-    if (count == 0) return;
+    if (count === 0) return;
 
     $(currentDiv).remove();
     $(priceWrapper).data('count', count - 1);
@@ -163,9 +163,7 @@ function addListnerPopoverForCannotFix(caller) {
         var form = this;
         var url = $(form).attr("action");
         var method = $(form).attr("method");
-        var data = $(form).serialize();
-        console.log(url);
-        console.log(data);
+        var data = $(form).serialize();       
 
         $.ajax({
             url: url,

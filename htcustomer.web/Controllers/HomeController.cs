@@ -92,5 +92,11 @@ namespace htcustomer.web.Controllers
 
             return PartialView("_NewTransaction", transaction);
         }
+        public ActionResult GetTransactionPartial(int transactionId, TransactionStatus status)
+        {
+            var viewModel = transactionService.GetTransactionToReload(transactionId);
+            string partialName = (status == TransactionStatus.CannotFix) ? "_CannotFixTransaction" : "_FixedTransaction";
+            return PartialView(partialName, viewModel);
+        }
     }
 }
