@@ -114,15 +114,13 @@ div.btn-group {
 
 /* Device List */
 .list-container {
-    max-height: 50vh;
+    max-height: 55vh;
     display: block;
     overflow-y: scroll;
 }
 
-label.device-title {
-    color: #666694;
-    font-size: 25px;
-    padding: 0;
+.list-group-item .device-title {    
+    font-size: 18px;    
 }
 
 .list-group-item > .btn-action {
