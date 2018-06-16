@@ -5,8 +5,8 @@
         <div class="panel-heading">
             <div class="col-md-8">
                 <div class="device-title">@Model.Category.Name</div>
-                <div class="device-title">@Model.Customer.Name</div>
-                <div>@Model.Customer.Phone</div>                
+                @Html.ActionLink(Model.Customer.Name, "Index", "Contact", new { customerID = Model.Customer.CustomerID }, new { @class = "device-title" })
+                <div>@Model.Customer.Phone</div>
                 <hr />
             </div>
             
