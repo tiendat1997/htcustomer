@@ -420,6 +420,9 @@
     <Content Include="Views\Home\_CannotFixTransaction.cshtml" />
     <Content Include="Views\Device\_AddReason.cshtml" />
     <Content Include="Views\Contact\_DeliveredTransactionRow.cshtml" />
+    <Content Include="Views\Contact\_NotFixTransactionRow.cshtml" />
+    <Content Include="Views\Contact\_FixedTransactionRow.cshtml" />
+    <Content Include="Views\Contact\_CannotFixTransactionRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

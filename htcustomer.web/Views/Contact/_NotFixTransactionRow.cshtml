@@ -1,0 +1,18 @@
+﻿@model htcustomer.service.ViewModel.Transaction.TransactionViewModel
+<tr class="notfix-status">
+    <td>
+        <button class="btn btn-sm btn-success"><i class="fa fa-sm fa-check"></i></button>
+        <br /><br />
+        <button class="btn btn-sm btn-danger"><i class="fa fa-sm fa-recycle"></i></button>
+    </td>
+    <td>
+        <p>@Model.Category.Name</p>
+        <p>@Model.Description</p>
+    </td>
+    <td>
+        <p>@Model.Error</p>
+    </td>
+    <td>
+        @Model.RecievedDate.Value.ToString("dd/MM/yyyy")
+    </td>
+</tr>

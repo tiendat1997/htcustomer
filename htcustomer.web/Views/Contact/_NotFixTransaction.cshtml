@@ -17,23 +17,7 @@
             <tbody>
                 @foreach (var transaction in Model)
                 {
-                    <tr class="notfix-status">
-                        <td>
-                            <button class="btn btn-sm btn-success"><i class="fa fa-sm fa-check"></i></button>
-                            <br /><br />
-                            <button class="btn btn-sm btn-danger"><i class="fa fa-sm fa-recycle"></i></button>
-                        </td>
-                        <td>
-                            <p>@transaction.Category.Name</p>
-                            <p>@transaction.Description</p>
-                        </td>
-                        <td>
-                            <p>@transaction.Error</p>
-                        </td>
-                        <td>
-                            @transaction.RecievedDate.Value.ToString("dd/MM/yyyy")
-                        </td>
-                    </tr>
+                    @Html.Partial("_NotFixTransactionRow",transaction)
                 }
 
             </tbody>

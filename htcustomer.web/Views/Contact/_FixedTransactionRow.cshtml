@@ -1,0 +1,20 @@
+﻿@model htcustomer.service.ViewModel.Transaction.TransactionViewModel
+
+<tr class="fixed-status" id="transaction-detail-@Model.TransactionID">
+    <td>
+        <button class="btn btn-sm btn-success btn-deliver-transaction" data-id="@Model.TransactionID" data-url="@Url.Action("DeliverTransaction","Device",new { transactionId=Model.TransactionID, getTransactionRow = true})"><i class="fa fa-sm fa-send"></i></button>
+    </td>
+    <td>
+        <p>@Model.Category.Name</p>
+        <p>@Model.Description</p>
+    </td>
+    <td>
+        <p>@Model.Error</p>
+    </td>
+    <td>
+        @Model.RecievedDate.Value.ToString("dd/MM/yyyy")
+    </td>
+    <td>
+        <p>@Model.Price</p>
+    </td>
+</tr>
