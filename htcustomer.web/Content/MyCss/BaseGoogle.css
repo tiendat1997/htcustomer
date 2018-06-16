@@ -127,21 +127,23 @@ label.device-title {
     padding: 0;
 }
 
-.list-group-item-heading {
+.list-group-item > .btn-action {
+  display:inline-block;
+}
+.list-group-item div[class^='col-'], .list-group-item div[class^='panel-'] {
+    padding-right: 0;
+    padding-left: 0;    
+}
+.list-group-item hr {
+    margin: 5px 0 !important;
+}
+.list-group-item div[class='panel']{
+    margin-bottom: 0 !important;
 }
 
-.list-group-item > .btn-action {
-    right: 0;
-    position: absolute;
-    top: 0;
-}
 
 label.device-error, label.device-description, label.device-price, label.device-note {
     font-size: 15px;
-}
-
-.seperator-device {
-    margin: 10px auto;
 }
 
 label.device-error {

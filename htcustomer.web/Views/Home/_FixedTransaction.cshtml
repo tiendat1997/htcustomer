@@ -1,28 +1,38 @@
 ﻿@model htcustomer.service.ViewModel.Transaction.TransactionHomeViewModel
 
-<div class="list-group-item" style="position: relative" id="transaction-detail-@Model.TransactionID">
-    <button class="btn btn-sm btn-success btn-action btn-deliver-transaction" data-id="@Model.TransactionID" data-url="@Url.Action("DeliverTransaction","Device",new { transactionId=Model.TransactionID})"><i class="fa fa-send"></i></button>
-    <h5 class="list-group-item-heading">
-        <label class="label device-title">@Model.Category.Name</label>
-        <a href="#" data-placement="bottom" data-toggle="tooltip" title="@Model.Customer.Phone">@Model.Customer.Name</a>
-        <hr class="seperator-device" />
-    </h5>
-    <div class="list-group-item-text">
-        <label class="label device-price">Price</label>
-
-        <a data-toggle="collapse" data-target="#1-price"><b>@Model.Price</b></a>
-        <div id="1-price" class="collapse">
-            @Html.Partial("_DetailPriceTransaction", Model.ListPriceDetail)
+<div class="list-group-item" id="transaction-detail-@Model.TransactionID">
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="col-md-6">
+                <div>@Model.Category.Name</div>
+                <div>@Model.Customer.Name - (@Model.Customer.Phone)</div>
+                <hr />
+            </div>            
+            <div class="col-md-6 text-right">
+                <button class="btn btn-sm btn-success btn-deliver-transaction" data-id="@Model.TransactionID" data-url="@Url.Action("DeliverTransaction","Device",new { transactionId=Model.TransactionID})"><i class="fa fa-send"></i></button>
+            </div>
         </div>
-        <br />
-
-        <label class="label device-description">Description</label>
-        <ul>
-            <li>
-                <p>@Model.DeviceDescription</p>
-            </li>
-        </ul>
-
-    </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <i class="fa fa-money"></i>
+                </div>
+                <div class="col-md-10">
+                    <a data-toggle="collapse" data-target="#price-details"><b>@Model.Price</b></a>
+                    <div id="price-details" class="collapse">
+                        @Html.Partial("_DetailPriceTransaction", Model.ListPriceDetail)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-2"><i class="fa fa-bug"></i></div>
+                <div class="col-md-10">@Model.Error</div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-2"><i class="fa fa-sticky-note"></i></div>
+                <div class="col-md-10">@Model.DeviceDescription</div>
+            </div>
+        </div>
+    </div>        
 </div>
 

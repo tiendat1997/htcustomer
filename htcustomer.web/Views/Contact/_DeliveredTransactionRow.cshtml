@@ -18,7 +18,11 @@
     </td>
     <td>
         @Model.Price
-        @Html.Partial("_DetailPriceTransaction", Model.ListPriceDetail)
+        @if (Model.ListPriceDetail != null)
+        {
+            @Html.Partial("_DetailPriceTransaction", Model.ListPriceDetail)
+        }
+
     </td>
     <td>
         @Model.Reason
