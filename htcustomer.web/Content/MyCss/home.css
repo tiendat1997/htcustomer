@@ -173,8 +173,12 @@
 }
 
 
-.popover {
-    top: -5px !important;
-    left: -125.25px !important;
+
+@media (min-width: 992px) {
+    .popover {
+        top: -5px !important;
+        left: -125.25px !important;
+    } 
 }
+
 
