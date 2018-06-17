@@ -294,6 +294,34 @@ namespace htcustomer.service.Implements
                 NotFixTransactions = transactions.Where(t => t.Status == TransactionStatus.NotFix).ToList()
             };
         }
+        public TransactionViewModel GetTransactionToReloadContact(int transactionId)
+        {
+            var transaction = transactionRepository
+                                    .Gets()
+                                    .Where(tran => tran.TransactionID == transactionId)
+                                    .Select(t => new TransactionViewModel
+                                    {
+                                        TransactionID = t.TransactionID,
+                                        Status = (TransactionStatus)t.StatusID,
+                                        Category = new CategoryViewModel()
+                                        {
+                                            CategoryID = t.TblCategory.CategoryID,
+                                            Name = t.TblCategory.Name
+                                        },
+                                        Error = t.Error,
+                                        RecievedDate = t.RecievedDate,
+                                        DeliveredDate = t.DeliverDate,
+                                        Price = t.Price,
+                                        ListPriceDetail = t.TblDetailPrices.Select(p => new PriceDetailViewModel()
+                                        {
+                                            TransactionID = p.TransactionID.HasValue ? p.TransactionID.Value : 0,
+                                            Description = p.Description,
+                                            Price = p.Price.HasValue ? p.Price.Value : 0
+                                        }),
+                                        Reason = t.Reason
+                                    }).FirstOrDefault();
+            return transaction;
+        }
         public TransactionHomeViewModel GetTransactionToReload(int transactionId)
         {
             var transaction = transactionRepository

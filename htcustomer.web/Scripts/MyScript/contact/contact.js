@@ -43,7 +43,189 @@ function initCollapse() {
     $('#notfix-panel').collapse();
     $('#waiting-panel').collapse();
 }
+// reload partial after change status from not fix panel
+function reloadPartial(targetId, transactionId, status) {
+    var target = $(targetId); // get the table
+    var url = $("#not-fix-table").data('reload-url');
+    var counter = $(targetId).closest(".panel").find('.badge');
+    var total = $(counter).text();
+    console.log("TOTAL: " + total);
+
+    $.ajax({
+        method: 'GET',
+        cached: false,
+        url: url,
+        data: {
+            transactionId: transactionId,
+            status: status
+        }
+    }).done(function (partial) {
+        console.log(partial);
+        $(target).append(partial);
+        $(counter).text(++total);
+    });
+}
+
+function reIndexPriceDetail(currentWrapper) {
+    $(currentWrapper).children(".form-group").toArray().forEach(function (group, index) {
+        $($(group).children(".form-control")[0]).attr("name", "PriceList[" + index + "].Description");
+        $($(group).children(".form-control")[1]).attr("name", "PriceList[" + index + "].Price")
+    });
+}
+
+function addListnerPopoverForCannotFix(caller) {
+    var transactionId = $(caller).data("transaction-id");
+    var currentTransaction = $(caller).closest("tr");
+
+    $(`#popover-cannotfix-${transactionId}`).on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        var url = $(form).attr("action");
+        var method = $(form).attr("method");
+        var data = $(form).serialize();
+
+        $.ajax({
+            url: url,
+            method: method,
+            cached: false,
+            data: data
+        }).done(function (data) {
+            if (data.Status === 'Success') {
+                toastr.success(data.Message);
+                $(currentTransaction).remove();
+                $(caller).popover("hide");
+                reloadPartial("#cannot-fix-table", transactionId, "CannotFix");
+            }
+            else {
+                toastr.error(data.Message);
+            }
+        });
+    });
+}
+
+function removePriceDetail(btn) {
+
+    var parentForm = $(btn).parents("form");
+    var priceWrapper = $(parentForm).find('.expandable');
+    var currentDiv = $(btn).parents(".form-group");
+    var count = $(priceWrapper).data('count');
+
+    if (count === 0) return;
+
+    $(currentDiv).remove();
+    $(priceWrapper).data('count', count - 1);
+    reIndexPriceDetail(priceWrapper);
+}
+
+function initFirstPriceDetail(caller) {
+    var transactionId = $(caller).data('transaction-id');
+    var removeBtn = $(`#remove-btn-0-${transactionId}`);
+    $(removeBtn).on('click', function (e) {
+        e.preventDefault();
+        removePriceDetail(this);
+    });
+}
+function newPriceDetials(index) {
+    var formGroup = $("<div class='form-group'></div>");
+    var description = $(`<input class="form-control" name="PriceList[${index}].Description" type="text" placeholder="Enter Description" required/>`);
+    var price = $(`<input class="form-control" name="PriceList[${index}].Price" type="Number" placeholder="price" required/>`);
+    var deleteBtn = $(`<button class='btn btn-sm' style='float: right'><i class='fa fa-remove'></i></button>`);
+    $(deleteBtn).on('click', function (e) {
+        e.preventDefault();
+        removePriceDetail(this);
+    });
+    formGroup.append(description).append(price).append(deleteBtn);
+    return formGroup;
+}
+
+
+function addListenerPopoverForFix(caller) {
+    var transactionId = $(caller).data("transaction-id");
+    var currentTransaction = $(caller).closest("tr");
+
+    $(`#add-more-detail-${transactionId}`).on('click', function (e) {
+        var btn = $(this);
+        var parentDiv = $(btn).parents('form').find('.expandable');
+        var count = $(parentDiv).data('count');
+        var priceDetail = newPriceDetials(count + 1);
+        parentDiv.append(priceDetail);
+        $(parentDiv).data('count', count + 1);
+    });
+
+    $(`#popover-fix-${transactionId}`).on('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        var url = $(form).attr("action");
+        var method = $(form).attr("method");
+        var data = $(form).serialize();
+
+        $.ajax({
+            url: url,
+            method: method,
+            cached: false,
+            data: data
+        }).done(function (data) {
+            if (data.Status === 'Success') {
+                toastr.success(data.Message);
+                $(currentTransaction).remove();
+                $(caller).popover("hide");
+                reloadPartial("#fixed-table", transactionId, "Fixed");
+            }
+            else {
+                toastr.error(data.Message);
+            }
+        });
+    });
+}
+
+function initPopover() {
+
+    $('[data-toggle="popover"]').each(function (e) {
+        var caller = $(this);
+        var action = $(caller).data('transaction-action');
+        var title = "Add Price Details"
+        if (action === 'cannot-fix') title = "Add Reason";
+
+
+        caller.popover({
+            content: function () {
+                var urlAction = $(this).data("url");
+                var transactionId = $(this).data('transaction-id');
+                var content = '';
+                $.ajax({
+                    url: urlAction,
+                    method: 'GET',
+                    cache: false,
+                    async: false,
+                    data: { 'transactionId': transactionId }
+                }).done(function (result) {
+                    content = result;
+                });
+                return content;
+            },
+            html: true,
+            trigger: 'click',
+            title: title
+        }).on('shown.bs.popover', function (e) {
+            caller.data('bs.popover').tip().find('[data-dismiss="popover"]').on('click', function (e) {
+                caller.popover('hide');
+                caller.data("bs.popover").inState.click = false;
+            });
+            if (action === 'fix') {
+                addListenerPopoverForFix(caller);
+                initFirstPriceDetail(caller);
+            }
+            else {
+                // cannot fix 
+                addListnerPopoverForCannotFix(caller);
+            }
+        });
+    });
+}
+
+
 $(function (e) {
+    initPopover();
     initCollapse();
     // custom validation message for form input
     //$("form input").on("invalid", function (e) {

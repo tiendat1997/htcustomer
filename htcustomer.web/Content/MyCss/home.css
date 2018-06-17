@@ -172,12 +172,14 @@
     font-size: x-large;
 }
 
+.popover {
+    top: -5px !important;
+    left: -125.25px !important;
+} 
 
-
-@media (min-width: 992px) {
+@media (max-width: 768px) {
     .popover {
-        top: -5px !important;
-        left: -125.25px !important;
+        left: 0 !important;
     } 
 }
 

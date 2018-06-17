@@ -1,9 +1,13 @@
 ﻿@model htcustomer.service.ViewModel.Transaction.TransactionViewModel
 <tr class="notfix-status">
     <td>
-        <button class="btn btn-sm btn-success"><i class="fa fa-sm fa-check"></i></button>
+        <button class="btn btn-success" data-transaction-action="fix" data-toggle="popover" data-transaction-id="@Model.TransactionID" data-url=@Url.Action("GetBillForm", "Device")>
+            <i class="fa fa-check"></i>
+        </button>
         <br /><br />
-        <button class="btn btn-sm btn-danger"><i class="fa fa-sm fa-recycle"></i></button>
+        <button class="btn btn-danger" data-transaction-action="cannot-fix" data-toggle="popover" data-transaction-id="@Model.TransactionID" data-url=@Url.Action("GetReasonForm", "Device")>
+            <i class="fa fa-stop"></i>
+        </button>
     </td>
     <td>
         <p>@Model.Category.Name</p>

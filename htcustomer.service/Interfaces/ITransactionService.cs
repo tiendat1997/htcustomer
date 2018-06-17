@@ -22,5 +22,6 @@ namespace htcustomer.service.Interfaces
         bool Add(TransactionViewModel transaction);
         PriceTransactionViewModel GetTransactionToAddPrice(int transactionId);
         TransactionHomeViewModel GetTransactionToReload(int transactionId);
+        TransactionViewModel GetTransactionToReloadContact(int transactionId);
     }
 }

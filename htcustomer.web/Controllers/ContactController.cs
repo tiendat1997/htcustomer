@@ -99,6 +99,13 @@ namespace htcustomer.web.Controllers
                 return Json(new JsonMessage { Status = JsonResultStatus.Fail, Message = "Error during editing customer" }, JsonRequestBehavior.AllowGet);
             }
             return Json(new JsonMessage { Status = JsonResultStatus.Success, Message = "Editing customer successfully" }, JsonRequestBehavior.AllowGet);
-        }      
+        }
+
+        public ActionResult GetTransactionPartial(int transactionId, TransactionStatus status)
+        {
+            var viewModel = transactionService.GetTransactionToReloadContact(transactionId);
+            string partialName = (status == TransactionStatus.CannotFix) ? "_CannotFixTransactionRow" : "_FixedTransactionRow";
+            return PartialView(partialName, viewModel);
+        }
     }
 }
