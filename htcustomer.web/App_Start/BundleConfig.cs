@@ -51,6 +51,9 @@ namespace htcustomer.web
             // Contact Bundle 
             bundles.Add(new StyleBundle("~/Content/css/contact").Include(
                 "~/Content/MyCss/contact.css"));
+
+            // Bundle js and css srcript
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

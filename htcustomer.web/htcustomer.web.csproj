@@ -408,7 +408,6 @@
     <Content Include="Views\Contact\_DeliveredTransaction.cshtml" />
     <Content Include="Views\Contact\_NewCustomer.cshtml" />
     <Content Include="Views\Contact\_CustomerInformation.cshtml" />
-    <Content Include="Views\Category\_CategoryRow.cshtml" />
     <Content Include="Views\Shared\_DetailPriceTransaction.cshtml" />
     <Content Include="Views\Home\_NewTransaction.cshtml" />
     <Content Include="Views\Home\_AddCustomer.cshtml" />

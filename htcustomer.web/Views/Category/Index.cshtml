@@ -28,10 +28,10 @@
 </div>
 
 <!-- Trigger the modal with a button -->
-<div class="col-md-12" style="margin-bottom: 20px;">    
-     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<div class="col-md-12" style="margin-bottom: 20px;">
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
         <i class="fa fa-plus"></i>&nbsp; New Category
-     </button>    
+    </button>
 </div>
 <div class="col-md-12">
     <div class="panel">
@@ -45,18 +45,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var category in Model)
-            {
-                @Html.Partial("_CategoryRow", category);
-    }
+                    @{
+                        var count = 0;
+                        foreach (var category in Model)
+                        {
+
+                            <tr id="@category.CategoryID">
+                                <td>@(++count)</td>
+                                <td class="td-category-name-@category.CategoryID">@category.Name</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary btn-edit-category" data-id="@category.CategoryID"><i class="fa fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger btn-delete-category" data-id="@category.CategoryID"><i class="fa fa-remove"></i></button>
+                                </td>
+                            </tr>
+                        }
+                    }
                 </tbody>
             </table>
-        </div>        
+        </div>
     </div>
-    
 </div>
-
-
 @section scripts {
     <script src="~/Scripts/MyScript/category/category.js"></script>
 }
