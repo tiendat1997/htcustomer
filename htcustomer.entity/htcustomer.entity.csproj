@@ -49,75 +49,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HtModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HtModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HtModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HtModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HtModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HtModel.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="HtContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TblAccount.cs">
-      <DependentUpon>HtModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TblCategory.cs">
-      <DependentUpon>HtModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TblCustomer.cs">
-      <DependentUpon>HtModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TblDetailPrice.cs">
-      <DependentUpon>HtModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TblProduct.cs">
-      <DependentUpon>HtModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TblProductType.cs">
-      <DependentUpon>HtModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TblToDo.cs">
-      <DependentUpon>HtModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TblTransaction.cs">
-      <DependentUpon>HtModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TblTransactionStatu.cs">
-      <DependentUpon>HtModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="TblAccount.cs" />
+    <Compile Include="TblCategory.cs" />
+    <Compile Include="TblCustomer.cs" />
+    <Compile Include="TblDetailPrice.cs" />
+    <Compile Include="TblProduct.cs" />
+    <Compile Include="TblProductType.cs" />
+    <Compile Include="TblToDo.cs" />
+    <Compile Include="TblTransaction.cs" />
+    <Compile Include="TblTransactionStatu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="HtModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HtModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="HtModel.edmx.diagram">
-      <DependentUpon>HtModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="HtModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HtModel.edmx</DependentUpon>
-      <LastGenOutput>HtModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="HtModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HtModel.edmx</DependentUpon>
-      <LastGenOutput>HtModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

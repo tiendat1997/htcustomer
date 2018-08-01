@@ -12,10 +12,10 @@ namespace htcustomer.repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly HtDbContext context;
+        private readonly HtContext context;
         private readonly IDbSet<T> dbSet;
 
-        public Repository(HtDbContext _context)
+        public Repository(HtContext _context)
         {
             context = _context;
             dbSet = context.Set<T>();

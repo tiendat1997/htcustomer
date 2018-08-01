@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "htcustomer.web", "htcustomer.web\htcustomer.web.csproj", "{BCAB2F0E-2BB5-4274-B11F-8C4415E56ED5}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "htcustomer.service", "htcustomer.service\htcustomer.service.csproj", "{2FF38740-2F14-4D54-9944-96257059E228}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "htcustomer.repository", "htcustomer.repository\htcustomer.repository.csproj", "{DCEB1884-9FF5-4CBC-9877-39274E05F188}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "htcustomer.api", "htcustomer.api\htcustomer.api.csproj", "{3973988D-1AFC-4AC5-B106-CC6DF1594C21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DCEB1884-9FF5-4CBC-9877-39274E05F188}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCEB1884-9FF5-4CBC-9877-39274E05F188}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCEB1884-9FF5-4CBC-9877-39274E05F188}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3973988D-1AFC-4AC5-B106-CC6DF1594C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3973988D-1AFC-4AC5-B106-CC6DF1594C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3973988D-1AFC-4AC5-B106-CC6DF1594C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3973988D-1AFC-4AC5-B106-CC6DF1594C21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

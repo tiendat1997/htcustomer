@@ -48,8 +48,7 @@ namespace htcustomer.web
             // container.LoadConfiguration();
 
             // TODO: Register your type's mappings here.
-            // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<HtDbContext>(new PerRequestLifetimeManager(), new InjectionConstructor("name=HuyThongDiaryDBEntities"));
+            // container.RegisterType<IProductRepository, ProductRepository>();            
             container.RegisterType<IUnitOfWork, UnitOfWork>();
             container.RegisterType<IContactService, ContactService>();
             container.RegisterType<ITransactionService, TransactionService>();

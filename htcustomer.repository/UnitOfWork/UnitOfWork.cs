@@ -9,8 +9,8 @@ namespace htcustomer.repository.UnitOfWork
 {
     public sealed class UnitOfWork : IUnitOfWork
     {
-        private HtDbContext dbContext;
-        public UnitOfWork(HtDbContext _dbContext)
+        private HtContext dbContext;
+        public UnitOfWork(HtContext _dbContext)
         {
             dbContext = _dbContext;
         }
