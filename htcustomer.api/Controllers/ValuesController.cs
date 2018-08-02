@@ -7,8 +7,8 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace htcustomer.api.Controllers
-{   
-    [EnableCors(origins: "http://localhost:8080",  headers: "*", methods: "*")]
+{
+    [Authorize]   
     public class ValuesController : ApiController
     {
         // GET api/values

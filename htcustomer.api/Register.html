@@ -14,7 +14,11 @@
             <table class="table table-bordered">
                 <thead>
                    <tr class="success">
-                       <td colspan="2">New User Registration</td>
+                       <th colspan="2">
+                            New User Registration
+                           <a class="btn btn-success pull-right" href="Login.html">Login</a>
+                       </th>
+
                    </tr>
                 </thead>
                 <tbody>
@@ -68,6 +72,10 @@
                 $('#divError').hide('fade');
             });
 
+            $('#successModal').on('hidden.bs.modal', function () {
+                window.location.href = "Login.html";
+            });
+
             $('#btnRegister').click(function () {
                 
                 $.ajax({
@@ -79,7 +87,7 @@
                         confirmPassword: $('#textConfirmPassword').val()
                     },
                     success: function () {
-                        $('#successModal').modal('show');
+                        $('#successModal').modal('show');                        
                     },
                     error: function (jqXHR) {
                         $('#divErrorText').text(jqXHR.responseText);

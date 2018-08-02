@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Data</title>
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body style="padding-top: 20px;">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well">
+            <input type="button" id="btnLoadValues" value="Load Values" class="btn btn-success"/>  
+            <span id="spanUsername" class="text-muted"></span>
+            <input type="button" id="btnLogOut" value="Log out" class="btn btn-success pull-right" />                    
+        </div>
+
+        <div class="well hidden" id="divData">
+            <ul class="list-group" id="listData">
+                <li class="list-group-item"></li>
+            </ul>
+        </div>
+
+        <div class="modal fade" tabindex="-1" id="errorModal" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Session Expired</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <h2 class="modal-title">Please close this message to login again</h2>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-success">Close</button>
+                    </div>
+                </div>               
+            </div>        
+        </div>
+        <div id="divError" class="alert alert-danger collapse">
+            <a id="linkClose" class="close" href="#">&times;</a>
+            <div id="divErrorText"></div>
+        </div>
+    </div>
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#spanUsername').text('Hello ' + sessionStorage.getItem('userName'));
+            var token = sessionStorage.getItem('accessToken');
+            if (sessionStorage.getItem('accessToken') == null) {
+                window.location.href = "Login.html";
+            }
+            $('#errorModal').on('hidden.bs.modal', function () {
+                window.location.href = "Login.html";
+            });
+
+            $('#btnLogOut').click(function () {
+                sessionStorage.removeItem('accessToken');
+                window.location.href = "Login.html";
+            });
+
+            $('#linkClose').click(function () {
+                $('#divError').hide('fade');
+            });
+
+            $('#btnLoadValues').click(function () {
+
+                $.ajax({
+                    url: 'http://localhost/htcustomer.api/api/values',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
+                    },                    
+                    success: function (data) {
+                        $('#divData').removeClass('hidden');
+                        $.each(data, function (index, value) {
+                            var row = $(`<li class="list-group-item">${value}</li>`);
+                            $('#listData').append(row);
+                        });
+                    },
+                    error: function (jqXHR) {
+                        if (jqXHR.status == '401') {
+                            $('#errorModal').modal('show');
+                        }
+                        else {
+                            $('#divErrorText').text(jqXHR.responseText);
+                            $('#divError').show('fade');
+                        }                        
+                    }
+                });
+            });
+        })
+    </script>
+</body>
+</html>
